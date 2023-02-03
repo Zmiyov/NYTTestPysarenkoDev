@@ -7,7 +7,7 @@
 
 import UIKit
 
-class BooksViewController: UIViewController {
+final class BooksViewController: UIViewController {
     
     let bookListViewModel = BookListViewModel()
     
@@ -52,8 +52,8 @@ class BooksViewController: UIViewController {
         dataSource = UICollectionViewDiffableDataSource<Section, BookModel>(collectionView: collectionView, cellProvider: { (collectionView, indexPath, book) -> UICollectionViewCell? in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifiers.bookCollectionViewCell.rawValue, for: indexPath) as! BookCollectionViewCell
             
-            cell.nameLabel.text = book.title
-            cell.publishedDateLabel.text = book.description
+            cell.bookNameLabel.text = book.title
+            cell.descriptionLabel.text = book.description
             
             return cell
         })

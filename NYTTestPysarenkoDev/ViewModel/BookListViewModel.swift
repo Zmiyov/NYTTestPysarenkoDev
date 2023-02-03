@@ -7,7 +7,7 @@
 
 import Foundation
 
-class BookListViewModel {
+final class BookListViewModel {
     let books: [BookModel] = TempModels.books
     
     

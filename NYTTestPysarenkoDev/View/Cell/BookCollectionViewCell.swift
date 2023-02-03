@@ -6,17 +6,33 @@
 //
 
 import UIKit
+import WebKit
 
-class BookCollectionViewCell: UICollectionViewCell {
+final class BookCollectionViewCell: UICollectionViewCell {
     
-    let nameLabel = UILabel(font: UIFont.systemFont(ofSize: 24, weight: .bold), alighment: .left)
-    let publishedDateLabel = UILabel(font: UIFont.systemFont(ofSize: 15, weight: .regular), alighment: .left)
+    let bookNameLabel = UILabel(font: UIFont.systemFont(ofSize: 24, weight: .bold), alighment: .left)
+    let descriptionLabel = UILabel(font: UIFont.systemFont(ofSize: 15, weight: .regular), alighment: .left)
+    let authorLabel = UILabel(font: UIFont.systemFont(ofSize: 15, weight: .regular), alighment: .left)
+    let publisherLabel = UILabel(font: UIFont.systemFont(ofSize: 15, weight: .regular), alighment: .left)
+    let rankLabel = UILabel(font: UIFont.systemFont(ofSize: 15, weight: .regular), alighment: .left)
 
-    
+    private let buyButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Buy", for: .normal)
+        button.setTitleColor(UIColor.label, for: .normal)
+        button.titleLabel?.font = UIFont(name: "Avenir Next Demi Bold", size: 21)
+        button.backgroundColor = .link
+        button.contentHorizontalAlignment = .center
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.layer.cornerRadius = 8
+        button.clipsToBounds = true
+        return button
+    }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
+        setupButton()
     }
     
     required init?(coder: NSCoder) {
@@ -24,22 +40,44 @@ class BookCollectionViewCell: UICollectionViewCell {
         setupView()
     }
     
+    func setupButton() {
+        buyButton.addTarget(self, action: #selector(openBuyLink), for: .touchUpInside)
+    }
+    
+    @objc func openBuyLink() {
+        print("Perform")
+//        guard let url = URL(string: "https://stackoverflow.com") else { return }
+//        UIApplication.shared.open(url)
+        
+        let webView = WKWebView(frame: .infinite)
+        guard let url = URL(string: "https://stackoverflow.com") else { return }
+        let request = URLRequest(url: url)
+        webView.load(request)
+    }
+    
     private func setupView() {
         
         layer.cornerRadius = 12
         backgroundColor = .white
         
-        addSubview(nameLabel)
-        nameLabel.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([nameLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
-                                     nameLabel.topAnchor.constraint(equalTo: topAnchor, constant: 15)
+        addSubview(bookNameLabel)
+        bookNameLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([bookNameLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
+                                     bookNameLabel.topAnchor.constraint(equalTo: topAnchor, constant: 15)
                                     ])
         
-        addSubview(publishedDateLabel)
-        publishedDateLabel.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([publishedDateLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
-                                     publishedDateLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 10)
+        addSubview(descriptionLabel)
+        descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([descriptionLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
+                                     descriptionLabel.topAnchor.constraint(equalTo: bookNameLabel.bottomAnchor, constant: 10)
                                     ])
+        addSubview(buyButton)
+        NSLayoutConstraint.activate([
+            buyButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
+            buyButton.centerXAnchor.constraint(equalTo: centerXAnchor),
+            buyButton.widthAnchor.constraint(equalToConstant: 100),
+            buyButton.heightAnchor.constraint(equalToConstant: 40)
+        ])
         
     }
 }

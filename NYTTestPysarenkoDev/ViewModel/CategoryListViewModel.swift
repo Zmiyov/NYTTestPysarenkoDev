@@ -7,7 +7,7 @@
 
 import Foundation
 
-class CategoryListViewModel {
+final class CategoryListViewModel {
     var categories: [CategoryModel] = TempModels.categories
     
     func categoriesCount() -> Int {
