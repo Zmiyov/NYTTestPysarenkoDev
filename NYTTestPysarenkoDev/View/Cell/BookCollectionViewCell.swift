@@ -46,13 +46,11 @@ final class BookCollectionViewCell: UICollectionViewCell {
     
     @objc func openBuyLink() {
         print("Perform")
-//        guard let url = URL(string: "https://stackoverflow.com") else { return }
-//        UIApplication.shared.open(url)
         
-        let webView = WKWebView(frame: .infinite)
         guard let url = URL(string: "https://stackoverflow.com") else { return }
-        let request = URLRequest(url: url)
-        webView.load(request)
+        let webView = WebViewViewController(url: url, title: "Buy Book")
+        let navVC = UINavigationController(rootViewController: webView)
+        self.window?.rootViewController?.present(navVC, animated: true)
     }
     
     private func setupView() {

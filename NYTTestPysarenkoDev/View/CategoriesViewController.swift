@@ -70,7 +70,7 @@ extension CategoriesViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        let currentEvent = categoryListViewModel.categories[indexPath.item]
+//        let currentEvent = categoryListViewModel.categories[indexPath.item]
         let booksVC = BooksViewController()
 //        let navVC = UINavigationController(rootViewController: booksVC)
 //        navVC.modalPresentationStyle = .popover
