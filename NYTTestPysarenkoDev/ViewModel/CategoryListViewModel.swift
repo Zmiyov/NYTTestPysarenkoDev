@@ -13,4 +13,8 @@ class CategoryListViewModel {
     func categoriesCount() -> Int {
         return categories.count
     }
+    
+    func currentCategory(at index: Int) -> CategoryModel {
+        return categories[index]
+    }
 }

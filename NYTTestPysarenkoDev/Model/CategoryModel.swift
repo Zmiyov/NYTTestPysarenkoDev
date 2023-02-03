@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct CategoryModel: Codable {
+struct CategoryModel: Codable, Hashable {
     let name: String
     let oldestPublishedDate: String
     let newestPublishedDate: String
