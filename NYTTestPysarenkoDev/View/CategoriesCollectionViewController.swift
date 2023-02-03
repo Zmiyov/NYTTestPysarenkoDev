@@ -7,9 +7,11 @@
 
 import UIKit
 
-private let reuseIdentifier = "Cell"
-
-class CategoriesCollectionViewController: UICollectionViewController {
+final class CategoriesCollectionViewController: UICollectionViewController {
+    
+    private enum CellIdentifiers: String {
+        case categoryCollectionViewCell
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,7 +20,7 @@ class CategoriesCollectionViewController: UICollectionViewController {
         // self.clearsSelectionOnViewWillAppear = false
 
         // Register cell classes
-        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        self.collectionView!.register(CategoryCollectionViewCell.self, forCellWithReuseIdentifier: CellIdentifiers.categoryCollectionViewCell.rawValue)
 
         // Do any additional setup after loading the view.
     }
@@ -47,7 +49,7 @@ class CategoriesCollectionViewController: UICollectionViewController {
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifiers.categoryCollectionViewCell.rawValue, for: indexPath) as! CategoryCollectionViewCell
     
         // Configure the cell
     
