@@ -8,5 +8,9 @@
 import Foundation
 
 class CategoryListViewModel {
+    var categories: [CategoryModel] = TempModels.categories
     
+    func categoriesCount() -> Int {
+        return categories.count
+    }
 }

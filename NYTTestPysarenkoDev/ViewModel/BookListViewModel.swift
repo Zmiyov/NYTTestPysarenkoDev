@@ -8,5 +8,10 @@
 import Foundation
 
 class BookListViewModel {
+    let books: [BookModel] = TempModels.books
     
+    
+    func booksCount() -> Int {
+        return books.count
+    }
 }
