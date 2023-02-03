@@ -31,14 +31,16 @@ class CategoryCollectionViewCell: UICollectionViewCell {
         
         addSubview(nameLabel)
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([nameLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
-                                     nameLabel.topAnchor.constraint(equalTo: topAnchor, constant: 15)
+        NSLayoutConstraint.activate([
+                                     nameLabel.topAnchor.constraint(equalTo: topAnchor, constant: 15),
+                                     nameLabel.centerXAnchor.constraint(equalTo: centerXAnchor)
                                     ])
         
         addSubview(publishedDateLabel)
         publishedDateLabel.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([publishedDateLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
-                                     publishedDateLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 10)
+        NSLayoutConstraint.activate([
+                                     publishedDateLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 10),
+                                     publishedDateLabel.centerXAnchor.constraint(equalTo: centerXAnchor)
                                     ])
         
     }

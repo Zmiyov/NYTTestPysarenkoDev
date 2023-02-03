@@ -37,15 +37,16 @@ final class CategoriesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "Categories"
         view.backgroundColor = .secondarySystemBackground
         
         setConstraints()
       
-        
         collectionView.delegate = self
         createDataSource()
-        
     }
+    
+// MARK: - UICollectionViewDataSource
     
     func createDataSource() {
         dataSource = UICollectionViewDiffableDataSource<Section, CategoryModel>(collectionView: collectionView, cellProvider: { (collectionView, indexPath, category) -> UICollectionViewCell? in
@@ -58,9 +59,8 @@ final class CategoriesViewController: UIViewController {
         })
         dataSource.apply(filteredItemsSnapshot)
     }
-    
 }
-    // MARK: - UICollectionViewDataSource
+// MARK: - UICollectionViewDelegate
 
 extension CategoriesViewController: UICollectionViewDelegateFlowLayout {
 
@@ -68,40 +68,22 @@ extension CategoriesViewController: UICollectionViewDelegateFlowLayout {
         return CGSize(width: collectionView.frame.width, height: collectionView.frame.width/3)
     }
     
-    
-
-
-    // MARK: - UICollectionViewDelegate
-
-    /*
-    // Uncomment this method to specify if the specified item should be highlighted during tracking
-    override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-        return true
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let currentEvent = categoryListViewModel.categories[indexPath.item]
+        let booksVC = BooksViewController()
+//        let navVC = UINavigationController(rootViewController: booksVC)
+//        navVC.modalPresentationStyle = .popover
+//
+//        let appearance = UINavigationBarAppearance()
+//        appearance.configureWithDefaultBackground()
+//
+//        navVC.navigationBar.standardAppearance = appearance
+//        navVC.navigationBar.scrollEdgeAppearance = appearance
+        
+//        present(booksVC, animated: true)
+        navigationController?.pushViewController(booksVC, animated: true)
     }
-    */
-
-    /*
-    // Uncomment this method to specify if the specified item should be selected
-    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-    override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
-    
-    }
-    */
-
 }
 
 //MARK: - Set Constraints

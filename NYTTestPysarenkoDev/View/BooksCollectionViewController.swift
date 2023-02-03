@@ -1,5 +1,5 @@
 //
-//  BooksCollectionViewController.swift
+//  BooksViewController.swift
 //  NYTTestPysarenkoDev
 //
 //  Created by Vladimir Pisarenko on 03.02.2023.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class BooksCollectionViewController: UICollectionViewController {
+class BooksViewController: UIViewController {
     
     let bookListViewModel = BookListViewModel()
     
@@ -15,62 +15,72 @@ class BooksCollectionViewController: UICollectionViewController {
         case bookCollectionViewCell
     }
 
+    enum Section: CaseIterable {
+        case main
+    }
+    
+    var dataSource: UICollectionViewDiffableDataSource<Section, BookModel>!
+    var filteredItemsSnapshot: NSDiffableDataSourceSnapshot<Section, BookModel> {
+        var snapshot = NSDiffableDataSourceSnapshot<Section, BookModel>()
+        snapshot.appendSections([.main])
+        snapshot.appendItems(bookListViewModel.books)
+        return snapshot
+    }
+    
+    let collectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.register(BookCollectionViewCell.self, forCellWithReuseIdentifier: CellIdentifiers.bookCollectionViewCell.rawValue)
+        return collectionView
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.collectionView!.register(BookCollectionViewCell.self, forCellWithReuseIdentifier: CellIdentifiers.bookCollectionViewCell.rawValue)
+        title = "Books"
+        view.backgroundColor = .secondarySystemBackground
+        
+        setConstraints()
+      
+        collectionView.delegate = self
+        createDataSource()
     }
-
-    // MARK: - UICollectionViewDataSource
-
-    override func numberOfSections(in collectionView: UICollectionView) -> Int {
-
-        return 0
-    }
-
-
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-
-        return 0
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifiers.bookCollectionViewCell.rawValue, for: indexPath) as! BookCollectionViewCell
     
-        // Configure the cell
+// MARK: - UICollectionViewDataSource
     
-        return cell
+    func createDataSource() {
+        dataSource = UICollectionViewDiffableDataSource<Section, BookModel>(collectionView: collectionView, cellProvider: { (collectionView, indexPath, book) -> UICollectionViewCell? in
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifiers.bookCollectionViewCell.rawValue, for: indexPath) as! BookCollectionViewCell
+            
+            cell.nameLabel.text = book.title
+            cell.publishedDateLabel.text = book.description
+            
+            return cell
+        })
+        dataSource.apply(filteredItemsSnapshot)
     }
+}
+// MARK: - UICollectionViewDelegateFlowLayout
 
-    // MARK: UICollectionViewDelegate
+extension BooksViewController: UICollectionViewDelegateFlowLayout {
 
-    /*
-    // Uncomment this method to specify if the specified item should be highlighted during tracking
-    override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-        return true
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: collectionView.frame.width, height: collectionView.frame.width/3)
     }
-    */
+}
 
-    /*
-    // Uncomment this method to specify if the specified item should be selected
-    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
+//MARK: - Set Constraints
 
-    /*
-    // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-    override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
+extension BooksViewController {
     
+    private func setConstraints() {
+        view.addSubview(collectionView)
+        collectionView.backgroundColor = .secondarySystemBackground
+        NSLayoutConstraint.activate([
+            collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
+            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0)
+        ])
     }
-    */
-
 }
