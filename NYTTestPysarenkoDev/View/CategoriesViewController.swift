@@ -45,13 +45,18 @@ final class CategoriesViewController: UIViewController {
         collectionView.delegate = self
         createDataSource()
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(didTapRefresh))
+//        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(didTapRefresh))
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(obserber(notification: )), name: .loadCategories, object: nil)
     }
     
-    @objc private func didTapRefresh() {
-//        print("refresh")
-//        print(categoryListViewModel.categories)
-        self.collectionView.reloadData()
+//    @objc private func didTapRefresh() {
+//
+//        createDataSource()
+//    }
+    
+    @objc private func obserber(notification: Notification) {
+
         createDataSource()
     }
     
@@ -83,8 +88,6 @@ extension CategoriesViewController: UICollectionViewDelegateFlowLayout {
         let booksVC = BooksViewController()
         booksVC.bookListViewModel = BookListViewModel(name: category.listNameEncoded, date: category.newestPublishedDate)
 
-        print(category.listNameEncoded)
-        print(category.newestPublishedDate)
         navigationController?.pushViewController(booksVC, animated: true)
     }
 }

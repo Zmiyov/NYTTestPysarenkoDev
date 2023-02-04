@@ -16,6 +16,7 @@ final class CategoryListViewModel {
 //            print("DidSet")
 //            print(categories, "Cater")
             //need notify
+            NotificationCenter.default.post(name: .loadCategories, object: nil, userInfo: nil)
         }
     }
     
@@ -33,3 +34,5 @@ final class CategoryListViewModel {
         return categories[index]
     }
 }
+
+

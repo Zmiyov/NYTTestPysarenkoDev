@@ -15,6 +15,8 @@ final class BookCollectionViewCell: UICollectionViewCell {
     let authorLabel = UILabel(font: UIFont.systemFont(ofSize: 15, weight: .regular), alighment: .left)
     let publisherLabel = UILabel(font: UIFont.systemFont(ofSize: 15, weight: .regular), alighment: .left)
     let rankLabel = UILabel(font: UIFont.systemFont(ofSize: 15, weight: .regular), alighment: .left)
+    
+    var urlString: String?
 
     private let buyButton: UIButton = {
         let button = UIButton()
@@ -47,7 +49,7 @@ final class BookCollectionViewCell: UICollectionViewCell {
     @objc func openBuyLink() {
         print("Perform")
         
-        guard let url = URL(string: "https://stackoverflow.com") else { return }
+        guard let urlString = self.urlString, let url = URL(string: urlString) else { return }
         let webView = WebViewViewController(url: url, title: "Buy Book")
         let navVC = UINavigationController(rootViewController: webView)
         self.window?.rootViewController?.present(navVC, animated: true)

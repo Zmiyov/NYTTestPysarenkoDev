@@ -9,7 +9,11 @@ import Foundation
 
 final class BookListViewModel {
 //    let books: [BookModel] = TempModels.books
-    var books: [BookModel] = []
+    var books: [BookModel] = [] {
+        didSet {
+            NotificationCenter.default.post(name: .loadBooks, object: nil, userInfo: nil)
+        }
+    }
     
     init(name: String, date: String) {
         NYTAPIManager.shared.fetchBooks(name: name, date: date) { books in

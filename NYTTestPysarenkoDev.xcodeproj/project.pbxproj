@@ -29,6 +29,7 @@
 		A59BF1B0298E57490082B923 /* ResponseBooks.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59BF1AF298E57490082B923 /* ResponseBooks.swift */; };
 		A59BF1B4298E709C0082B923 /* NYTAPIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59BF1B3298E709C0082B923 /* NYTAPIKey.swift */; };
 		A59BF1B7298E72590082B923 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = A59BF1B6298E72590082B923 /* Alamofire */; };
+		A59BF1B9298ED1940082B923 /* NotificationsName+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59BF1B8298ED1940082B923 /* NotificationsName+.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +56,7 @@
 		A59BF1AD298E532E0082B923 /* ResponseCategories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseCategories.swift; sourceTree = "<group>"; };
 		A59BF1AF298E57490082B923 /* ResponseBooks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseBooks.swift; sourceTree = "<group>"; };
 		A59BF1B3298E709C0082B923 /* NYTAPIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYTAPIKey.swift; sourceTree = "<group>"; };
+		A59BF1B8298ED1940082B923 /* NotificationsName+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationsName+.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,6 +158,7 @@
 			isa = PBXGroup;
 			children = (
 				A59BF1A5298D8A2F0082B923 /* UILabel+.swift */,
+				A59BF1B8298ED1940082B923 /* NotificationsName+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -275,6 +278,7 @@
 				A59BF198298D801A0082B923 /* BookCollectionViewCell.swift in Sources */,
 				A59BF18B298D57480082B923 /* CategoryModel.swift in Sources */,
 				A59BF19F298D82700082B923 /* CategoryCellViewModel.swift in Sources */,
+				A59BF1B9298ED1940082B923 /* NotificationsName+.swift in Sources */,
 				A59BF1B4298E709C0082B923 /* NYTAPIKey.swift in Sources */,
 				A59BF1AE298E532E0082B923 /* ResponseCategories.swift in Sources */,
 				A59BF1A6298D8A2F0082B923 /* UILabel+.swift in Sources */,
