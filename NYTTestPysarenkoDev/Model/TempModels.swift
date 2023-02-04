@@ -8,9 +8,9 @@
 import Foundation
 
 class TempModels {
-    static let categories = [CategoryModel(name: "Fiction", oldestPublishedDate: "1 Jan", newestPublishedDate: "2Jan"),
-                             CategoryModel(name: "Electronic", oldestPublishedDate: "1 Feb", newestPublishedDate: "2 Feb"),
-                             CategoryModel(name: "Magazine", oldestPublishedDate: "1 Mar", newestPublishedDate: "2 Mar")]
+    static let categories = [CategoryModel(categoryName: "Fiction", oldestPublishedDate: "1 Jan", newestPublishedDate: "2Jan"),
+                             CategoryModel(categoryName: "Electronic", oldestPublishedDate: "1 Feb", newestPublishedDate: "2 Feb"),
+                             CategoryModel(categoryName: "Magazine", oldestPublishedDate: "1 Mar", newestPublishedDate: "2 Mar")]
     
     static let books = [BookModel(title: "Book1", description: "Description1", author: "Author1", publisher: "Publisher1", image: "Image1",                          rank: "Rank1", linkToBuy: "https://www.apple.com/ua/"),
                         BookModel(title: "Book2", description: "Description2", author: "Author2", publisher: "Publisher2", image: "Image2", rank: "Rank2", linkToBuy: "https://www.apple.com/ua/"),

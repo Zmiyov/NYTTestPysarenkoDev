@@ -24,6 +24,9 @@
 		A59BF1A3298D83C30082B923 /* TempModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59BF1A2298D83C30082B923 /* TempModels.swift */; };
 		A59BF1A6298D8A2F0082B923 /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59BF1A5298D8A2F0082B923 /* UILabel+.swift */; };
 		A59BF1A8298DAC470082B923 /* WebViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59BF1A7298DAC470082B923 /* WebViewViewController.swift */; };
+		A59BF1AA298DBB610082B923 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59BF1A9298DBB610082B923 /* NetworkService.swift */; };
+		A59BF1AE298E532E0082B923 /* ResponseCategories.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59BF1AD298E532E0082B923 /* ResponseCategories.swift */; };
+		A59BF1B0298E57490082B923 /* ResponseBooks.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59BF1AF298E57490082B923 /* ResponseBooks.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +49,9 @@
 		A59BF1A2298D83C30082B923 /* TempModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempModels.swift; sourceTree = "<group>"; };
 		A59BF1A5298D8A2F0082B923 /* UILabel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+.swift"; sourceTree = "<group>"; };
 		A59BF1A7298DAC470082B923 /* WebViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewViewController.swift; sourceTree = "<group>"; };
+		A59BF1A9298DBB610082B923 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		A59BF1AD298E532E0082B923 /* ResponseCategories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseCategories.swift; sourceTree = "<group>"; };
+		A59BF1AF298E57490082B923 /* ResponseBooks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseBooks.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,8 +101,8 @@
 		A59BF187298D56E40082B923 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				A59BF18A298D57480082B923 /* CategoryModel.swift */,
-				A59BF18C298D57E10082B923 /* BookModel.swift */,
+				A59BF1AB298E51C90082B923 /* ListsAPI */,
+				A59BF1AC298E51DC0082B923 /* BooksAPI */,
 				A59BF1A2298D83C30082B923 /* TempModels.swift */,
 			);
 			path = Model;
@@ -136,6 +142,7 @@
 		A59BF199298D805B0082B923 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				A59BF1A9298DBB610082B923 /* NetworkService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -146,6 +153,24 @@
 				A59BF1A5298D8A2F0082B923 /* UILabel+.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		A59BF1AB298E51C90082B923 /* ListsAPI */ = {
+			isa = PBXGroup;
+			children = (
+				A59BF1AD298E532E0082B923 /* ResponseCategories.swift */,
+				A59BF18A298D57480082B923 /* CategoryModel.swift */,
+			);
+			path = ListsAPI;
+			sourceTree = "<group>";
+		};
+		A59BF1AC298E51DC0082B923 /* BooksAPI */ = {
+			isa = PBXGroup;
+			children = (
+				A59BF1AF298E57490082B923 /* ResponseBooks.swift */,
+				A59BF18C298D57E10082B923 /* BookModel.swift */,
+			);
+			path = BooksAPI;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -219,15 +244,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				A59BF18D298D57E10082B923 /* BookModel.swift in Sources */,
+				A59BF1B0298E57490082B923 /* ResponseBooks.swift in Sources */,
 				A59BF198298D801A0082B923 /* BookCollectionViewCell.swift in Sources */,
 				A59BF18B298D57480082B923 /* CategoryModel.swift in Sources */,
 				A59BF19F298D82700082B923 /* CategoryCellViewModel.swift in Sources */,
+				A59BF1AE298E532E0082B923 /* ResponseCategories.swift in Sources */,
 				A59BF1A6298D8A2F0082B923 /* UILabel+.swift in Sources */,
 				A59BF174298D56CE0082B923 /* AppDelegate.swift in Sources */,
 				A59BF1A1298D82850082B923 /* BookCellViewModel.swift in Sources */,
 				A59BF191298D7F5E0082B923 /* CategoriesViewController.swift in Sources */,
 				A59BF1A3298D83C30082B923 /* TempModels.swift in Sources */,
 				A59BF19D298D82010082B923 /* BookListViewModel.swift in Sources */,
+				A59BF1AA298DBB610082B923 /* NetworkService.swift in Sources */,
 				A59BF1A8298DAC470082B923 /* WebViewViewController.swift in Sources */,
 				A59BF176298D56CE0082B923 /* SceneDelegate.swift in Sources */,
 				A59BF196298D800E0082B923 /* CategoryCollectionViewCell.swift in Sources */,
