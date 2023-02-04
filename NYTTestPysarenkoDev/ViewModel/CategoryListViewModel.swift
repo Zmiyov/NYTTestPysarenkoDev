@@ -8,7 +8,27 @@
 import Foundation
 
 final class CategoryListViewModel {
-    var categories: [CategoryModel] = TempModels.categories
+//    var categories: [CategoryModel] = TempModels.categories
+    
+    
+    
+    var categories: [CategoryModel] = [] {
+        didSet {
+            print("DidSet")
+            print(categories, "Cater")
+            //need notify
+        }
+    }
+    
+    init() {
+        NYTAPIManager.shared.fetchCategories { categories in
+
+            self.categories = categories
+        }
+
+    }
+    
+
     
     func categoriesCount() -> Int {
         return categories.count

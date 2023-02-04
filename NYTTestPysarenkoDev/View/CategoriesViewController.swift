@@ -9,7 +9,7 @@ import UIKit
 
 final class CategoriesViewController: UIViewController {
     
-    let categoryListViewModel = CategoryListViewModel()
+    let categoryListViewModel = CategoryListViewModel() 
     
     private enum CellIdentifiers: String {
         case categoryCollectionViewCell
@@ -44,6 +44,15 @@ final class CategoriesViewController: UIViewController {
       
         collectionView.delegate = self
         createDataSource()
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(didTapRefresh))
+    }
+    
+    @objc private func didTapRefresh() {
+        print("refresh")
+        print(categoryListViewModel.categories)
+        self.collectionView.reloadData()
+        createDataSource()
     }
     
 // MARK: - UICollectionViewDataSource
@@ -52,7 +61,7 @@ final class CategoriesViewController: UIViewController {
         dataSource = UICollectionViewDiffableDataSource<Section, CategoryModel>(collectionView: collectionView, cellProvider: { (collectionView, indexPath, category) -> UICollectionViewCell? in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifiers.categoryCollectionViewCell.rawValue, for: indexPath) as! CategoryCollectionViewCell
             
-            cell.nameLabel.text = category.name
+            cell.nameLabel.text = category.categoryName
             cell.publishedDateLabel.text = category.oldestPublishedDate
             
             return cell
