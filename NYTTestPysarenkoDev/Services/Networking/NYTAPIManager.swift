@@ -24,7 +24,15 @@ class NYTAPIManager {
         }
     }
     
-    func fetchBooks(date: String, name: String) {
-        let url = "https://api.nytimes.com/svc/books/v3/lists/\(date)/\(name).json?api-key=\(NYTAPIKey.key.rawValue)"
+    func fetchBooks(name: String, date: String, completion: @escaping ([BookModel]) -> Void) {
+        print("Fetch books start")
+        let url = "https://api.nytimes.com/svc/books/v3/lists/2023-02-12/combined-print-and-e-book-fiction.json?api-key=\(NYTAPIKey.key.rawValue)"
+        AF.request(url).responseDecodable(of: ResponseBooks.self) { response in
+            print(response)
+            guard let fetchedBooks = response.value?.books else { return }
+            
+            print(fetchedBooks, "Fetched Books")
+            completion(fetchedBooks)
+        }
     }
 }

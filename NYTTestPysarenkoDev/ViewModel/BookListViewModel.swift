@@ -8,8 +8,14 @@
 import Foundation
 
 final class BookListViewModel {
-    let books: [BookModel] = TempModels.books
+//    let books: [BookModel] = TempModels.books
+    var books: [BookModel] = []
     
+    init(name: String, date: String) {
+        NYTAPIManager.shared.fetchBooks(name: name, date: date) { books in
+            self.books = books
+        }
+    }
     
     func booksCount() -> Int {
         return books.count

@@ -8,7 +8,7 @@
 import Foundation
 
 struct ResponseBooks {
-    var books: [BookModel]?
+    var books: [BookModel]
     
     enum CodingKeys: String, CodingKey {
         case results
@@ -21,7 +21,8 @@ struct ResponseBooks {
 extension ResponseBooks: Decodable {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        let booksContainer = try container.nestedContainer(keyedBy: CodingKeys.self, forKey: .books)
-        self.books = try booksContainer.decode([BookModel].self, forKey: .books )
+        let resultContainer = try container.nestedContainer(keyedBy: CodingKeys.self, forKey: .results)
+//        let booksContainer = try resultContainer.nestedContainer(keyedBy: CodingKeys.self, forKey: .books)
+        self.books = try resultContainer.decode([BookModel].self, forKey: .books )
     }
 }

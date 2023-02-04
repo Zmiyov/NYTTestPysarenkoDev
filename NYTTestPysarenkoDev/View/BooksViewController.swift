@@ -9,7 +9,7 @@ import UIKit
 
 final class BooksViewController: UIViewController {
     
-    let bookListViewModel = BookListViewModel()
+    var bookListViewModel: BookListViewModel?
     
     private enum CellIdentifiers: String {
         case bookCollectionViewCell
@@ -23,7 +23,7 @@ final class BooksViewController: UIViewController {
     var filteredItemsSnapshot: NSDiffableDataSourceSnapshot<Section, BookModel> {
         var snapshot = NSDiffableDataSourceSnapshot<Section, BookModel>()
         snapshot.appendSections([.main])
-        snapshot.appendItems(bookListViewModel.books)
+        snapshot.appendItems(bookListViewModel?.books ?? [])
         return snapshot
     }
     
@@ -43,6 +43,15 @@ final class BooksViewController: UIViewController {
         setConstraints()
       
         collectionView.delegate = self
+        createDataSource()
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(didTapRefresh))
+    }
+    
+    @objc private func didTapRefresh() {
+        print("refresh")
+//        print(bookListViewModel?.books)
+        self.collectionView.reloadData()
         createDataSource()
     }
     

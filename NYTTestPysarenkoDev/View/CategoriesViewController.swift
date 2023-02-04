@@ -49,8 +49,8 @@ final class CategoriesViewController: UIViewController {
     }
     
     @objc private func didTapRefresh() {
-        print("refresh")
-        print(categoryListViewModel.categories)
+//        print("refresh")
+//        print(categoryListViewModel.categories)
         self.collectionView.reloadData()
         createDataSource()
     }
@@ -79,18 +79,12 @@ extension CategoriesViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-//        let currentEvent = categoryListViewModel.categories[indexPath.item]
+        let category = categoryListViewModel.categories[indexPath.item]
         let booksVC = BooksViewController()
-//        let navVC = UINavigationController(rootViewController: booksVC)
-//        navVC.modalPresentationStyle = .popover
-//
-//        let appearance = UINavigationBarAppearance()
-//        appearance.configureWithDefaultBackground()
-//
-//        navVC.navigationBar.standardAppearance = appearance
-//        navVC.navigationBar.scrollEdgeAppearance = appearance
-        
-//        present(booksVC, animated: true)
+        booksVC.bookListViewModel = BookListViewModel(name: category.listNameEncoded, date: category.newestPublishedDate)
+
+        print(category.listNameEncoded)
+        print(category.newestPublishedDate)
         navigationController?.pushViewController(booksVC, animated: true)
     }
 }

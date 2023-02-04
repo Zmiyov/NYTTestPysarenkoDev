@@ -10,7 +10,7 @@ import WebKit
 
 final class BookCollectionViewCell: UICollectionViewCell {
     
-    let bookNameLabel = UILabel(font: UIFont.systemFont(ofSize: 24, weight: .bold), alighment: .left)
+    let bookNameLabel = UILabel(font: UIFont.systemFont(ofSize: 17, weight: .bold), alighment: .left)
     let descriptionLabel = UILabel(font: UIFont.systemFont(ofSize: 15, weight: .regular), alighment: .left)
     let authorLabel = UILabel(font: UIFont.systemFont(ofSize: 15, weight: .regular), alighment: .left)
     let publisherLabel = UILabel(font: UIFont.systemFont(ofSize: 15, weight: .regular), alighment: .left)

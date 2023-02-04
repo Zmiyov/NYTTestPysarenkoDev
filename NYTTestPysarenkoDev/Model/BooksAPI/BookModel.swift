@@ -8,7 +8,7 @@
 import Foundation
 
 struct BookModel: Hashable {
-    let rank: String
+    let rank: Int
     let publisher: String
     let description: String
     let title: String
@@ -32,7 +32,7 @@ struct BookModel: Hashable {
 extension BookModel: Decodable {
     init(from decoder: Decoder) throws {
         let booksContainer = try decoder.container(keyedBy: CodingKeys.self)
-        rank = try booksContainer.decode(String.self, forKey: .rank)
+        rank = try booksContainer.decode(Int.self, forKey: .rank)
         publisher = try booksContainer.decode(String.self, forKey: .publisher)
         description = try booksContainer.decode(String.self, forKey: .description)
         title = try booksContainer.decode(String.self, forKey: .title)
