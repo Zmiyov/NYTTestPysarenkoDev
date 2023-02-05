@@ -10,7 +10,7 @@ import CoreData
 
 class CoreDataStack {
     
-    static var shared = CoreDataStack(modelName: "NewYorkTimes")
+//    static var shared = CoreDataStack()
     
     private let modelName: String
     lazy var managedContext: NSManagedObjectContext = {
@@ -21,7 +21,7 @@ class CoreDataStack {
         self.modelName = modelName
     }
     
-    private lazy var storeContainer: NSPersistentContainer = {
+    lazy var storeContainer: NSPersistentContainer = {
        
         let container = NSPersistentContainer(name: self.modelName)
         container.loadPersistentStores { _, error in

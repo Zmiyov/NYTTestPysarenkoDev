@@ -50,10 +50,48 @@ class DataProvider {
         var successfull = false
         
         taskContext.performAndWait {
-            let matchingEpisodeRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "BookEntity")
+            let matchingBooksRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "BookEntity")
+            let bookIDs = jsonDictionary.map { $0["book_uri"] as? String }.compactMap{ $0 }
+            matchingBooksRequest.predicate = NSPredicate(format: "bookID in %@", argumentArray: [bookIDs])
             
+            let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: matchingBooksRequest)
+            batchDeleteRequest.resultType = .resultTypeObjectIDs
+            
+            do {
+                let batchDeleteResult = try taskContext.execute(batchDeleteRequest) as? NSBatchDeleteResult
+                
+                if let deletedBookIDs = batchDeleteResult?.result as? [NSManagedObjectID] {
+                    NSManagedObjectContext.mergeChanges(fromRemoteContextSave: [NSDeletedObjectsKey: deletedBookIDs], into: [self.persistentContainer.viewContext])
+                }
+            } catch {
+                print("Error: \(error)\nCould not batch delete existing records.")
+                return
+            }
+            
+            for bookDictionary in jsonDictionary {
+                guard let book = NSEntityDescription.insertNewObject(forEntityName: "BookEntity", into: taskContext) as? BookEntity else {
+                    print("Error: Failed to create a new Film object!")
+                    return
+                }
+                
+                do {
+                    try book.update(with: bookDictionary)
+                } catch {
+                    print("Error: \(error)\nThe film object will be deleted.")
+                    taskContext.delete(book)
+                }
+                
+                if taskContext.hasChanges {
+                    do {
+                        try taskContext.save()
+                    } catch {
+                        print("Error: \(error)\nCould not save Core Data context.")
+                    }
+                    taskContext.reset()
+                }
+                successfull = true
+            }
         }
-        
         return successfull
     }
 }

@@ -23,7 +23,8 @@ extension BookEntity {
     @NSManaged public var author: String?
     @NSManaged public var bookImage: String?
     @NSManaged public var linkToBuyOnAmazon: String?
-    @NSManaged public var buyLinks: NSOrderedSet?
+//    @NSManaged public var buyLinks: NSOrderedSet?
+    @NSManaged public var bookID: String?
     
     func update(with jsonDictionary: [String: Any]) throws {
         guard let rank = jsonDictionary["rank"] as? Int16,
@@ -33,7 +34,8 @@ extension BookEntity {
               let author = jsonDictionary["author"] as? String,
               let bookImage = jsonDictionary["book_image"] as? String,
               let linkToBuyOnAmazon = jsonDictionary["amazon_product_url"] as? String,
-              let buyLinks = jsonDictionary["buy_links"] as? NSOrderedSet
+//              let buyLinks = jsonDictionary["buy_links"] as? NSOrderedSet,
+              let bookID = jsonDictionary["book_uri"] as? String
         else {
             throw NSError(domain: "", code: 100)
         }
@@ -45,7 +47,8 @@ extension BookEntity {
         self.author = author
         self.bookImage = bookImage
         self.linkToBuyOnAmazon = linkToBuyOnAmazon
-        self.buyLinks = buyLinks
+//        self.buyLinks = buyLinks
+        self.bookID = bookID
     }
     
     func fetchImage() {

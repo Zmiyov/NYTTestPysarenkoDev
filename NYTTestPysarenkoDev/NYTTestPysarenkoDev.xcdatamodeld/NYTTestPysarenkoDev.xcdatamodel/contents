@@ -3,6 +3,7 @@
     <entity name="BookEntity" representedClassName="BookEntity" syncable="YES">
         <attribute name="author" optional="YES" attributeType="String"/>
         <attribute name="bookDescription" optional="YES" attributeType="String"/>
+        <attribute name="bookID" optional="YES" attributeType="String"/>
         <attribute name="bookImage" optional="YES" attributeType="String"/>
         <attribute name="linkToBuyOnAmazon" optional="YES" attributeType="String"/>
         <attribute name="publisher" optional="YES" attributeType="String"/>
@@ -21,4 +22,5 @@
         <attribute name="newestPublishedDate" optional="YES" attributeType="String"/>
         <attribute name="oldestPublishedDate" optional="YES" attributeType="String"/>
     </entity>
+    <fetchRequest name="NYTBooks" entity="BookEntity"/>
 </model>

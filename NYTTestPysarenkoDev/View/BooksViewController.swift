@@ -7,6 +7,7 @@
 
 import UIKit
 import AlamofireImage
+import CoreData
 
 final class BooksViewController: UIViewController {
     
@@ -20,9 +21,9 @@ final class BooksViewController: UIViewController {
         case main
     }
     
-    var dataSource: UICollectionViewDiffableDataSource<Section, BookModel>!
-    var filteredItemsSnapshot: NSDiffableDataSourceSnapshot<Section, BookModel> {
-        var snapshot = NSDiffableDataSourceSnapshot<Section, BookModel>()
+    var dataSource: UICollectionViewDiffableDataSource<Section, BookEntity>!
+    var filteredItemsSnapshot: NSDiffableDataSourceSnapshot<Section, BookEntity> {
+        var snapshot = NSDiffableDataSourceSnapshot<Section, BookEntity>()
         snapshot.appendSections([.main])
         snapshot.appendItems(bookListViewModel?.books ?? [])
         return snapshot
@@ -57,7 +58,7 @@ final class BooksViewController: UIViewController {
 // MARK: - UICollectionViewDataSource
     
     func createDataSource() {
-        dataSource = UICollectionViewDiffableDataSource<Section, BookModel>(collectionView: collectionView, cellProvider: { (collectionView, indexPath, book) -> UICollectionViewCell? in
+        dataSource = UICollectionViewDiffableDataSource<Section, BookEntity>(collectionView: collectionView, cellProvider: { (collectionView, indexPath, book) -> UICollectionViewCell? in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifiers.bookCollectionViewCell.rawValue, for: indexPath) as! BookCollectionViewCell
             
             
@@ -65,7 +66,7 @@ final class BooksViewController: UIViewController {
             cell.urlString = book.linkToBuyOnAmazon
             cell.bookNameLabel.text = book.title
             cell.descriptionLabel.text = book.description
-            cell.imageView.af.setImage(withURL: URL(string: book.bookImage)!)
+            cell.imageView.af.setImage(withURL: URL(string: book.bookImage!)!)
             
 //            NYTAPIManager.shared.fetchImage(url: book.bookImage, completion: { image in
 //                cell.imageView.image = image
@@ -99,4 +100,8 @@ extension BooksViewController {
             collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0)
         ])
     }
+}
+
+extension BooksViewController: NSFetchedResultsControllerDelegate {
+    
 }
