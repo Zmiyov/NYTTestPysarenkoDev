@@ -24,6 +24,56 @@ extension BookEntity {
     @NSManaged public var bookImage: String?
     @NSManaged public var linkToBuyOnAmazon: String?
     @NSManaged public var buyLinks: NSOrderedSet?
+    
+    func update(with jsonDictionary: [String: Any]) throws {
+        guard let rank = jsonDictionary["rank"] as? Int16,
+              let publisher = jsonDictionary["publisher"] as? String,
+              let bookDescription = jsonDictionary["description"] as? String,
+              let title = jsonDictionary["title"] as? String,
+              let author = jsonDictionary["author"] as? String,
+              let bookImage = jsonDictionary["book_image"] as? String,
+              let linkToBuyOnAmazon = jsonDictionary["amazon_product_url"] as? String,
+              let buyLinks = jsonDictionary["buy_links"] as? NSOrderedSet
+        else {
+            throw NSError(domain: "", code: 100)
+        }
+
+        self.rank = rank
+        self.publisher = publisher
+        self.bookDescription = bookDescription
+        self.title = title
+        self.author = author
+        self.bookImage = bookImage
+        self.linkToBuyOnAmazon = linkToBuyOnAmazon
+        self.buyLinks = buyLinks
+    }
+    
+    func fetchImage() {
+        
+    }
+    
+//    func update(with bookModel: BookModel) throws {
+//        guard let rank = bookModel.rank as? Int32,
+//              let publisher = bookModel.publisher as? String,
+//              let bookDescription = bookModel.description as? String,
+//              let title = bookModel.title as? String,
+//              let author = bookModel.author as? String,
+//              let bookImage = bookModel.bookImage as? String,
+//              let linkToBuyOnAmazon = bookModel.linkToBuyOnAmazon as? String,
+//              let buyLinks = bookModel.buyLinks as? NSOrderedSet
+//        else {
+//            throw NSError(domain: "", code: 100)
+//        }
+//
+//        self.rank = rank
+//        self.publisher = publisher
+//        self.bookDescription = bookDescription
+//        self.title = title
+//        self.author = author
+//        self.bookImage = bookImage
+//        self.linkToBuyOnAmazon = linkToBuyOnAmazon
+//        self.buyLinks = buyLinks
+//    }
 
 }
 

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AlamofireImage
 
 final class BooksViewController: UIViewController {
     
@@ -64,11 +65,11 @@ final class BooksViewController: UIViewController {
             cell.urlString = book.linkToBuyOnAmazon
             cell.bookNameLabel.text = book.title
             cell.descriptionLabel.text = book.description
+            cell.imageView.af.setImage(withURL: URL(string: book.bookImage)!)
             
-            
-            NYTAPIManager.shared.fetchImage(url: book.bookImage, completion: { image in
-                cell.imageView.image = image
-            })
+//            NYTAPIManager.shared.fetchImage(url: book.bookImage, completion: { image in
+//                cell.imageView.image = image
+//            })
             
             return cell
         })

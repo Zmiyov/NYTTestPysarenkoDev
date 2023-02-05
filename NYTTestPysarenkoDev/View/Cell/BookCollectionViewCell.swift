@@ -7,6 +7,7 @@
 
 import UIKit
 import WebKit
+import SafariServices
 
 final class BookCollectionViewCell: UICollectionViewCell {
     
@@ -65,10 +66,17 @@ final class BookCollectionViewCell: UICollectionViewCell {
     @objc func openBuyLink() {
         print("Perform")
         
+//        guard let urlString = self.urlString, let url = URL(string: urlString) else { return }
+//        let webView = WebViewViewController(url: url, title: "Buy Book")
+//        let navVC = UINavigationController(rootViewController: webView)
+//        self.window?.rootViewController?.present(navVC, animated: true)
+        
         guard let urlString = self.urlString, let url = URL(string: urlString) else { return }
-        let webView = WebViewViewController(url: url, title: "Buy Book")
-        let navVC = UINavigationController(rootViewController: webView)
-        self.window?.rootViewController?.present(navVC, animated: true)
+        let config = SFSafariViewController.Configuration()
+        config.entersReaderIfAvailable = true
+        
+        let vc = SFSafariViewController(url: url, configuration: config)
+        self.window?.rootViewController?.present(vc, animated: true)
     }
     
     private func setupView() {

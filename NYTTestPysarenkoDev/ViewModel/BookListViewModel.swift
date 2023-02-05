@@ -21,6 +21,9 @@ final class BookListViewModel {
         networkManager.fetchBooks(name: name, date: date) { books in
             self.books = books
         }
+        networkManager.fetchBooksJSON(name: name, date: date) { book, error in
+            
+        }
     }
     
     func booksCount() -> Int {

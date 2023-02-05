@@ -10,7 +10,7 @@ import CoreData
 
 class CoreDataStack {
     
-    static var shared = CoreDataStack(modelName: "BortJournal")
+    static var shared = CoreDataStack(modelName: "NewYorkTimes")
     
     private let modelName: String
     lazy var managedContext: NSManagedObjectContext = {
@@ -29,6 +29,13 @@ class CoreDataStack {
                 print("Unresolved error \(error), \(error.userInfo)")
             }
         }
+        
+        container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+//        container.viewContext.undoManager = nil
+        container.viewContext.shouldDeleteInaccessibleFaults = true
+        
+        container.viewContext.automaticallyMergesChangesFromParent = true
+        
         return container
     }()
     
