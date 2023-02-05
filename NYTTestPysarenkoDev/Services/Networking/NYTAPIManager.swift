@@ -5,8 +5,9 @@
 //  Created by Vladimir Pisarenko on 04.02.2023.
 //
 
-import Foundation
+import UIKit
 import Alamofire
+import AlamofireImage
 
 class NYTAPIManager {
     static let shared = NYTAPIManager()
@@ -28,6 +29,18 @@ class NYTAPIManager {
             guard let fetchedBooks = response.value?.books else { return }
 
             completion(fetchedBooks)
+        }
+    }
+    
+    func fetchImage(url: String, completion: @escaping (UIImage) -> Void) {
+        AF.request(url).responseImage { response in
+            switch response.result {
+                
+            case .success(let image):
+                completion(image)
+            case .failure(let error):
+                print(error)
+            }
         }
     }
 }

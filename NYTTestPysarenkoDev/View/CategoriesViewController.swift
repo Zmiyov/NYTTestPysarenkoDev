@@ -45,15 +45,8 @@ final class CategoriesViewController: UIViewController {
         collectionView.delegate = self
         createDataSource()
         
-//        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(didTapRefresh))
-        
         NotificationCenter.default.addObserver(self, selector: #selector(obserber(notification: )), name: .loadCategories, object: nil)
     }
-    
-//    @objc private func didTapRefresh() {
-//
-//        createDataSource()
-//    }
     
     @objc private func obserber(notification: Notification) {
 

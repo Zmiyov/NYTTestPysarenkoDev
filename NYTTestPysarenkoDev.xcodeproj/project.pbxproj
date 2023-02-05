@@ -30,6 +30,7 @@
 		A59BF1B4298E709C0082B923 /* NYTAPIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59BF1B3298E709C0082B923 /* NYTAPIKey.swift */; };
 		A59BF1B7298E72590082B923 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = A59BF1B6298E72590082B923 /* Alamofire */; };
 		A59BF1B9298ED1940082B923 /* NotificationsName+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59BF1B8298ED1940082B923 /* NotificationsName+.swift */; };
+		A59BF1BC298F06DB0082B923 /* AlamofireImage in Frameworks */ = {isa = PBXBuildFile; productRef = A59BF1BB298F06DB0082B923 /* AlamofireImage */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,6 +66,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A59BF1B7298E72590082B923 /* Alamofire in Frameworks */,
+				A59BF1BC298F06DB0082B923 /* AlamofireImage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -215,6 +217,7 @@
 			name = NYTTestPysarenkoDev;
 			packageProductDependencies = (
 				A59BF1B6298E72590082B923 /* Alamofire */,
+				A59BF1BB298F06DB0082B923 /* AlamofireImage */,
 			);
 			productName = NYTTestPysarenkoDev;
 			productReference = A59BF170298D56CE0082B923 /* NYTTestPysarenkoDev.app */;
@@ -246,6 +249,7 @@
 			mainGroup = A59BF167298D56CE0082B923;
 			packageReferences = (
 				A59BF1B5298E72590082B923 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				A59BF1BA298F06DB0082B923 /* XCRemoteSwiftPackageReference "AlamofireImage" */,
 			);
 			productRefGroup = A59BF171298D56CE0082B923 /* Products */;
 			projectDirPath = "";
@@ -510,6 +514,14 @@
 				kind = branch;
 			};
 		};
+		A59BF1BA298F06DB0082B923 /* XCRemoteSwiftPackageReference "AlamofireImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/AlamofireImage.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -517,6 +529,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = A59BF1B5298E72590082B923 /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
+		};
+		A59BF1BB298F06DB0082B923 /* AlamofireImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A59BF1BA298F06DB0082B923 /* XCRemoteSwiftPackageReference "AlamofireImage" */;
+			productName = AlamofireImage;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

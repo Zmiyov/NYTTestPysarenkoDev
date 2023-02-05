@@ -45,15 +45,8 @@ final class BooksViewController: UIViewController {
         collectionView.delegate = self
         createDataSource()
         
-//        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(didTapRefresh))
-        
         NotificationCenter.default.addObserver(self, selector: #selector(obserber(notification: )), name: .loadBooks, object: nil)
     }
-    
-//    @objc private func didTapRefresh() {
-//
-//        createDataSource()
-//    }
     
     @objc private func obserber(notification: Notification) {
 
@@ -66,9 +59,16 @@ final class BooksViewController: UIViewController {
         dataSource = UICollectionViewDiffableDataSource<Section, BookModel>(collectionView: collectionView, cellProvider: { (collectionView, indexPath, book) -> UICollectionViewCell? in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifiers.bookCollectionViewCell.rawValue, for: indexPath) as! BookCollectionViewCell
             
+            
+            
             cell.urlString = book.linkToBuyOnAmazon
             cell.bookNameLabel.text = book.title
             cell.descriptionLabel.text = book.description
+            
+            
+            NYTAPIManager.shared.fetchImage(url: book.bookImage, completion: { image in
+                cell.imageView.image = image
+            })
             
             return cell
         })

@@ -8,7 +8,9 @@
 import Foundation
 
 final class BookListViewModel {
-//    let books: [BookModel] = TempModels.books
+
+    let networkManager = NYTAPIManager.shared
+    
     var books: [BookModel] = [] {
         didSet {
             NotificationCenter.default.post(name: .loadBooks, object: nil, userInfo: nil)
@@ -16,7 +18,7 @@ final class BookListViewModel {
     }
     
     init(name: String, date: String) {
-        NYTAPIManager.shared.fetchBooks(name: name, date: date) { books in
+        networkManager.fetchBooks(name: name, date: date) { books in
             self.books = books
         }
     }
@@ -24,4 +26,12 @@ final class BookListViewModel {
     func booksCount() -> Int {
         return books.count
     }
+    
+//    func bookImage() -> UIImage {
+//        let image = UIImage()
+//        networkManager.fetchImage(url: <#T##String#>) { <#UIImage#> in
+//            <#code#>
+//        }
+//        return image
+//    }
 }
