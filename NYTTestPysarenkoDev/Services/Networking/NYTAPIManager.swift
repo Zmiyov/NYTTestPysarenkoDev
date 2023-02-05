@@ -10,6 +10,7 @@ import Alamofire
 import AlamofireImage
 
 class NYTAPIManager {
+    
     static let shared = NYTAPIManager()
     
     var categories: [CategoryModel] = []

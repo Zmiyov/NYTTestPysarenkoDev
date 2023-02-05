@@ -16,6 +16,8 @@ extension BuyLinkEntity {
         return NSFetchRequest<BuyLinkEntity>(entityName: "BuyLinkEntity")
     }
 
+    @NSManaged public var marketName: String?
+    @NSManaged public var buyLinkUrl: String?
     @NSManaged public var book: BookEntity?
 
 }
