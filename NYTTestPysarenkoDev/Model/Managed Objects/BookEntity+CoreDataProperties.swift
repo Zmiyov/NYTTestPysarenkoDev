@@ -25,6 +25,7 @@ extension BookEntity {
     @NSManaged public var linkToBuyOnAmazon: String?
 //    @NSManaged public var buyLinks: NSOrderedSet?
     @NSManaged public var bookID: String?
+    @NSManaged public var category: String?
     
     func update(with jsonDictionary: [String: Any]) throws {
         guard let rank = jsonDictionary["rank"] as? Int16,

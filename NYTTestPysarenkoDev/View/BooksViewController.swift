@@ -39,13 +39,14 @@ final class BooksViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Books"
+        title = bookListViewModel?.name
         view.backgroundColor = .secondarySystemBackground
         
         setConstraints()
       
         collectionView.delegate = self
         createDataSource()
+        print(bookListViewModel?.books, "Books")
         
         NotificationCenter.default.addObserver(self, selector: #selector(obserber(notification: )), name: .loadBooks, object: nil)
     }
@@ -61,17 +62,12 @@ final class BooksViewController: UIViewController {
         dataSource = UICollectionViewDiffableDataSource<Section, BookEntity>(collectionView: collectionView, cellProvider: { (collectionView, indexPath, book) -> UICollectionViewCell? in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifiers.bookCollectionViewCell.rawValue, for: indexPath) as! BookCollectionViewCell
             
-            
-            
             cell.urlString = book.linkToBuyOnAmazon
             cell.bookNameLabel.text = book.title
             cell.descriptionLabel.text = book.description
             cell.imageView.af.setImage(withURL: URL(string: book.bookImage!)!)
-            
-//            NYTAPIManager.shared.fetchImage(url: book.bookImage, completion: { image in
-//                cell.imageView.image = image
-//            })
-            
+//            print(book.title)
+//            print(book.category)
             return cell
         })
         dataSource.apply(filteredItemsSnapshot)
@@ -103,5 +99,7 @@ extension BooksViewController {
 }
 
 extension BooksViewController: NSFetchedResultsControllerDelegate {
-    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+//        createDataSource()
+    }
 }

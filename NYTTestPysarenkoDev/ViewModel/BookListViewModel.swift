@@ -10,15 +10,19 @@ import CoreData
 
 final class BookListViewModel {
 
-    let networkManager = NYTAPIManager.shared
+    var dataProvider = DataProvider(persistentContainer: CoreDataStack.shared.storeContainer, repository: NYTAPIManager.shared)
     
-    
-    var dataProvider = DataProvider(persistentContainer: CoreDataStack(modelName: "NYTTestPysarenkoDev").storeContainer, repository: NYTAPIManager.shared)
+    var name: String
+    var date: String
     
     lazy var fetchedResultsController: NSFetchedResultsController<BookEntity> = {
+        
         let fetchRequest = NSFetchRequest<BookEntity>(entityName:"BookEntity")
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "rank", ascending:true)]
-        
+        fetchRequest.predicate = NSPredicate(format: "category == %@", name)
+
+        print(name)
+        print(date)
         let controller = NSFetchedResultsController(fetchRequest: fetchRequest,
                                                     managedObjectContext: dataProvider.viewContext,
                                                     sectionNameKeyPath: nil, cacheName: nil)
@@ -34,11 +38,13 @@ final class BookListViewModel {
         return controller
     }()
     
-    
+
     var delegate: NSFetchedResultsControllerDelegate?
     
     var books: [BookEntity] = [] {
         didSet {
+            print("DidSet")
+            print(books, "DidSet Books")
             NotificationCenter.default.post(name: .loadBooks, object: nil, userInfo: nil)
         }
     }
@@ -46,24 +52,26 @@ final class BookListViewModel {
     init(name: String, date: String, delegate: NSFetchedResultsControllerDelegate) {
         
         self.delegate = delegate
+        self.name = name
+        self.date = date
         
-//[        networkManager.fetchBooks(name: name, date: date) { books in
-//            self.books = books
-//        }
-//        networkManager.fetchBooksJSON(name: name, date: date) { book, error in
-//            
-//        }]
-        
-        dataProvider.getBooks(name: name, date: date) { (error) in
-            // Handle Error by displaying it in UI
+        dataProvider.getBooks(name: name, date: date) { [weak self] (error) in
+            
+            self?.fetchBooks()
         }
+    }
+    
+    func fetchBooks() {
+        self.books = []
         
-        self.books = fetchedResultsController.fetchedObjects ?? []
+        if let books = fetchedResultsController.fetchedObjects {
+            print(books, "Fetched books")
+            self.books = books
+        }
     }
     
-    func booksCount() -> Int {
-        return books.count
-    }
+//    func booksCount() -> Int {
+//        return books.count
+//    }
     
-
 }

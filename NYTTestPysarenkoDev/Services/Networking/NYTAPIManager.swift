@@ -10,9 +10,8 @@ import Alamofire
 import AlamofireImage
 import SwiftyJSON
 
-class NYTAPIManager {
+final class NYTAPIManager {
     
-//    private init() {}
     static let shared = NYTAPIManager()
     
     var categories: [CategoryModel] = []
@@ -31,7 +30,6 @@ class NYTAPIManager {
         AF.request(url).responseDecodable(of: ResponseBooks.self) { response in
             guard let fetchedBooks = response.value?.books else { return }
 
-//            print(fetchedBooks)
             completion(fetchedBooks)
         }
     }

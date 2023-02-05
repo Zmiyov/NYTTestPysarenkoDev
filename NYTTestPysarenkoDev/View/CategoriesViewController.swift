@@ -60,7 +60,7 @@ final class CategoriesViewController: UIViewController {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifiers.categoryCollectionViewCell.rawValue, for: indexPath) as! CategoryCollectionViewCell
             
             cell.nameLabel.text = category.categoryName
-            cell.publishedDateLabel.text = category.oldestPublishedDate
+            cell.publishedDateLabel.text = category.newestPublishedDate
             
             return cell
         })

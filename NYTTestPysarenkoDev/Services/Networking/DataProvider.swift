@@ -30,22 +30,20 @@ class DataProvider {
             }
             
             guard let jsonDictionary = jsonDictionary else {
-//                let error = NSError(domain: dataErrorDomain, code: DataErrorCode.wrongDataFormat.rawValue, userInfo: nil)
                 completion(error)
                 return
             }
             
             let taskContext = self.persistentContainer.newBackgroundContext()
             taskContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
-            taskContext.undoManager = nil
             
-            _ = self.syncBooks(jsonDictionary: jsonDictionary, taskContext: taskContext)
+            _ = self.syncBooks(name: name, jsonDictionary: jsonDictionary, taskContext: taskContext)
             
             completion(nil)
         }
     }
     
-    private func syncBooks(jsonDictionary: [[String: Any]], taskContext: NSManagedObjectContext) -> Bool {
+    private func syncBooks(name: String, jsonDictionary: [[String: Any]], taskContext: NSManagedObjectContext) -> Bool {
         
         var successfull = false
         
@@ -75,6 +73,10 @@ class DataProvider {
                 }
                 
                 do {
+                    print("do name")
+                    if book.category == nil {
+                        book.category = name
+                    }
                     try book.update(with: bookDictionary)
                 } catch {
                     print("Error: \(error)\nThe film object will be deleted.")

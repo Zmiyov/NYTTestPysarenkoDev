@@ -10,7 +10,7 @@ import CoreData
 
 class CoreDataStack {
     
-//    static var shared = CoreDataStack()
+    static var shared = CoreDataStack(modelName: "NYTTestPysarenkoDev")
     
     private let modelName: String
     lazy var managedContext: NSManagedObjectContext = {

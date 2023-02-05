@@ -133,9 +133,8 @@
 		A59BF187298D56E40082B923 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				A59BF1AB298E51C90082B923 /* ListsAPI */,
-				A59BF1AC298E51DC0082B923 /* BooksAPI */,
-				A59BF1A2298D83C30082B923 /* TempModels.swift */,
+				A59BF1CF298FB1570082B923 /* Managed Objects */,
+				A59BF1E329903FEE0082B923 /* Codable models */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -176,7 +175,6 @@
 			children = (
 				A59BF1C0298FAE590082B923 /* Core Data */,
 				A59BF1B1298E6F8F0082B923 /* Networking */,
-				A59BF1E1299012700082B923 /* CacheManager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -211,6 +209,7 @@
 		A59BF1B1298E6F8F0082B923 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				A59BF1E1299012700082B923 /* CacheManager.swift */,
 				A59BF1A9298DBB610082B923 /* NYTAPIManager.swift */,
 				A59BF1DF298FCE180082B923 /* DataProvider.swift */,
 			);
@@ -228,7 +227,6 @@
 		A59BF1C0298FAE590082B923 /* Core Data */ = {
 			isa = PBXGroup;
 			children = (
-				A59BF1CF298FB1570082B923 /* Managed Objects */,
 				A59BF1C1298FAE790082B923 /* CoreDataStack.swift */,
 			);
 			path = "Core Data";
@@ -245,6 +243,16 @@
 				A59BF1D1298FBEC30082B923 /* BuyLinkEntity+CoreDataProperties.swift */,
 			);
 			path = "Managed Objects";
+			sourceTree = "<group>";
+		};
+		A59BF1E329903FEE0082B923 /* Codable models */ = {
+			isa = PBXGroup;
+			children = (
+				A59BF1AB298E51C90082B923 /* ListsAPI */,
+				A59BF1AC298E51DC0082B923 /* BooksAPI */,
+				A59BF1A2298D83C30082B923 /* TempModels.swift */,
+			);
+			path = "Codable models";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
