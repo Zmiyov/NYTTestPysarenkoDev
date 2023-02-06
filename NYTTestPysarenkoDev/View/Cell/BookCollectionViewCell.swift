@@ -55,6 +55,8 @@ final class BookCollectionViewCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         setupView()
+        setConstraints()
+        setupButton()
     }
     
     override func prepareForReuse() {
@@ -62,18 +64,21 @@ final class BookCollectionViewCell: UICollectionViewCell {
     }
     
     override func layoutSubviews() {
+        
         if UIDevice.current.orientation.isLandscape {
             bookNameLabel.font = UIFont.systemFont(ofSize: 25, weight: .bold)
             authorLabel.font = UIFont.systemFont(ofSize: 21, weight: .semibold)
             descriptionLabel.font = UIFont.systemFont(ofSize: 17, weight: .regular)
             publisherLabel.font = UIFont.systemFont(ofSize: 19, weight: .regular)
             rankLabel.font = UIFont.systemFont(ofSize: 19, weight: .regular)
+            buyButton.titleLabel?.font = UIFont(name: "Avenir Next Demi Bold", size: 21)
         } else {
             bookNameLabel.font = UIFont.systemFont(ofSize: 17, weight: .bold)
             authorLabel.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
             descriptionLabel.font = UIFont.systemFont(ofSize: 13, weight: .regular)
             publisherLabel.font = UIFont.systemFont(ofSize: 15, weight: .regular)
             rankLabel.font = UIFont.systemFont(ofSize: 15, weight: .regular)
+            buyButton.titleLabel?.font = UIFont(name: "Avenir Next Demi Bold", size: 19)
         }
     }
     
@@ -82,7 +87,7 @@ final class BookCollectionViewCell: UICollectionViewCell {
     }
     
     @objc func openBuyLink() {
-        print("Perform")
+//        print("Perform")
         
 //        guard let urlString = self.urlString, let url = URL(string: urlString) else { return }
 //        let webView = WebViewViewController(url: url, title: "Buy Book")
@@ -125,8 +130,9 @@ final class BookCollectionViewCell: UICollectionViewCell {
         NSLayoutConstraint.activate([
             buyButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
             buyButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
-            buyButton.widthAnchor.constraint(equalToConstant: 75),
-            buyButton.heightAnchor.constraint(equalToConstant: 30)
+            
+            buyButton.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.2),
+            buyButton.widthAnchor.constraint(equalTo: buyButton.heightAnchor, multiplier: 3),
         ])
         
         NSLayoutConstraint.activate([
