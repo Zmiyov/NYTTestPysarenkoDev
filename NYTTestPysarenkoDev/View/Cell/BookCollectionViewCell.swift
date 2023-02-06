@@ -48,6 +48,7 @@ final class BookCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
+        setConstraints()
         setupButton()
     }
     
@@ -58,6 +59,22 @@ final class BookCollectionViewCell: UICollectionViewCell {
     
     override func prepareForReuse() {
         imageView.image = nil
+    }
+    
+    override func layoutSubviews() {
+        if UIDevice.current.orientation.isLandscape {
+            bookNameLabel.font = UIFont.systemFont(ofSize: 25, weight: .bold)
+            authorLabel.font = UIFont.systemFont(ofSize: 21, weight: .semibold)
+            descriptionLabel.font = UIFont.systemFont(ofSize: 17, weight: .regular)
+            publisherLabel.font = UIFont.systemFont(ofSize: 19, weight: .regular)
+            rankLabel.font = UIFont.systemFont(ofSize: 19, weight: .regular)
+        } else {
+            bookNameLabel.font = UIFont.systemFont(ofSize: 17, weight: .bold)
+            authorLabel.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
+            descriptionLabel.font = UIFont.systemFont(ofSize: 13, weight: .regular)
+            publisherLabel.font = UIFont.systemFont(ofSize: 15, weight: .regular)
+            rankLabel.font = UIFont.systemFont(ofSize: 15, weight: .regular)
+        }
     }
     
     private func setupButton() {
@@ -86,6 +103,18 @@ final class BookCollectionViewCell: UICollectionViewCell {
         backgroundColor = .white
         
         addSubview(imageView)
+        addSubview(buyButton)
+        addSubview(bookNameLabel)
+        addSubview(authorLabel)
+        addSubview(descriptionLabel)
+        addSubview(rankLabel)
+        addSubview(publisherLabel)
+
+        descriptionLabel.numberOfLines = 3
+    }
+    
+    private func setConstraints() {
+        
         NSLayoutConstraint.activate([
             imageView.topAnchor.constraint(equalTo: topAnchor, constant: 5),
             imageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5),
@@ -93,7 +122,6 @@ final class BookCollectionViewCell: UICollectionViewCell {
             imageView.widthAnchor.constraint(equalTo: imageView.heightAnchor, multiplier: 0.75),
         ])
         
-        addSubview(buyButton)
         NSLayoutConstraint.activate([
             buyButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
             buyButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
@@ -101,40 +129,34 @@ final class BookCollectionViewCell: UICollectionViewCell {
             buyButton.heightAnchor.constraint(equalToConstant: 30)
         ])
         
-        addSubview(bookNameLabel)
-        NSLayoutConstraint.activate([bookNameLabel.topAnchor.constraint(equalTo: topAnchor, constant: 10),
-                                     bookNameLabel.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 15),
-                                     bookNameLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15)
-                                    ])
-        
-        addSubview(authorLabel)
-        NSLayoutConstraint.activate([authorLabel.topAnchor.constraint(equalTo: bookNameLabel.bottomAnchor, constant: 3),
-                                     authorLabel.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 15),
-                                     authorLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15)
-                                    ])
-        
-        addSubview(descriptionLabel)
-        descriptionLabel.numberOfLines = 3
-        NSLayoutConstraint.activate([descriptionLabel.topAnchor.constraint(equalTo: authorLabel.bottomAnchor, constant: 0),
-                                     descriptionLabel.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 15),
-                                     descriptionLabel.trailingAnchor.constraint(equalTo: buyButton.leadingAnchor, constant: -15)
-                                    ])
-        
-        addSubview(rankLabel)
-        rankLabel.numberOfLines = 3
         NSLayoutConstraint.activate([
-                                     rankLabel.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 15),
-                                     rankLabel.trailingAnchor.constraint(equalTo: buyButton.leadingAnchor, constant: -15),
-                                     rankLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
-                                    ])
+            bookNameLabel.topAnchor.constraint(equalTo: topAnchor, constant: 10),
+            bookNameLabel.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 15),
+            bookNameLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15)
+        ])
         
-        addSubview(publisherLabel)
-        descriptionLabel.numberOfLines = 3
         NSLayoutConstraint.activate([
-                                     publisherLabel.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 15),
-                                     publisherLabel.trailingAnchor.constraint(equalTo: buyButton.leadingAnchor, constant: -15),
-                                     publisherLabel.bottomAnchor.constraint(equalTo: rankLabel.topAnchor, constant: 0)
-                                    ])
+            authorLabel.topAnchor.constraint(equalTo: bookNameLabel.bottomAnchor, constant: 3),
+            authorLabel.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 15),
+            authorLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15)
+        ])
         
+        NSLayoutConstraint.activate([
+            descriptionLabel.topAnchor.constraint(equalTo: authorLabel.bottomAnchor, constant: 0),
+            descriptionLabel.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 15),
+            descriptionLabel.trailingAnchor.constraint(equalTo: buyButton.leadingAnchor, constant: -15)
+        ])
+        
+        NSLayoutConstraint.activate([
+            rankLabel.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 15),
+            rankLabel.trailingAnchor.constraint(equalTo: buyButton.leadingAnchor, constant: -15),
+            rankLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
+        ])
+        
+        NSLayoutConstraint.activate([
+            publisherLabel.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 15),
+            publisherLabel.trailingAnchor.constraint(equalTo: buyButton.leadingAnchor, constant: -15),
+            publisherLabel.bottomAnchor.constraint(equalTo: rankLabel.topAnchor, constant: 0)
+        ])
     }
 }
