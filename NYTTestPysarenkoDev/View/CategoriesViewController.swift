@@ -19,9 +19,9 @@ final class CategoriesViewController: UIViewController {
         case main
     }
     
-    var dataSource: UICollectionViewDiffableDataSource<Section, CategoryModel>!
-    var filteredItemsSnapshot: NSDiffableDataSourceSnapshot<Section, CategoryModel> {
-        var snapshot = NSDiffableDataSourceSnapshot<Section, CategoryModel>()
+    var dataSource: UICollectionViewDiffableDataSource<Section, CategoryEntity>!
+    var filteredItemsSnapshot: NSDiffableDataSourceSnapshot<Section, CategoryEntity> {
+        var snapshot = NSDiffableDataSourceSnapshot<Section, CategoryEntity>()
         snapshot.appendSections([.main])
         snapshot.appendItems(categoryListViewModel.categories)
         return snapshot
@@ -56,7 +56,7 @@ final class CategoriesViewController: UIViewController {
 // MARK: - UICollectionViewDataSource
     
     func createDataSource() {
-        dataSource = UICollectionViewDiffableDataSource<Section, CategoryModel>(collectionView: collectionView, cellProvider: { (collectionView, indexPath, category) -> UICollectionViewCell? in
+        dataSource = UICollectionViewDiffableDataSource<Section, CategoryEntity>(collectionView: collectionView, cellProvider: { (collectionView, indexPath, category) -> UICollectionViewCell? in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifiers.categoryCollectionViewCell.rawValue, for: indexPath) as! CategoryCollectionViewCell
             
             cell.nameLabel.text = category.categoryName
@@ -79,9 +79,10 @@ extension CategoriesViewController: UICollectionViewDelegateFlowLayout {
         
         let category = categoryListViewModel.categories[indexPath.item]
         let booksVC = BooksViewController()
-        booksVC.bookListViewModel = BookListViewModel(name: category.listNameEncoded, date: category.newestPublishedDate, delegate: booksVC)
+        guard let categoryName = category.listNameEncoded,
+              let categoryDate = category.newestPublishedDate else { return }
+        booksVC.bookListViewModel = BookListViewModel(name: categoryName, date: categoryDate, delegate: booksVC)
         
-
         navigationController?.pushViewController(booksVC, animated: true)
     }
 }

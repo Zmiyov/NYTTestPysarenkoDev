@@ -70,8 +70,4 @@ final class BookListViewModel {
         }
     }
     
-//    func booksCount() -> Int {
-//        return books.count
-//    }
-    
 }
