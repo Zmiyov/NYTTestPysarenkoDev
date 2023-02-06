@@ -8,7 +8,7 @@
 import Foundation
 import CoreData
 
-class CoreDataStack {
+final class CoreDataStack {
     
     static var shared = CoreDataStack(modelName: "NYTTestPysarenkoDev")
     

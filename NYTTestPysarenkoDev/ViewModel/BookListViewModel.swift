@@ -21,8 +21,6 @@ final class BookListViewModel {
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "rank", ascending:true)]
         fetchRequest.predicate = NSPredicate(format: "category == %@", name)
 
-        print(name)
-        print(date)
         let controller = NSFetchedResultsController(fetchRequest: fetchRequest,
                                                     managedObjectContext: dataProvider.viewContext,
                                                     sectionNameKeyPath: nil, cacheName: nil)
@@ -43,19 +41,16 @@ final class BookListViewModel {
     
     var books: [BookEntity] = [] {
         didSet {
-
             NotificationCenter.default.post(name: .loadBooks, object: nil, userInfo: nil)
         }
     }
     
     init(name: String, date: String, delegate: NSFetchedResultsControllerDelegate) {
-        
         self.delegate = delegate
         self.name = name
         self.date = date
         
         dataProvider.getBooks(name: name, date: date) { [weak self] (error) in
-            
             self?.fetchBooks()
         }
     }
@@ -64,7 +59,6 @@ final class BookListViewModel {
         self.books = []
         
         if let books = fetchedResultsController.fetchedObjects {
- 
             self.books = books
         }
     }

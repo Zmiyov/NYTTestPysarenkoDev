@@ -7,6 +7,6 @@
 
 import Foundation
 
-class CacheManager {
+final class CacheManager {
     
 }

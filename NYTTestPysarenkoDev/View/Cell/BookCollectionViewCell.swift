@@ -136,7 +136,7 @@ final class BookCollectionViewCell: UICollectionViewCell {
         ])
         
         NSLayoutConstraint.activate([
-            bookNameLabel.topAnchor.constraint(equalTo: topAnchor, constant: 10),
+            bookNameLabel.topAnchor.constraint(equalTo: topAnchor, constant: 5),
             bookNameLabel.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 15),
             bookNameLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15)
         ])
@@ -148,7 +148,7 @@ final class BookCollectionViewCell: UICollectionViewCell {
         ])
         
         NSLayoutConstraint.activate([
-            descriptionLabel.topAnchor.constraint(equalTo: authorLabel.bottomAnchor, constant: 0),
+            descriptionLabel.topAnchor.constraint(equalTo: authorLabel.bottomAnchor, constant: 3),
             descriptionLabel.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 15),
             descriptionLabel.trailingAnchor.constraint(equalTo: buyButton.leadingAnchor, constant: -15)
         ])
@@ -156,7 +156,7 @@ final class BookCollectionViewCell: UICollectionViewCell {
         NSLayoutConstraint.activate([
             rankLabel.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 15),
             rankLabel.trailingAnchor.constraint(equalTo: buyButton.leadingAnchor, constant: -15),
-            rankLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
+            rankLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5),
         ])
         
         NSLayoutConstraint.activate([

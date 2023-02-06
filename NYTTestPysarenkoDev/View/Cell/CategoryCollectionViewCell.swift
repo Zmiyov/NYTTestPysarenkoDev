@@ -52,7 +52,6 @@ final class CategoryCollectionViewCell: UICollectionViewCell {
         addSubview(mainVerticalStackView)
         mainVerticalStackView.addArrangedSubview(nameLabel)
         mainVerticalStackView.addArrangedSubview(publishedDateLabel)
-        
     }
     
     private func setConstraints() {

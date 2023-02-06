@@ -54,7 +54,6 @@ final class WebViewViewController: UIViewController {
     }
     
     @objc private func didTapRefresh() {
-        
         self.webView.load(URLRequest(url: self.url))
     }
 }
