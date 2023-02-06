@@ -73,7 +73,7 @@ class DataProvider {
                 }
                 
                 do {
-                    print("do name")
+//                    print("do name")
                     if book.category == nil {
                         book.category = name
                     }
@@ -148,8 +148,6 @@ class DataProvider {
                 }
                 
                 do {
-                    print("do name")
-
                     try category.update(with: categoryDictionary)
                 } catch {
                     print("Error: \(error)\nThe film object will be deleted.")

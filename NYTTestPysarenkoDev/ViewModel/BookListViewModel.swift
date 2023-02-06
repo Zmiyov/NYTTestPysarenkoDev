@@ -43,8 +43,7 @@ final class BookListViewModel {
     
     var books: [BookEntity] = [] {
         didSet {
-            print("DidSet")
-            print(books, "DidSet Books")
+
             NotificationCenter.default.post(name: .loadBooks, object: nil, userInfo: nil)
         }
     }
@@ -65,7 +64,7 @@ final class BookListViewModel {
         self.books = []
         
         if let books = fetchedResultsController.fetchedObjects {
-            print(books, "Fetched books")
+ 
             self.books = books
         }
     }

@@ -23,7 +23,7 @@ final class BookCollectionViewCell: UICollectionViewCell {
     let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.layer.cornerRadius = 8
-        imageView.backgroundColor = .green
+        imageView.backgroundColor = UIColor(cgColor: CGColor(red: 149/255, green: 187/255, blue: 223/255, alpha: 1))
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -89,7 +89,7 @@ final class BookCollectionViewCell: UICollectionViewCell {
             imageView.topAnchor.constraint(equalTo: topAnchor, constant: 5),
             imageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5),
             imageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5),
-            imageView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.25),
+            imageView.widthAnchor.constraint(equalTo: imageView.heightAnchor, multiplier: 0.75),
         ])
         
         addSubview(bookNameLabel)

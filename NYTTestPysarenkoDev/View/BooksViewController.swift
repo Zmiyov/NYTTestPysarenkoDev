@@ -46,7 +46,6 @@ final class BooksViewController: UIViewController {
       
         collectionView.delegate = self
         createDataSource()
-        print(bookListViewModel?.books, "Books")
         
         NotificationCenter.default.addObserver(self, selector: #selector(obserber(notification: )), name: .loadBooks, object: nil)
     }
@@ -65,9 +64,14 @@ final class BooksViewController: UIViewController {
             cell.urlString = book.linkToBuyOnAmazon
             cell.bookNameLabel.text = book.title
             cell.descriptionLabel.text = book.description
-            cell.imageView.af.setImage(withURL: URL(string: book.bookImage!)!)
-//            print(book.title)
-//            print(book.category)
+//            cell.imageView.af.setImage(withURL: URL(string: book.bookImageURL!)!, placeholderImage: UIImage(named: "placeholderLightPortrait"))
+            if let imageUrl = book.bookImageURL,
+               let url = URL(string: imageUrl) {
+                cell.imageView.af.setImage(withURL: url, placeholderImage: UIImage(named: "placeholderLightPortrait"))
+            }
+
+//            cell.imageView.af.setImage(withURL: url, placeholderImage: UIImage(named: "placeholder"))
+
             return cell
         })
         dataSource.apply(filteredItemsSnapshot)

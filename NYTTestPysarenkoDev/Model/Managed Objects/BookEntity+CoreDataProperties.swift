@@ -21,7 +21,7 @@ extension BookEntity {
     @NSManaged public var bookDescription: String?
     @NSManaged public var title: String?
     @NSManaged public var author: String?
-    @NSManaged public var bookImage: String?
+    @NSManaged public var bookImageURL: String?
     @NSManaged public var linkToBuyOnAmazon: String?
 //    @NSManaged public var buyLinks: NSOrderedSet?
     @NSManaged public var bookID: String?
@@ -46,7 +46,7 @@ extension BookEntity {
         self.bookDescription = bookDescription
         self.title = title
         self.author = author
-        self.bookImage = bookImage
+        self.bookImageURL = bookImage
         self.linkToBuyOnAmazon = linkToBuyOnAmazon
 //        self.buyLinks = buyLinks
         self.bookID = bookID
