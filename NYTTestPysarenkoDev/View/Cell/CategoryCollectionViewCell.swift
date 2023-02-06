@@ -9,8 +9,8 @@ import UIKit
 
 final class CategoryCollectionViewCell: UICollectionViewCell {
     
-    let nameLabel = UILabel(font: UIFont.systemFont(ofSize: 17, weight: .bold), alighment: .left)
-    let publishedDateLabel = UILabel(font: UIFont.systemFont(ofSize: 15, weight: .regular), alighment: .left)
+    let nameLabel = UILabel(font: UIFont.systemFont(ofSize: 17, weight: .bold), alighment: .center)
+    let publishedDateLabel = UILabel(font: UIFont.systemFont(ofSize: 15, weight: .regular), alighment: .center)
 
     
     
@@ -24,24 +24,52 @@ final class CategoryCollectionViewCell: UICollectionViewCell {
         setupView()
     }
     
+    override func layoutSubviews() {
+        if UIDevice.current.orientation.isLandscape {
+            nameLabel.font = UIFont.systemFont(ofSize: 25, weight: .bold)
+            publishedDateLabel.font = UIFont.systemFont(ofSize: 23, weight: .regular)
+        } else {
+            nameLabel.font = UIFont.systemFont(ofSize: 17, weight: .bold)
+            publishedDateLabel.font = UIFont.systemFont(ofSize: 15, weight: .regular)
+        }
+    }
+    
     private func setupView() {
         
         layer.cornerRadius = 12
         backgroundColor = .white
         
-        addSubview(nameLabel)
-        nameLabel.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-                                     nameLabel.topAnchor.constraint(equalTo: topAnchor, constant: 15),
-                                     nameLabel.centerXAnchor.constraint(equalTo: centerXAnchor)
-                                    ])
+        let mainVerticalStackView = UIStackView()
+        mainVerticalStackView.axis = .vertical
+        mainVerticalStackView.backgroundColor = .clear
+        mainVerticalStackView.distribution = .fillEqually
+//        mainVerticalStackView.
+        mainVerticalStackView.spacing = 5
+        mainVerticalStackView.translatesAutoresizingMaskIntoConstraints = false
+        mainVerticalStackView.contentMode = .center
         
-        addSubview(publishedDateLabel)
-        publishedDateLabel.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(mainVerticalStackView)
         NSLayoutConstraint.activate([
-                                     publishedDateLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 10),
-                                     publishedDateLabel.centerXAnchor.constraint(equalTo: centerXAnchor)
-                                    ])
+            mainVerticalStackView.topAnchor.constraint(equalTo: topAnchor),
+            mainVerticalStackView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            mainVerticalStackView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            mainVerticalStackView.bottomAnchor.constraint(equalTo: bottomAnchor)
+//            mainVerticalStackView.widthAnchor.constraint(equalTo: widthAnchor)
+        ])
+        
+        mainVerticalStackView.addArrangedSubview(nameLabel)
+//        nameLabel.translatesAutoresizingMaskIntoConstraints = false
+//        NSLayoutConstraint.activate([
+//                                     nameLabel.topAnchor.constraint(equalTo: topAnchor, constant: 15),
+//                                     nameLabel.centerXAnchor.constraint(equalTo: centerXAnchor)
+//                                    ])
+        
+        mainVerticalStackView.addArrangedSubview(publishedDateLabel)
+//        publishedDateLabel.translatesAutoresizingMaskIntoConstraints = false
+//        NSLayoutConstraint.activate([
+//                                     publishedDateLabel.bottomAnchor.constraint(equalTo: mainVerticalStackView.bottomAnchor, constant: 0)
+//
+//                                    ])
         
     }
 }

@@ -63,14 +63,14 @@ final class BooksViewController: UIViewController {
             
             cell.urlString = book.linkToBuyOnAmazon
             cell.bookNameLabel.text = book.title
-            cell.descriptionLabel.text = book.description
-//            cell.imageView.af.setImage(withURL: URL(string: book.bookImageURL!)!, placeholderImage: UIImage(named: "placeholderLightPortrait"))
-            if let imageUrl = book.bookImageURL,
-               let url = URL(string: imageUrl) {
+            cell.authorLabel.text = book.author
+            cell.descriptionLabel.text = book.bookDescription
+            cell.publisherLabel.text = "Publisher: " + book.publisher!
+            cell.rankLabel.text = "Rank: " + String(book.rank)
+
+            if let imageUrl = book.bookImageURL, let url = URL(string: imageUrl) {
                 cell.imageView.af.setImage(withURL: url, placeholderImage: UIImage(named: "placeholderLightPortrait"))
             }
-
-//            cell.imageView.af.setImage(withURL: url, placeholderImage: UIImage(named: "placeholder"))
 
             return cell
         })
@@ -82,7 +82,7 @@ final class BooksViewController: UIViewController {
 extension BooksViewController: UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.width, height: collectionView.frame.width/3)
+        return CGSize(width: collectionView.frame.width, height: collectionView.frame.width/2.5)
     }
 }
 
