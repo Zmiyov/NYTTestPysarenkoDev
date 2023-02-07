@@ -105,7 +105,7 @@ final class BookCollectionViewCell: UICollectionViewCell {
     private func setupView() {
         
         layer.cornerRadius = 12
-        backgroundColor = .white
+        backgroundColor = .tertiarySystemBackground
         
         addSubview(imageView)
         addSubview(buyButton)
