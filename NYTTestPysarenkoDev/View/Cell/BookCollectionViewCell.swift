@@ -14,6 +14,8 @@ final class BookCollectionViewCell: UICollectionViewCell {
     var urlString: String?
     var imageURL: String?
     
+    var buyLinks: [BuyLinkEntity]?
+    
     let bookNameLabel = UILabel(font: UIFont.systemFont(ofSize: 17, weight: .bold), alighment: .left)
     let authorLabel = UILabel(font: UIFont.systemFont(ofSize: 15, weight: .semibold), alighment: .left)
     let descriptionLabel = UILabel(font: UIFont.systemFont(ofSize: 13, weight: .regular), alighment: .left)
@@ -34,7 +36,7 @@ final class BookCollectionViewCell: UICollectionViewCell {
 
     private let buyButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Buy", for: .normal)
+        button.setTitle("Buy".localized(), for: .normal)
         button.setTitleColor(UIColor.label, for: .normal)
         button.titleLabel?.font = UIFont(name: "Avenir Next Demi Bold", size: 19)
         button.backgroundColor = .link
@@ -87,19 +89,27 @@ final class BookCollectionViewCell: UICollectionViewCell {
     }
     
     @objc func openBuyLink() {
-//        print("Perform")
         
 //        guard let urlString = self.urlString, let url = URL(string: urlString) else { return }
 //        let webView = WebViewViewController(url: url, title: "Buy Book")
 //        let navVC = UINavigationController(rootViewController: webView)
 //        self.window?.rootViewController?.present(navVC, animated: true)
         
-        guard let urlString = self.urlString, let url = URL(string: urlString) else { return }
-        let config = SFSafariViewController.Configuration()
-        config.entersReaderIfAvailable = true
+//        guard let urlString = self.urlString, let url = URL(string: urlString) else { return }
+//        let config = SFSafariViewController.Configuration()
+//        config.entersReaderIfAvailable = true
+//
+//        let vc = SFSafariViewController(url: url, configuration: config)
+//        self.window?.rootViewController?.present(vc, animated: true)
         
-        let vc = SFSafariViewController(url: url, configuration: config)
-        self.window?.rootViewController?.present(vc, animated: true)
+        
+        guard let buyLinks = buyLinks,
+              let rootVC = self.window?.rootViewController
+        else {
+            return
+        }
+        let buyLinksAlert = BuyLinksAlert.instagramAlertController(buyLinks: buyLinks, rootVC: rootVC)
+        rootVC.present(buyLinksAlert, animated: true)
     }
     
     private func setupView() {

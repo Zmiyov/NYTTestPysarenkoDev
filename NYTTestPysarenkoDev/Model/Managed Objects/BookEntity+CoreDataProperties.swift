@@ -23,7 +23,7 @@ extension BookEntity {
     @NSManaged public var author: String?
     @NSManaged public var bookImageURL: String?
     @NSManaged public var linkToBuyOnAmazon: String?
-//    @NSManaged public var buyLinks: NSOrderedSet?
+    @NSManaged public var buyLinks: NSOrderedSet?
     @NSManaged public var bookID: String?
     @NSManaged public var category: String?
     
@@ -35,7 +35,7 @@ extension BookEntity {
               let author = jsonDictionary["author"] as? String,
               let bookImage = jsonDictionary["book_image"] as? String,
               let linkToBuyOnAmazon = jsonDictionary["amazon_product_url"] as? String,
-//              let buyLinks = jsonDictionary["buy_links"] as? NSOrderedSet,
+              let buyLinksArray = jsonDictionary["buy_links"] as? [[String: Any]],
               let bookID = jsonDictionary["book_uri"] as? String
         else {
             throw NSError(domain: "", code: 100)
@@ -48,36 +48,18 @@ extension BookEntity {
         self.author = author
         self.bookImageURL = bookImage
         self.linkToBuyOnAmazon = linkToBuyOnAmazon
-//        self.buyLinks = buyLinks
+//        let linksIDs = self.buyLinks as? [BuyLinkEntity]
+//        print(buyLinksArray)
+        try buyLinksArray.forEach { value in
+//            print(value)
+            guard let context = self.managedObjectContext else { return }
+            let buyLink = BuyLinkEntity(context: context)
+            try buyLink.update(with: value)
+            self.addToBuyLinks(buyLink)
+        }
+        
         self.bookID = bookID
     }
-    
-    func fetchImage() {
-        
-    }
-    
-//    func update(with bookModel: BookModel) throws {
-//        guard let rank = bookModel.rank as? Int32,
-//              let publisher = bookModel.publisher as? String,
-//              let bookDescription = bookModel.description as? String,
-//              let title = bookModel.title as? String,
-//              let author = bookModel.author as? String,
-//              let bookImage = bookModel.bookImage as? String,
-//              let linkToBuyOnAmazon = bookModel.linkToBuyOnAmazon as? String,
-//              let buyLinks = bookModel.buyLinks as? NSOrderedSet
-//        else {
-//            throw NSError(domain: "", code: 100)
-//        }
-//
-//        self.rank = rank
-//        self.publisher = publisher
-//        self.bookDescription = bookDescription
-//        self.title = title
-//        self.author = author
-//        self.bookImage = bookImage
-//        self.linkToBuyOnAmazon = linkToBuyOnAmazon
-//        self.buyLinks = buyLinks
-//    }
 
 }
 

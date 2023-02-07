@@ -25,7 +25,6 @@ final class BookListViewModel {
         let controller = NSFetchedResultsController(fetchRequest: fetchRequest,
                                                     managedObjectContext: dataProvider.viewContext,
                                                     sectionNameKeyPath: nil, cacheName: nil)
-        controller.delegate = delegate
         
         do {
             try controller.performFetch()
@@ -37,21 +36,17 @@ final class BookListViewModel {
         return controller
     }()
     
-
-    var delegate: NSFetchedResultsControllerDelegate?
-    
     var books: [BookEntity] = [] {
         didSet {
             NotificationCenter.default.post(name: .loadBooks, object: nil, userInfo: nil)
         }
     }
     
-    init(encodedName: String, titleName: String, date: String, delegate: NSFetchedResultsControllerDelegate) {
-        self.delegate = delegate
+    init(encodedName: String, titleName: String, date: String) {
         self.encodedName = encodedName
         self.titleName = titleName
         self.date = date
-        
+
         dataProvider.getBooks(name: encodedName, date: date) { [weak self] (error) in
             self?.fetchBooks()
         }

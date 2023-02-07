@@ -82,8 +82,7 @@ extension CategoriesViewController: UICollectionViewDelegateFlowLayout {
         guard let categoryNameEncoded = category.listNameEncoded,
               let categoryName = category.categoryName,
               let categoryDate = category.newestPublishedDate else { return }
-        booksVC.bookListViewModel = BookListViewModel(encodedName: categoryNameEncoded, titleName: categoryName, date: categoryDate, delegate: booksVC)
-//        booksVC.title = categoryName
+        booksVC.bookListViewModel = BookListViewModel(encodedName: categoryNameEncoded, titleName: categoryName, date: categoryDate)
         
         navigationController?.pushViewController(booksVC, animated: true)
     }

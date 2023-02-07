@@ -78,7 +78,7 @@ final class DataProvider {
                     }
                     try book.update(with: bookDictionary)
                 } catch {
-                    print("Error: \(error)\nThe film object will be deleted.")
+                    print("Error: \(error)\nThe Book object will be deleted.")
                     taskContext.delete(book)
                 }
                 
@@ -149,7 +149,7 @@ final class DataProvider {
                 do {
                     try category.update(with: categoryDictionary)
                 } catch {
-                    print("Error: \(error)\nThe film object will be deleted.")
+                    print("Error: \(error)\nThe Category object will be deleted.")
                     taskContext.delete(category)
                 }
                 

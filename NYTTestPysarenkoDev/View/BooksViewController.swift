@@ -61,12 +61,13 @@ final class BooksViewController: UIViewController {
         dataSource = UICollectionViewDiffableDataSource<Section, BookEntity>(collectionView: collectionView, cellProvider: { (collectionView, indexPath, book) -> UICollectionViewCell? in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifiers.bookCollectionViewCell.rawValue, for: indexPath) as! BookCollectionViewCell
             
+            cell.buyLinks = book.buyLinks?.array as? [BuyLinkEntity]
             cell.urlString = book.linkToBuyOnAmazon
             cell.bookNameLabel.text = book.title
             cell.authorLabel.text = book.author
             cell.descriptionLabel.text = book.bookDescription
-            cell.publisherLabel.text = "Publisher: " + book.publisher!
-            cell.rankLabel.text = "Rank: " + String(book.rank)
+            cell.publisherLabel.text = "Publisher: ".localized() + (book.publisher ?? "")
+            cell.rankLabel.text = "Rank: ".localized() + String(book.rank)
 
             if let imageUrl = book.bookImageURL, let url = URL(string: imageUrl) {
                 cell.imageView.af.setImage(withURL: url, placeholderImage: UIImage(named: "placeholderLightPortrait"))
@@ -77,6 +78,7 @@ final class BooksViewController: UIViewController {
         dataSource.apply(filteredItemsSnapshot)
     }
 }
+
 // MARK: - UICollectionViewDelegateFlowLayout
 
 extension BooksViewController: UICollectionViewDelegateFlowLayout {
@@ -102,10 +104,3 @@ extension BooksViewController {
     }
 }
 
-//MARK: - NSFetchedResultsControllerDelegate
-
-extension BooksViewController: NSFetchedResultsControllerDelegate {
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-//        createDataSource()
-    }
-}
