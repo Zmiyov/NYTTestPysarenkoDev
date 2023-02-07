@@ -12,14 +12,15 @@ final class BookListViewModel {
 
     var dataProvider = DataProvider(persistentContainer: CoreDataStack.shared.storeContainer, repository: NYTAPIManager.shared)
     
-    var name: String
+    var encodedName: String
+    var titleName: String
     var date: String
     
     lazy var fetchedResultsController: NSFetchedResultsController<BookEntity> = {
         
         let fetchRequest = NSFetchRequest<BookEntity>(entityName:"BookEntity")
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "rank", ascending:true)]
-        fetchRequest.predicate = NSPredicate(format: "category == %@", name)
+        fetchRequest.predicate = NSPredicate(format: "category == %@", encodedName)
 
         let controller = NSFetchedResultsController(fetchRequest: fetchRequest,
                                                     managedObjectContext: dataProvider.viewContext,
@@ -45,12 +46,13 @@ final class BookListViewModel {
         }
     }
     
-    init(name: String, date: String, delegate: NSFetchedResultsControllerDelegate) {
+    init(encodedName: String, titleName: String, date: String, delegate: NSFetchedResultsControllerDelegate) {
         self.delegate = delegate
-        self.name = name
+        self.encodedName = encodedName
+        self.titleName = titleName
         self.date = date
         
-        dataProvider.getBooks(name: name, date: date) { [weak self] (error) in
+        dataProvider.getBooks(name: encodedName, date: date) { [weak self] (error) in
             self?.fetchBooks()
         }
     }

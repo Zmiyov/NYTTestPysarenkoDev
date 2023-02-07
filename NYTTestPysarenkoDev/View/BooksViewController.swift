@@ -39,7 +39,7 @@ final class BooksViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = bookListViewModel?.name
+        title = bookListViewModel?.titleName
         view.backgroundColor = .secondarySystemBackground
         
         setConstraints()
