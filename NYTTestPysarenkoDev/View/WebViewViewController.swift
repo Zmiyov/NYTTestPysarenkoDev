@@ -45,7 +45,7 @@ final class WebViewViewController: UIViewController {
     }
 
     private func configureButtons() {
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(didTapButton))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Done".localized(), style: .done, target: self, action: #selector(didTapButton))
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(didTapRefresh))
     }
     

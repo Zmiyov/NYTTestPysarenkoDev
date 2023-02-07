@@ -15,6 +15,10 @@ final class CategoriesViewController: UIViewController {
         case categoryCollectionViewCell
     }
     
+    private enum TextLabels: String {
+        case title = "Title"
+    }
+    
     enum Section: CaseIterable {
         case main
     }
@@ -37,7 +41,7 @@ final class CategoriesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Categories"
+        title = TextLabels.title.rawValue.localized()
         view.backgroundColor = .secondarySystemBackground
         
         setConstraints()

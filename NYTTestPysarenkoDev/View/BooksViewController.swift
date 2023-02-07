@@ -21,6 +21,11 @@ final class BooksViewController: UIViewController {
         case main
     }
     
+    private enum BookVCTextLabels: String {
+        case publisher = "Publisher: "
+        case rank = "Rank: "
+    }
+    
     var dataSource: UICollectionViewDiffableDataSource<Section, BookEntity>!
     var filteredItemsSnapshot: NSDiffableDataSourceSnapshot<Section, BookEntity> {
         var snapshot = NSDiffableDataSourceSnapshot<Section, BookEntity>()
@@ -62,12 +67,12 @@ final class BooksViewController: UIViewController {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifiers.bookCollectionViewCell.rawValue, for: indexPath) as! BookCollectionViewCell
             
             cell.buyLinks = book.buyLinks?.array as? [BuyLinkEntity]
-            cell.urlString = book.linkToBuyOnAmazon
+//            cell.urlString = book.linkToBuyOnAmazon  //Link for SafariServices
             cell.bookNameLabel.text = book.title
             cell.authorLabel.text = book.author
             cell.descriptionLabel.text = book.bookDescription
-            cell.publisherLabel.text = "Publisher: ".localized() + (book.publisher ?? "")
-            cell.rankLabel.text = "Rank: ".localized() + String(book.rank)
+            cell.publisherLabel.text = BookVCTextLabels.publisher.rawValue.localized() + (book.publisher ?? "")
+            cell.rankLabel.text = BookVCTextLabels.rank.rawValue.localized() + String(book.rank)
 
             if let imageUrl = book.bookImageURL, let url = URL(string: imageUrl) {
                 cell.imageView.af.setImage(withURL: url, placeholderImage: UIImage(named: "placeholderLightPortrait"))

@@ -11,10 +11,11 @@ import SafariServices
 
 final class BookCollectionViewCell: UICollectionViewCell {
     
-    var urlString: String?
-    var imageURL: String?
-    
     var buyLinks: [BuyLinkEntity]?
+    
+    private enum BookCellTextLabels: String {
+        case buy = "Buy"
+    }
     
     let bookNameLabel = UILabel(font: UIFont.systemFont(ofSize: 17, weight: .bold), alighment: .left)
     let authorLabel = UILabel(font: UIFont.systemFont(ofSize: 15, weight: .semibold), alighment: .left)
@@ -36,7 +37,7 @@ final class BookCollectionViewCell: UICollectionViewCell {
 
     private let buyButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Buy".localized(), for: .normal)
+        button.setTitle(BookCellTextLabels.buy.rawValue.localized(), for: .normal)
         button.setTitleColor(UIColor.label, for: .normal)
         button.titleLabel?.font = UIFont(name: "Avenir Next Demi Bold", size: 19)
         button.backgroundColor = .link
@@ -89,12 +90,13 @@ final class BookCollectionViewCell: UICollectionViewCell {
     }
     
     @objc func openBuyLink() {
-        
+        //WebKit
 //        guard let urlString = self.urlString, let url = URL(string: urlString) else { return }
 //        let webView = WebViewViewController(url: url, title: "Buy Book")
 //        let navVC = UINavigationController(rootViewController: webView)
 //        self.window?.rootViewController?.present(navVC, animated: true)
         
+        //SafariServices
 //        guard let urlString = self.urlString, let url = URL(string: urlString) else { return }
 //        let config = SFSafariViewController.Configuration()
 //        config.entersReaderIfAvailable = true
@@ -102,7 +104,7 @@ final class BookCollectionViewCell: UICollectionViewCell {
 //        let vc = SFSafariViewController(url: url, configuration: config)
 //        self.window?.rootViewController?.present(vc, animated: true)
         
-        
+        //Alert
         guard let buyLinks = buyLinks,
               let rootVC = self.window?.rootViewController
         else {
