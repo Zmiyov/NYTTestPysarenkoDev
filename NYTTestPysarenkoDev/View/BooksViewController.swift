@@ -91,6 +91,8 @@ final class BooksViewController: UIViewController {
             if let imageUrl = book.bookImageURL, let url = URL(string: imageUrl) {
                 cell.imageView.af.setImage(withURL: url, placeholderImage: UIImage(named: "placeholderLightPortrait"), filter: AspectScaledToFillSizeFilter(size: CGSize(width: 160, height: 200)))
             }
+            
+            print((book.categories?[0] as? BookCategoriesEntity)?.bookCategoryName as? String)
 
             return cell
         })

@@ -22,9 +22,10 @@ final class BookListViewModel {
         let fetchRequest = NSFetchRequest<BookEntity>(entityName:"BookEntity")
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "rank", ascending:true)]
 
-        fetchRequest.predicate = NSPredicate(format: "bookID in %@", argumentArray: [bookIDs ?? []])
-//        fetchRequest.predicate = NSPredicate(format: "category == %@", encodedName)
-
+//        fetchRequest.predicate = NSPredicate(format: "bookID in %@", argumentArray: [bookIDs ?? []])
+//        fetchRequest.predicate = NSPredicate(format: "categories == %@", encodedName)
+//        fetchRequest.predicate = NSPredicate(format: "SUBQUERY(categories, $category, $category.bookCategoryName = $@).@count>0", encodedName)
+        fetchRequest.predicate = NSPredicate(format: "ANY categories.bookCategoryName != nil AND ANY categories.bookCategoryName CONTAINS [cd] %@", encodedName)
         let controller = NSFetchedResultsController(fetchRequest: fetchRequest,
                                                     managedObjectContext: dataProvider.viewContext,
                                                     sectionNameKeyPath: nil, cacheName: nil)
@@ -47,7 +48,6 @@ final class BookListViewModel {
         self.date = date
 
         dataProvider.getBooks(name: encodedName, date: date) { [weak self] (bookIDsArray, error) in
-            print(bookIDsArray)
             if let bookIDsArray = bookIDsArray {
                 self?.bookIDs = bookIDsArray
                 

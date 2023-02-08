@@ -41,6 +41,8 @@ final class DataProvider {
             
             let bookIDs = jsonDictionary.map { $0["book_uri"] as? String }.compactMap{ $0 }
             completion(bookIDs, nil)
+            
+            let bookCategories = NSFetchRequest<NSFetchRequestResult>(entityName: "BookEntity")
         }
     }
     
@@ -74,9 +76,15 @@ final class DataProvider {
                 }
                 
                 do {
-//                    if book.category == nil {
-//                        book.category = name
-//                    }
+                    if let bookCategories = book.categories {
+                        let array = bookCategories.map{ ($0 as? BookCategoriesEntity)?.bookCategoryName as? String }
+                        if !array.contains(name) {
+                            let buyLink = BookCategoriesEntity(context: taskContext)
+                            buyLink.bookCategoryName = name
+                            book.addToCategories(buyLink)
+                        }
+                    }
+                    
                     try book.update(with: bookDictionary)
                 } catch {
                     print("Error: \(error)\nThe Book object will be deleted.")
