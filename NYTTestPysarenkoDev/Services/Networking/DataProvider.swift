@@ -40,9 +40,8 @@ final class DataProvider {
             _ = self.syncBooks(name: name, jsonDictionary: jsonDictionary, taskContext: taskContext)
             
             let bookIDs = jsonDictionary.map { $0["book_uri"] as? String }.compactMap{ $0 }
-            completion(bookIDs, nil)
             
-            let bookCategories = NSFetchRequest<NSFetchRequestResult>(entityName: "BookEntity")
+            completion(bookIDs, nil)
         }
     }
     
@@ -53,7 +52,10 @@ final class DataProvider {
         taskContext.performAndWait {
             let matchingBooksRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "BookEntity")
             let bookIDs = jsonDictionary.map { $0["book_uri"] as? String }.compactMap{ $0 }
-            matchingBooksRequest.predicate = NSPredicate(format: "bookID in %@", argumentArray: [bookIDs])
+            let bookIDpredicate = NSPredicate(format: "bookID in %@", argumentArray: [bookIDs])
+            let nonEmptyPredicate = NSPredicate(format: "ANY categories.bookCategoryName != nil AND ANY categories.bookCategoryName CONTAINS [cd] %@", name)
+            let andPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [bookIDpredicate, nonEmptyPredicate])
+            matchingBooksRequest.predicate = andPredicate
             
             let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: matchingBooksRequest)
             batchDeleteRequest.resultType = .resultTypeObjectIDs
@@ -76,16 +78,18 @@ final class DataProvider {
                 }
                 
                 do {
-                    if let bookCategories = book.categories {
-                        let array = bookCategories.map{ ($0 as? BookCategoriesEntity)?.bookCategoryName as? String }
-                        if !array.contains(name) {
-                            let buyLink = BookCategoriesEntity(context: taskContext)
-                            buyLink.bookCategoryName = name
-                            book.addToCategories(buyLink)
-                        }
-                    }
+//                    if let bookCategories = book.categories {
+//                        let array = bookCategories.map{ ($0 as? BookCategoriesEntity)?.bookCategoryName as? String }
+//                        if !array.contains(name) {
+//                            let bookCategory = BookCategoriesEntity(context: taskContext)
+//                            bookCategory.bookCategoryName = name
+//                            book.addToCategories(bookCategory)
+//                            try book.update(with: bookDictionary)
+//                            print("Add cat")
+//                        }
+//                    }
                     
-                    try book.update(with: bookDictionary)
+                    try book.update(name: name, with: bookDictionary)
                 } catch {
                     print("Error: \(error)\nThe Book object will be deleted.")
                     taskContext.delete(book)

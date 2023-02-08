@@ -27,7 +27,7 @@ extension BookEntity {
     @NSManaged public var buyLinks: NSOrderedSet?
     @NSManaged public var categories: NSOrderedSet?
     
-    func update(with jsonDictionary: [String: Any]) throws {
+    func update(name: String, with jsonDictionary: [String: Any]) throws {
         guard let rank = jsonDictionary["rank"] as? Int16,
               let publisher = jsonDictionary["publisher"] as? String,
               let bookDescription = jsonDictionary["description"] as? String,
@@ -54,6 +54,16 @@ extension BookEntity {
             let buyLink = BuyLinkEntity(context: context)
             try buyLink.update(with: value)
             self.addToBuyLinks(buyLink)
+        }
+        
+        if let bookCategories = self.categories {
+            let array = bookCategories.map{ ($0 as? BookCategoriesEntity)?.bookCategoryName as? String }
+            if !array.contains(name) {
+                guard let context = self.managedObjectContext else { return }
+                let bookCategory = BookCategoriesEntity(context: context)
+                bookCategory.bookCategoryName = name
+                self.addToCategories(bookCategory)
+            }
         }
         
         self.bookID = bookID
