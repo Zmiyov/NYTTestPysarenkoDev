@@ -22,15 +22,15 @@ final class DataProvider {
         self.repository = repository
     }
     
-    func getBooks(name: String, date: String, completion: @escaping(Error?) -> Void) {
+    func getBooks(name: String, date: String, completion: @escaping([String]?, Error?) -> Void) {
         repository.fetchBooksJSON(name: name, date: date) { jsonDictionary, error in
             if let error = error {
-                completion(error)
+                completion(nil, error)
                 return
             }
             
             guard let jsonDictionary = jsonDictionary else {
-                completion(error)
+                completion(nil, error)
                 return
             }
             
@@ -39,7 +39,8 @@ final class DataProvider {
             
             _ = self.syncBooks(name: name, jsonDictionary: jsonDictionary, taskContext: taskContext)
             
-            completion(nil)
+            let bookIDs = jsonDictionary.map { $0["book_uri"] as? String }.compactMap{ $0 }
+            completion(bookIDs, nil)
         }
     }
     
@@ -73,9 +74,9 @@ final class DataProvider {
                 }
                 
                 do {
-                    if book.category == nil {
-                        book.category = name
-                    }
+//                    if book.category == nil {
+//                        book.category = name
+//                    }
                     try book.update(with: bookDictionary)
                 } catch {
                     print("Error: \(error)\nThe Book object will be deleted.")

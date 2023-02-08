@@ -15,12 +15,15 @@ final class BookListViewModel {
     var encodedName: String
     var titleName: String
     var date: String
+    var bookIDs: [String]?
     
     lazy var fetchedResultsController: NSFetchedResultsController<BookEntity> = {
         
         let fetchRequest = NSFetchRequest<BookEntity>(entityName:"BookEntity")
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "rank", ascending:true)]
-        fetchRequest.predicate = NSPredicate(format: "category == %@", encodedName)
+
+        fetchRequest.predicate = NSPredicate(format: "bookID in %@", argumentArray: [bookIDs ?? []])
+//        fetchRequest.predicate = NSPredicate(format: "category == %@", encodedName)
 
         let controller = NSFetchedResultsController(fetchRequest: fetchRequest,
                                                     managedObjectContext: dataProvider.viewContext,
@@ -43,7 +46,12 @@ final class BookListViewModel {
         self.titleName = titleName
         self.date = date
 
-        dataProvider.getBooks(name: encodedName, date: date) { [weak self] (error) in
+        dataProvider.getBooks(name: encodedName, date: date) { [weak self] (bookIDsArray, error) in
+            print(bookIDsArray)
+            if let bookIDsArray = bookIDsArray {
+                self?.bookIDs = bookIDsArray
+                
+            }
             self?.fetchBooks()
         }
     }

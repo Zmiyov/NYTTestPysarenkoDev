@@ -15,7 +15,7 @@ final class BooksViewController: UIViewController {
     private let refreshControl = UIRefreshControl()
     
     private enum CellIdentifiers: String {
-        case bookCollectionViewCell
+        case bookCell
     }
 
     enum Section: CaseIterable {
@@ -39,7 +39,7 @@ final class BooksViewController: UIViewController {
         let layout = UICollectionViewFlowLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.register(BookCollectionViewCell.self, forCellWithReuseIdentifier: CellIdentifiers.bookCollectionViewCell.rawValue)
+        collectionView.register(BookCollectionViewCell.self, forCellWithReuseIdentifier: CellIdentifiers.bookCell.rawValue)
         return collectionView
     }()
     
@@ -60,13 +60,17 @@ final class BooksViewController: UIViewController {
     
     @objc
     private func didPullToRefresh(_ sender: Any) {
-        createDataSource()
+        DispatchQueue.main.async {
+            self.createDataSource()
+        }
         refreshControl.endRefreshing()
     }
     
     private func bindViewModel() {
         bookListViewModel?.books.bind { [weak self] books in
-            self?.createDataSource()
+            DispatchQueue.main.async {
+                self?.createDataSource()
+            }
         }
     }
     
@@ -74,7 +78,7 @@ final class BooksViewController: UIViewController {
     
     func createDataSource() {
         dataSource = UICollectionViewDiffableDataSource<Section, BookEntity>(collectionView: collectionView, cellProvider: { (collectionView, indexPath, book) -> UICollectionViewCell? in
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifiers.bookCollectionViewCell.rawValue, for: indexPath) as! BookCollectionViewCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifiers.bookCell.rawValue, for: indexPath) as! BookCollectionViewCell
             
             cell.buyLinks = book.buyLinks?.array as? [BuyLinkEntity]
 //            cell.urlString = book.linkToBuyOnAmazon  //Link for SafariServices
@@ -85,7 +89,7 @@ final class BooksViewController: UIViewController {
             cell.rankLabel.text = BookVCTextLabels.rank.rawValue.localized() + String(book.rank)
 
             if let imageUrl = book.bookImageURL, let url = URL(string: imageUrl) {
-                cell.imageView.af.setImage(withURL: url, placeholderImage: UIImage(named: "placeholderLightPortrait"))
+                cell.imageView.af.setImage(withURL: url, placeholderImage: UIImage(named: "placeholderLightPortrait"), filter: AspectScaledToFillSizeFilter(size: CGSize(width: 160, height: 200)))
             }
 
             return cell

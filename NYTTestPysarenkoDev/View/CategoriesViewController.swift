@@ -9,7 +9,7 @@ import UIKit
 
 final class CategoriesViewController: UIViewController {
     
-    let categoryListViewModel = CategoryListViewModel()
+    var categoryListViewModel = CategoryListViewModel()
     private let refreshControl = UIRefreshControl()
     
     private enum CellIdentifiers: String {
@@ -58,13 +58,19 @@ final class CategoriesViewController: UIViewController {
     
     @objc
     private func didPullToRefresh(_ sender: Any) {
-        createDataSource()
+        DispatchQueue.main.async {
+//            self.categoryListViewModel = CategoryListViewModel()
+            self.createDataSource()
+//            self.collectionView.reloadData()
+        }
         refreshControl.endRefreshing()
     }
     
     private func bindViewModel() {
         categoryListViewModel.categories.bind { [weak self] categories in
-            self?.createDataSource()
+            DispatchQueue.main.async {
+                self?.createDataSource()
+            }
         }
     }
     
