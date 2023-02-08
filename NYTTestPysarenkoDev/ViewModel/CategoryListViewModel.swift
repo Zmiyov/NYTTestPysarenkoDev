@@ -31,12 +31,7 @@ final class CategoryListViewModel {
         return controller
     }()
     
-    var categories: [CategoryEntity] = [] {
-        didSet {
-
-            NotificationCenter.default.post(name: .loadCategories, object: nil, userInfo: nil)
-        }
-    }
+    var categories = Dynamic([CategoryEntity]())
     
     init() {
         dataProvider.getCategories() { [weak self] (error) in
@@ -45,10 +40,10 @@ final class CategoryListViewModel {
     }
     
     func fetchCategories() {
-        self.categories = []
+        self.categories.value = []
         
         if let categories = fetchedResultsController.fetchedObjects {
-            self.categories = categories
+            self.categories.value = categories
         }
     }
 }

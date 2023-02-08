@@ -16,7 +16,7 @@ final class CategoriesViewController: UIViewController {
     }
     
     private enum TextLabels: String {
-        case title = "Title"
+        case title = "Categories"
     }
     
     enum Section: CaseIterable {
@@ -27,7 +27,7 @@ final class CategoriesViewController: UIViewController {
     var filteredItemsSnapshot: NSDiffableDataSourceSnapshot<Section, CategoryEntity> {
         var snapshot = NSDiffableDataSourceSnapshot<Section, CategoryEntity>()
         snapshot.appendSections([.main])
-        snapshot.appendItems(categoryListViewModel.categories)
+        snapshot.appendItems(categoryListViewModel.categories.value)
         return snapshot
     }
     
@@ -48,13 +48,13 @@ final class CategoriesViewController: UIViewController {
       
         collectionView.delegate = self
         createDataSource()
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(obserber(notification: )), name: .loadCategories, object: nil)
+        bindViewModel()
     }
     
-    @objc private func obserber(notification: Notification) {
-
-        createDataSource()
+    func bindViewModel() {
+        categoryListViewModel.categories.bind { [weak self] categories in
+            self?.createDataSource()
+        }
     }
     
 // MARK: - UICollectionViewDataSource
@@ -81,7 +81,7 @@ extension CategoriesViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        let category = categoryListViewModel.categories[indexPath.item]
+        let category = categoryListViewModel.categories.value[indexPath.item]
         let booksVC = BooksViewController()
         guard let categoryNameEncoded = category.listNameEncoded,
               let categoryName = category.categoryName,

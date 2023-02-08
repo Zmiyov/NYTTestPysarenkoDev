@@ -30,7 +30,7 @@ final class BooksViewController: UIViewController {
     var filteredItemsSnapshot: NSDiffableDataSourceSnapshot<Section, BookEntity> {
         var snapshot = NSDiffableDataSourceSnapshot<Section, BookEntity>()
         snapshot.appendSections([.main])
-        snapshot.appendItems(bookListViewModel?.books ?? [])
+        snapshot.appendItems(bookListViewModel?.books.value ?? [])
         return snapshot
     }
     
@@ -51,13 +51,13 @@ final class BooksViewController: UIViewController {
       
         collectionView.delegate = self
         createDataSource()
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(obserber(notification: )), name: .loadBooks, object: nil)
+        bindViewModel()
     }
     
-    @objc private func obserber(notification: Notification) {
-
-        createDataSource()
+    func bindViewModel() {
+        bookListViewModel?.books.bind { [weak self] books in
+            self?.createDataSource()
+        }
     }
     
 // MARK: - UICollectionViewDataSource

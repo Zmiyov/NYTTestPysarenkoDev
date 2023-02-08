@@ -36,11 +36,7 @@ final class BookListViewModel {
         return controller
     }()
     
-    var books: [BookEntity] = [] {
-        didSet {
-            NotificationCenter.default.post(name: .loadBooks, object: nil, userInfo: nil)
-        }
-    }
+    var books = Dynamic([BookEntity]())
     
     init(encodedName: String, titleName: String, date: String) {
         self.encodedName = encodedName
@@ -53,10 +49,10 @@ final class BookListViewModel {
     }
     
     func fetchBooks() {
-        self.books = []
+        self.books.value = []
         
         if let books = fetchedResultsController.fetchedObjects {
-            self.books = books
+            self.books.value = books
         }
     }
     
