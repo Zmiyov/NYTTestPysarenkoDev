@@ -12,6 +12,7 @@ import CoreData
 final class BooksViewController: UIViewController {
     
     var bookListViewModel: BookListViewModel?
+    private let refreshControl = UIRefreshControl()
     
     private enum CellIdentifiers: String {
         case bookCollectionViewCell
@@ -50,11 +51,20 @@ final class BooksViewController: UIViewController {
         setConstraints()
       
         collectionView.delegate = self
+        collectionView.refreshControl = refreshControl
+        refreshControl.addTarget(self, action: #selector(didPullToRefresh(_:)), for: .valueChanged)
+        
         createDataSource()
         bindViewModel()
     }
     
-    func bindViewModel() {
+    @objc
+    private func didPullToRefresh(_ sender: Any) {
+        createDataSource()
+        refreshControl.endRefreshing()
+    }
+    
+    private func bindViewModel() {
         bookListViewModel?.books.bind { [weak self] books in
             self?.createDataSource()
         }

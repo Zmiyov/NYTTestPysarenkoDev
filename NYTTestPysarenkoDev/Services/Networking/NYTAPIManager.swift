@@ -14,7 +14,8 @@ final class NYTAPIManager {
     
     static let shared = NYTAPIManager()
     
-    //For codable models
+    //MARK: - For codable models
+    
     func fetchCategories(completion: @escaping ([CategoryModel]) -> Void) {
         let url = "https://api.nytimes.com/svc/books/v3/lists/names.json?api-key=\(NYTAPIKey.key.rawValue)"
         AF.request(url).responseDecodable(of: ResponseCategories.self) { response in
@@ -33,7 +34,8 @@ final class NYTAPIManager {
         }
     }
     
-    //For data provider
+    //MARK: - For data provider(are using)
+    
     func fetchCategoriesJSON(completion: @escaping(_ categoriesDict: [[String: Any]]?, _ error: Error?) -> ()) {
         let url = "https://api.nytimes.com/svc/books/v3/lists/names.json?api-key=\(NYTAPIKey.key.rawValue)"
         AF.request(url).responseData { data in
@@ -43,8 +45,7 @@ final class NYTAPIManager {
                 let jsonObject = try? JSONSerialization.jsonObject(with: data, options: [])
                 let jsonDictionary = jsonObject as? [String: Any]
                 let categories = jsonDictionary?["results"] as? [[String: Any]]
-//                let json = try? JSON(data: data)
-//                print(json)
+
                 completion(categories, nil)
             case .failure(let error):
                 completion(nil, error)
@@ -52,7 +53,6 @@ final class NYTAPIManager {
             }
         }
     }
-    
     
     func fetchBooksJSON(name: String, date: String, completion: @escaping(_ booksDict: [[String: Any]]?, _ error: Error?) -> ()) {
         let url = "https://api.nytimes.com/svc/books/v3/lists/\(date)/\(name).json?api-key=\(NYTAPIKey.key.rawValue)"
@@ -64,8 +64,7 @@ final class NYTAPIManager {
                 let jsonDictionary = jsonObject as? [String: Any]
                 let results = jsonDictionary?["results"] as? [String: Any]
                 let books = results?["books"] as? [[String: Any]]
-//                let json = try? JSON(data: data)
-//                print(json)
+
                 completion(books, nil)
             case .failure(let error):
                 completion(nil, error)

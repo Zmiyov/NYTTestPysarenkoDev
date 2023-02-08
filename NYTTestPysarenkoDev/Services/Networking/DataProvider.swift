@@ -123,8 +123,6 @@ final class DataProvider {
         
         taskContext.performAndWait {
             let matchingBooksRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "CategoryEntity")
-            //            let categoryIDs = jsonDictionary.map { $0["list_name_encoded"] as? String }.compactMap{ $0 }
-            //            matchingBooksRequest.predicate = NSPredicate(format: "bookID in %@", argumentArray: [bookIDs])
             
             let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: matchingBooksRequest)
             batchDeleteRequest.resultType = .resultTypeObjectIDs

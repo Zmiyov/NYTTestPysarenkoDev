@@ -9,7 +9,8 @@ import UIKit
 
 final class CategoriesViewController: UIViewController {
     
-    let categoryListViewModel = CategoryListViewModel() 
+    let categoryListViewModel = CategoryListViewModel()
+    private let refreshControl = UIRefreshControl()
     
     private enum CellIdentifiers: String {
         case categoryCell
@@ -35,6 +36,7 @@ final class CategoriesViewController: UIViewController {
         let layout = UICollectionViewFlowLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.alwaysBounceVertical = true
         collectionView.register(CategoryCollectionViewCell.self, forCellWithReuseIdentifier: CellIdentifiers.categoryCell.rawValue)
         return collectionView
     }()
@@ -47,11 +49,20 @@ final class CategoriesViewController: UIViewController {
         setConstraints()
       
         collectionView.delegate = self
+        collectionView.refreshControl = refreshControl
+        refreshControl.addTarget(self, action: #selector(didPullToRefresh(_:)), for: .valueChanged)
+        
         createDataSource()
         bindViewModel()
     }
     
-    func bindViewModel() {
+    @objc
+    private func didPullToRefresh(_ sender: Any) {
+        createDataSource()
+        refreshControl.endRefreshing()
+    }
+    
+    private func bindViewModel() {
         categoryListViewModel.categories.bind { [weak self] categories in
             self?.createDataSource()
         }
