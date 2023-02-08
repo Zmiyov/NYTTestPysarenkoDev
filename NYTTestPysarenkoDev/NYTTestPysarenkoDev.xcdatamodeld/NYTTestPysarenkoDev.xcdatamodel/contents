@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21513" systemVersion="22D49" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="BookCategoriesEntity" representedClassName="BookCategoriesEntity" syncable="YES">
+        <attribute name="bookCategoryName" optional="YES" attributeType="String"/>
+        <relationship name="book" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="BookEntity" inverseName="categories" inverseEntity="BookEntity"/>
+    </entity>
     <entity name="BookEntity" representedClassName="BookEntity" syncable="YES">
         <attribute name="author" optional="YES" attributeType="String"/>
         <attribute name="bookDescription" optional="YES" attributeType="String"/>
         <attribute name="bookID" optional="YES" attributeType="String"/>
         <attribute name="bookImageURL" optional="YES" attributeType="String"/>
-        <attribute name="category" optional="YES" attributeType="String"/>
         <attribute name="linkToBuyOnAmazon" optional="YES" attributeType="String"/>
         <attribute name="publisher" optional="YES" attributeType="String"/>
         <attribute name="rank" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="title" optional="YES" attributeType="String"/>
         <relationship name="buyLinks" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="BuyLinkEntity" inverseName="book" inverseEntity="BuyLinkEntity"/>
+        <relationship name="categories" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="BookCategoriesEntity" inverseName="book" inverseEntity="BookCategoriesEntity"/>
     </entity>
     <entity name="BuyLinkEntity" representedClassName="BuyLinkEntity" syncable="YES">
         <attribute name="buyLinkUrl" optional="YES" attributeType="String"/>

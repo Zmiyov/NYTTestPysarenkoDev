@@ -2,7 +2,7 @@
 //  BookEntity+CoreDataProperties.swift
 //  NYTTestPysarenkoDev
 //
-//  Created by Vladimir Pisarenko on 05.02.2023.
+//  Created by Vladimir Pisarenko on 08.02.2023.
 //
 //
 
@@ -16,16 +16,16 @@ extension BookEntity {
         return NSFetchRequest<BookEntity>(entityName: "BookEntity")
     }
 
-    @NSManaged public var rank: Int16
-    @NSManaged public var publisher: String?
-    @NSManaged public var bookDescription: String?
-    @NSManaged public var title: String?
     @NSManaged public var author: String?
+    @NSManaged public var bookDescription: String?
+    @NSManaged public var bookID: String?
     @NSManaged public var bookImageURL: String?
     @NSManaged public var linkToBuyOnAmazon: String?
+    @NSManaged public var publisher: String?
+    @NSManaged public var rank: Int16
+    @NSManaged public var title: String?
     @NSManaged public var buyLinks: NSOrderedSet?
-    @NSManaged public var bookID: String?
-    @NSManaged public var category: String?
+    @NSManaged public var categories: NSOrderedSet?
     
     func update(with jsonDictionary: [String: Any]) throws {
         guard let rank = jsonDictionary["rank"] as? Int16,
@@ -48,10 +48,8 @@ extension BookEntity {
         self.author = author
         self.bookImageURL = bookImage
         self.linkToBuyOnAmazon = linkToBuyOnAmazon
-//        let linksIDs = self.buyLinks as? [BuyLinkEntity]
-//        print(buyLinksArray)
+
         try buyLinksArray.forEach { value in
-//            print(value)
             guard let context = self.managedObjectContext else { return }
             let buyLink = BuyLinkEntity(context: context)
             try buyLink.update(with: value)
@@ -95,6 +93,41 @@ extension BookEntity {
 
     @objc(removeBuyLinks:)
     @NSManaged public func removeFromBuyLinks(_ values: NSOrderedSet)
+
+}
+
+// MARK: Generated accessors for categories
+extension BookEntity {
+
+    @objc(insertObject:inCategoriesAtIndex:)
+    @NSManaged public func insertIntoCategories(_ value: BookCategoriesEntity, at idx: Int)
+
+    @objc(removeObjectFromCategoriesAtIndex:)
+    @NSManaged public func removeFromCategories(at idx: Int)
+
+    @objc(insertCategories:atIndexes:)
+    @NSManaged public func insertIntoCategories(_ values: [BookCategoriesEntity], at indexes: NSIndexSet)
+
+    @objc(removeCategoriesAtIndexes:)
+    @NSManaged public func removeFromCategories(at indexes: NSIndexSet)
+
+    @objc(replaceObjectInCategoriesAtIndex:withObject:)
+    @NSManaged public func replaceCategories(at idx: Int, with value: BookCategoriesEntity)
+
+    @objc(replaceCategoriesAtIndexes:withCategories:)
+    @NSManaged public func replaceCategories(at indexes: NSIndexSet, with values: [BookCategoriesEntity])
+
+    @objc(addCategoriesObject:)
+    @NSManaged public func addToCategories(_ value: BookCategoriesEntity)
+
+    @objc(removeCategoriesObject:)
+    @NSManaged public func removeFromCategories(_ value: BookCategoriesEntity)
+
+    @objc(addCategories:)
+    @NSManaged public func addToCategories(_ values: NSOrderedSet)
+
+    @objc(removeCategories:)
+    @NSManaged public func removeFromCategories(_ values: NSOrderedSet)
 
 }
 
