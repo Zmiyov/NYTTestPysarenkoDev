@@ -42,6 +42,7 @@
 		A59BF1DE298FC9B10082B923 /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = A59BF1DD298FC9B10082B923 /* SwiftyJSON */; };
 		A59BF1E0298FCE180082B923 /* DataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59BF1DF298FCE180082B923 /* DataProvider.swift */; };
 		A59BF1E2299012700082B923 /* CacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59BF1E1299012700082B923 /* CacheManager.swift */; };
+		A5DDC42F2993D76900CF1485 /* Dynamic.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DDC42E2993D76900CF1485 /* Dynamic.swift */; };
 		A5E38E6B2992EAC50088B860 /* BuyLinksAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E38E6A2992EAC50088B860 /* BuyLinksAlertController.swift */; };
 /* End PBXBuildFile section */
 
@@ -81,6 +82,7 @@
 		A59BF1D9298FC04E0082B923 /* BookEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BookEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		A59BF1DF298FCE180082B923 /* DataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProvider.swift; sourceTree = "<group>"; };
 		A59BF1E1299012700082B923 /* CacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheManager.swift; sourceTree = "<group>"; };
+		A5DDC42E2993D76900CF1485 /* Dynamic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dynamic.swift; sourceTree = "<group>"; };
 		A5E38E6A2992EAC50088B860 /* BuyLinksAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyLinksAlertController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -146,11 +148,11 @@
 		A59BF188298D56F40082B923 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				A5E38E692992EA950088B860 /* Alert */,
 				A59BF190298D7F5E0082B923 /* CategoriesViewController.swift */,
 				A59BF192298D7F7B0082B923 /* BooksViewController.swift */,
 				A59BF1A7298DAC470082B923 /* WebViewViewController.swift */,
 				A59BF194298D7FE30082B923 /* Cell */,
+				A5E38E692992EA950088B860 /* Alert */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -158,6 +160,7 @@
 		A59BF189298D57170082B923 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				A5DDC42D2993D75300CF1485 /* Bindings */,
 				A59BF19A298D81F40082B923 /* CategoryListViewModel.swift */,
 				A59BF19C298D82010082B923 /* BookListViewModel.swift */,
 			);
@@ -257,6 +260,14 @@
 				A59BF1A2298D83C30082B923 /* TempModels.swift */,
 			);
 			path = "Codable models";
+			sourceTree = "<group>";
+		};
+		A5DDC42D2993D75300CF1485 /* Bindings */ = {
+			isa = PBXGroup;
+			children = (
+				A5DDC42E2993D76900CF1485 /* Dynamic.swift */,
+			);
+			path = Bindings;
 			sourceTree = "<group>";
 		};
 		A5E38E692992EA950088B860 /* Alert */ = {
@@ -359,6 +370,7 @@
 				A59BF1B4298E709C0082B923 /* NYTAPIKey.swift in Sources */,
 				A59BF1BF298FAE3F0082B923 /* NYTTestPysarenkoDev.xcdatamodeld in Sources */,
 				A5E38E6B2992EAC50088B860 /* BuyLinksAlertController.swift in Sources */,
+				A5DDC42F2993D76900CF1485 /* Dynamic.swift in Sources */,
 				A59BF1AE298E532E0082B923 /* ResponseCategories.swift in Sources */,
 				A59BF1A6298D8A2F0082B923 /* UILabel+.swift in Sources */,
 				A59BF1D2298FBEC30082B923 /* BuyLinkEntity+CoreDataClass.swift in Sources */,

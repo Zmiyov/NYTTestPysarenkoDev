@@ -29,6 +29,7 @@ final class CategoryCollectionViewCell: UICollectionViewCell {
         setConstraints()
     }
     
+    @available(*, unavailable)
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         setupView()

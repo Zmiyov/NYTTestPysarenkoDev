@@ -12,7 +12,7 @@ final class CategoriesViewController: UIViewController {
     let categoryListViewModel = CategoryListViewModel() 
     
     private enum CellIdentifiers: String {
-        case categoryCollectionViewCell
+        case categoryCell
     }
     
     private enum TextLabels: String {
@@ -35,7 +35,7 @@ final class CategoriesViewController: UIViewController {
         let layout = UICollectionViewFlowLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.register(CategoryCollectionViewCell.self, forCellWithReuseIdentifier: CellIdentifiers.categoryCollectionViewCell.rawValue)
+        collectionView.register(CategoryCollectionViewCell.self, forCellWithReuseIdentifier: CellIdentifiers.categoryCell.rawValue)
         return collectionView
     }()
     
@@ -61,8 +61,8 @@ final class CategoriesViewController: UIViewController {
     
     func createDataSource() {
         dataSource = UICollectionViewDiffableDataSource<Section, CategoryEntity>(collectionView: collectionView, cellProvider: { (collectionView, indexPath, category) -> UICollectionViewCell? in
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifiers.categoryCollectionViewCell.rawValue, for: indexPath) as! CategoryCollectionViewCell
             
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifiers.categoryCell.rawValue, for: indexPath) as! CategoryCollectionViewCell
             cell.nameLabel.text = category.categoryName
             cell.publishedDateLabel.text = category.newestPublishedDate
             
@@ -85,7 +85,10 @@ extension CategoriesViewController: UICollectionViewDelegateFlowLayout {
         let booksVC = BooksViewController()
         guard let categoryNameEncoded = category.listNameEncoded,
               let categoryName = category.categoryName,
-              let categoryDate = category.newestPublishedDate else { return }
+              let categoryDate = category.newestPublishedDate
+        else {
+            return
+        }
         booksVC.bookListViewModel = BookListViewModel(encodedName: categoryNameEncoded, titleName: categoryName, date: categoryDate)
         
         navigationController?.pushViewController(booksVC, animated: true)

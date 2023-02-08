@@ -55,6 +55,7 @@ final class BookCollectionViewCell: UICollectionViewCell {
         setupButton()
     }
     
+    @available(*, unavailable)
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         setupView()
