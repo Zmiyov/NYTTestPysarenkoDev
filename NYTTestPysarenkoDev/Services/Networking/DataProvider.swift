@@ -109,6 +109,10 @@ final class DataProvider {
         return successfull
     }
     
+    
+    
+    
+    
     func getCategories(completion: @escaping(Error?) -> Void) {
         repository.fetchCategoriesJSON() { jsonDictionary, error in
             if let error = error {
