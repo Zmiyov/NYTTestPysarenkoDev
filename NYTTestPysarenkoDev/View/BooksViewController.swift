@@ -80,17 +80,9 @@ final class BooksViewController: UIViewController {
         dataSource = UICollectionViewDiffableDataSource<Section, BookEntity>(collectionView: collectionView, cellProvider: { (collectionView, indexPath, book) -> UICollectionViewCell? in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifiers.bookCell.rawValue, for: indexPath) as! BookCollectionViewCell
             
-            cell.buyLinks = book.buyLinks?.array as? [BuyLinkEntity]
-//            cell.urlString = book.linkToBuyOnAmazon  //Link for SafariServices
-            cell.bookNameLabel.text = book.title
-            cell.authorLabel.text = book.author
-            cell.descriptionLabel.text = book.bookDescription
-            cell.publisherLabel.text = BookVCTextLabels.publisher.rawValue.localized() + (book.publisher ?? "")
-            cell.rankLabel.text = BookVCTextLabels.rank.rawValue.localized() + String(book.rank)
-
-            if let imageUrl = book.bookImageURL, let url = URL(string: imageUrl) {
-                cell.imageView.af.setImage(withURL: url, placeholderImage: UIImage(named: "placeholderLightPortrait"), filter: AspectScaledToFillSizeFilter(size: CGSize(width: 160, height: 200)))
-            }
+            cell.configure(with: book,
+                           publisherLabel: BookVCTextLabels.publisher.rawValue.localized(),
+                           rankLabel: BookVCTextLabels.rank.rawValue.localized())
 
             return cell
         })

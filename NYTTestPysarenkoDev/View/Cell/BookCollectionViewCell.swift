@@ -8,6 +8,7 @@
 import UIKit
 import WebKit
 import SafariServices
+import AlamofireImage
 
 final class BookCollectionViewCell: UICollectionViewCell {
     
@@ -86,11 +87,26 @@ final class BookCollectionViewCell: UICollectionViewCell {
         }
     }
     
+    func configure(with book: BookEntity, publisherLabel: String, rankLabel: String) {
+        self.buyLinks = book.buyLinks?.array as? [BuyLinkEntity]
+//            self.urlString = book.linkToBuyOnAmazon  //Link for SafariServices
+        self.bookNameLabel.text = book.title
+        self.authorLabel.text = book.author
+        self.descriptionLabel.text = book.bookDescription
+        self.publisherLabel.text = publisherLabel + (book.publisher ?? "")
+        self.rankLabel.text = rankLabel + String(book.rank)
+
+        if let imageUrl = book.bookImageURL, let url = URL(string: imageUrl) {
+            self.imageView.af.setImage(withURL: url, placeholderImage: UIImage(named: "placeholderLightPortrait"), filter: AspectScaledToFillSizeFilter(size: CGSize(width: 160, height: 200)))
+        }
+    }
+    
     private func setupButton() {
         buyButton.addTarget(self, action: #selector(openBuyLink), for: .touchUpInside)
     }
     
     @objc func openBuyLink() {
+        
         //WebKit
 //        guard let urlString = self.urlString, let url = URL(string: urlString) else { return }
 //        let webView = WebViewViewController(url: url, title: "Buy Book")

@@ -46,6 +46,11 @@ final class CategoryCollectionViewCell: UICollectionViewCell {
         }
     }
     
+    func configure(category: CategoryEntity) {
+        self.nameLabel.text = category.categoryName
+        self.publishedDateLabel.text = category.newestPublishedDate
+    }
+    
     private func setupView() {
         layer.cornerRadius = 12
         backgroundColor = .tertiarySystemBackground

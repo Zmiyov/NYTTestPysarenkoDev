@@ -78,14 +78,15 @@ final class CategoriesViewController: UIViewController {
         dataSource = UICollectionViewDiffableDataSource<Section, CategoryEntity>(collectionView: collectionView, cellProvider: { (collectionView, indexPath, category) -> UICollectionViewCell? in
             
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifiers.categoryCell.rawValue, for: indexPath) as! CategoryCollectionViewCell
-            cell.nameLabel.text = category.categoryName
-            cell.publishedDateLabel.text = category.newestPublishedDate
+            
+            cell.configure(category: category)
             
             return cell
         })
         dataSource.apply(filteredItemsSnapshot)
     }
 }
+
 // MARK: - UICollectionViewDelegate
 
 extension CategoriesViewController: UICollectionViewDelegateFlowLayout {
