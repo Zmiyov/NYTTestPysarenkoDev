@@ -55,7 +55,6 @@ final class BookListViewModel {
         if let books = fetchedResultsController.fetchedObjects {
             self.books.value = books
         }
-        
     }
     
     func fetchCategories(categoryName: String) {
@@ -64,14 +63,15 @@ final class BookListViewModel {
         let fetchRequest = NSFetchRequest<BookCategoriesEntity>(entityName: "BookCategoriesEntity")
         fetchRequest.predicate = NSPredicate(format: "bookCategoryName = %@", categoryName)
         
-        do {
-            let category = try managedContext.fetch(fetchRequest)
-            let bookIdEntityArray = category[0].bookIDs?.array as? [BookIDEntity]
-            let idStringArray = bookIdEntityArray?.compactMap { $0.bookID }
+        self.bookIDs = []
+        let category = try? managedContext.fetch(fetchRequest)
+        guard let category, category != []
+        else {
+            return
+        }
+        if let bookIdEntityArray = category[0].bookIDs?.array as? [BookIDEntity] {
+            let idStringArray = bookIdEntityArray.compactMap { $0.bookID }
             self.bookIDs = idStringArray
-            print("do")
-        } catch {
-            print(error)
         }
     }
 }
