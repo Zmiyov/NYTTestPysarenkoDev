@@ -11,16 +11,14 @@ import CoreData
 final class CategoryListViewModel {
     
     var dataProvider = DataProvider(persistentContainer: CoreDataStack.shared.storeContainer, repository: NYTAPIManager.shared)
+    var categories = Dynamic([CategoryEntity]())
     
     lazy var fetchedResultsController: NSFetchedResultsController<CategoryEntity> = {
-        
         let fetchRequest = NSFetchRequest<CategoryEntity>(entityName:"CategoryEntity")
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "listNameEncoded", ascending:true)]
-
         let controller = NSFetchedResultsController(fetchRequest: fetchRequest,
                                                     managedObjectContext: dataProvider.viewContext,
                                                     sectionNameKeyPath: nil, cacheName: nil)
-        
         do {
             try controller.performFetch()
         } catch {
@@ -30,8 +28,6 @@ final class CategoryListViewModel {
         
         return controller
     }()
-    
-    var categories = Dynamic([CategoryEntity]())
     
     init() {
         dataProvider.getCategories() { [weak self] (error) in

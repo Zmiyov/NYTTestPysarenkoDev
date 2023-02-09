@@ -11,6 +11,7 @@ import CoreData
 final class BookListViewModel {
 
     var dataProvider = DataProvider(persistentContainer: CoreDataStack.shared.storeContainer, repository: NYTAPIManager.shared)
+    var books = Dynamic([BookEntity]())
     
     var encodedName: String
     var titleName: String
@@ -18,14 +19,12 @@ final class BookListViewModel {
     var bookIDs: [String]?
     
     lazy var fetchedResultsController: NSFetchedResultsController<BookEntity> = {
-        
         let fetchRequest = NSFetchRequest<BookEntity>(entityName: "BookEntity")
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "rank", ascending:true)]
         fetchRequest.predicate = NSPredicate(format: "bookID in %@", argumentArray: [bookIDs ?? []])
         let controller = NSFetchedResultsController(fetchRequest: fetchRequest,
                                                     managedObjectContext: dataProvider.viewContext,
                                                     sectionNameKeyPath: nil, cacheName: nil)
-        
         do {
             try controller.performFetch()
         } catch {
@@ -35,8 +34,6 @@ final class BookListViewModel {
         
         return controller
     }()
-    
-    var books = Dynamic([BookEntity]())
     
     init(encodedName: String, titleName: String, date: String) {
         self.encodedName = encodedName
@@ -51,14 +48,12 @@ final class BookListViewModel {
     
     func fetchBooks() {
         self.books.value = []
-        
         if let books = fetchedResultsController.fetchedObjects {
             self.books.value = books
         }
     }
     
     func fetchCategories(categoryName: String) {
-        
         let managedContext = dataProvider.viewContext
         let fetchRequest = NSFetchRequest<BookCategoriesEntity>(entityName: "BookCategoriesEntity")
         fetchRequest.predicate = NSPredicate(format: "bookCategoryName = %@", categoryName)

@@ -22,7 +22,6 @@ extension ResponseBooks: Decodable {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         let resultContainer = try container.nestedContainer(keyedBy: CodingKeys.self, forKey: .results)
-//        let booksContainer = try resultContainer.nestedContainer(keyedBy: CodingKeys.self, forKey: .books)
         self.books = try resultContainer.decode([BookModel].self, forKey: .books )
     }
 }

@@ -59,9 +59,7 @@ final class CategoriesViewController: UIViewController {
     @objc
     private func didPullToRefresh(_ sender: Any) {
         DispatchQueue.main.async {
-//            self.categoryListViewModel = CategoryListViewModel()
             self.createDataSource()
-//            self.collectionView.reloadData()
         }
         refreshControl.endRefreshing()
     }
