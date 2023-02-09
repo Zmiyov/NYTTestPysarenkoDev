@@ -2,7 +2,7 @@
 //  BookCategoriesEntity+CoreDataClass.swift
 //  NYTTestPysarenkoDev
 //
-//  Created by Vladimir Pisarenko on 08.02.2023.
+//  Created by Vladimir Pisarenko on 09.02.2023.
 //
 //
 

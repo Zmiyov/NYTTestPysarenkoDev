@@ -21,7 +21,7 @@ final class BookListViewModel {
         
         let fetchRequest = NSFetchRequest<BookEntity>(entityName: "BookEntity")
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "rank", ascending:true)]
-        fetchRequest.predicate = NSPredicate(format: "ANY categories.bookCategoryName != nil AND ANY categories.bookCategoryName CONTAINS [cd] %@", encodedName)
+        fetchRequest.predicate = NSPredicate(format: "bookID in %@", argumentArray: [bookIDs ?? []])
         let controller = NSFetchedResultsController(fetchRequest: fetchRequest,
                                                     managedObjectContext: dataProvider.viewContext,
                                                     sectionNameKeyPath: nil, cacheName: nil)
@@ -42,18 +42,9 @@ final class BookListViewModel {
         self.encodedName = encodedName
         self.titleName = titleName
         self.date = date
-        
-//        setBookID()
 
-        dataProvider.getBooks(name: encodedName, date: date) { [weak self] (bookIDsArray, error) in
-            if let bookIDsArray = bookIDsArray {
-                self?.bookIDs = bookIDsArray
-                
-                for bookID in bookIDsArray {
-                    _ = self?.updateCategories(bookID: bookID, with: encodedName)
-                }
-                
-            }
+        dataProvider.getBooks(name: encodedName, date: date) { [weak self] (error) in
+            self?.fetchCategories(categoryName: encodedName)
             self?.fetchBooks()
         }
     }
@@ -67,36 +58,20 @@ final class BookListViewModel {
         
     }
     
-    func setBookID() {
-        print("SetBokID1")
-        guard let bookIDs = self.bookIDs else { return }
-        print("SetBokID")
-        for bookID in bookIDs {
-            _ = updateCategories(bookID: bookID, with: encodedName)
-        }
-    }
-    
-    func updateCategories(bookID: String, with name: String) -> Bool {
-        var success = false
+    func fetchCategories(categoryName: String) {
         
         let managedContext = dataProvider.viewContext
-        let fetchRequest = NSFetchRequest<BookEntity>(entityName: "BookEntity")
-        fetchRequest.predicate = NSPredicate(format: "bookID = %@", bookID)
+        let fetchRequest = NSFetchRequest<BookCategoriesEntity>(entityName: "BookCategoriesEntity")
+        fetchRequest.predicate = NSPredicate(format: "bookCategoryName = %@", categoryName)
         
         do {
-            let test = try managedContext.fetch(fetchRequest)
-            if test.count == 1 {
-                let objectUpdate = test[0] as BookEntity
-                
-                let bookCategory = BookCategoriesEntity(context: managedContext)
-                bookCategory.bookCategoryName = name
-                objectUpdate.addToCategories(bookCategory)
-                try managedContext.save()
-                success = true
-            }
+            let category = try managedContext.fetch(fetchRequest)
+            let bookIdEntityArray = category[0].bookIDs?.array as? [BookIDEntity]
+            let idStringArray = bookIdEntityArray?.compactMap { $0.bookID }
+            self.bookIDs = idStringArray
+            print("do")
         } catch {
             print(error)
         }
-        return success
     }
 }
