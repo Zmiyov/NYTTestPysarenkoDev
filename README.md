@@ -1,6 +1,7 @@
 ## NYTTestPysarenkoDev
 
-Goal for this task was to create a 2-screen application based on the free New York Times API
+Goal for this task was to create a 2-screen application based on the free New York Times API.
+
 All data must be cashed, so as a user, you have the same experience doesn't matter if you are online or offline
 
 ### What has been done and what technologies were used in this project:
