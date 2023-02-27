@@ -89,7 +89,6 @@ final class BookCollectionViewCell: UICollectionViewCell {
     
     func configure(with book: BookEntity, publisherLabel: String, rankLabel: String) {
         self.buyLinks = book.buyLinks?.array as? [BuyLinkEntity]
-//            self.urlString = book.linkToBuyOnAmazon  //Link for SafariServices
         self.bookNameLabel.text = book.title
         self.authorLabel.text = book.author
         self.descriptionLabel.text = book.bookDescription
@@ -107,20 +106,6 @@ final class BookCollectionViewCell: UICollectionViewCell {
     
     @objc func openBuyLink() {
         
-        //WebKit
-//        guard let urlString = self.urlString, let url = URL(string: urlString) else { return }
-//        let webView = WebViewViewController(url: url, title: "Buy Book")
-//        let navVC = UINavigationController(rootViewController: webView)
-//        self.window?.rootViewController?.present(navVC, animated: true)
-        
-        //SafariServices
-//        guard let urlString = self.urlString, let url = URL(string: urlString) else { return }
-//        let config = SFSafariViewController.Configuration()
-//        config.entersReaderIfAvailable = true
-//
-//        let vc = SFSafariViewController(url: url, configuration: config)
-//        self.window?.rootViewController?.present(vc, animated: true)
-        
         //Alert
         guard let buyLinks = buyLinks,
               let rootVC = self.window?.rootViewController
@@ -136,13 +121,13 @@ final class BookCollectionViewCell: UICollectionViewCell {
         layer.cornerRadius = 12
         backgroundColor = .tertiarySystemBackground
         
-        addSubview(imageView)
-        addSubview(buyButton)
-        addSubview(bookNameLabel)
-        addSubview(authorLabel)
-        addSubview(descriptionLabel)
-        addSubview(rankLabel)
-        addSubview(publisherLabel)
+        contentView.addSubview(imageView)
+        contentView.addSubview(buyButton)
+        contentView.addSubview(bookNameLabel)
+        contentView.addSubview(authorLabel)
+        contentView.addSubview(descriptionLabel)
+        contentView.addSubview(rankLabel)
+        contentView.addSubview(publisherLabel)
 
         descriptionLabel.numberOfLines = 3
     }
@@ -150,30 +135,30 @@ final class BookCollectionViewCell: UICollectionViewCell {
     private func setConstraints() {
         
         NSLayoutConstraint.activate([
-            imageView.topAnchor.constraint(equalTo: topAnchor, constant: 5),
-            imageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5),
-            imageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5),
+            imageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5),
+            imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5),
+            imageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5),
             imageView.widthAnchor.constraint(equalTo: imageView.heightAnchor, multiplier: 0.75),
         ])
         
         NSLayoutConstraint.activate([
-            buyButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
-            buyButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
+            buyButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
+            buyButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
             
-            buyButton.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.2),
+            buyButton.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.2),
             buyButton.widthAnchor.constraint(equalTo: buyButton.heightAnchor, multiplier: 3),
         ])
         
         NSLayoutConstraint.activate([
-            bookNameLabel.topAnchor.constraint(equalTo: topAnchor, constant: 5),
+            bookNameLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5),
             bookNameLabel.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 15),
-            bookNameLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15)
+            bookNameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15)
         ])
         
         NSLayoutConstraint.activate([
             authorLabel.topAnchor.constraint(equalTo: bookNameLabel.bottomAnchor, constant: 3),
             authorLabel.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 15),
-            authorLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15)
+            authorLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15)
         ])
         
         NSLayoutConstraint.activate([
@@ -185,7 +170,7 @@ final class BookCollectionViewCell: UICollectionViewCell {
         NSLayoutConstraint.activate([
             rankLabel.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 15),
             rankLabel.trailingAnchor.constraint(equalTo: buyButton.leadingAnchor, constant: -15),
-            rankLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5),
+            rankLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5),
         ])
         
         NSLayoutConstraint.activate([

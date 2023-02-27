@@ -21,7 +21,6 @@
 		A59BF198298D801A0082B923 /* BookCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59BF197298D801A0082B923 /* BookCollectionViewCell.swift */; };
 		A59BF19B298D81F40082B923 /* CategoryListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59BF19A298D81F40082B923 /* CategoryListViewModel.swift */; };
 		A59BF19D298D82010082B923 /* BookListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59BF19C298D82010082B923 /* BookListViewModel.swift */; };
-		A59BF1A3298D83C30082B923 /* TempModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59BF1A2298D83C30082B923 /* TempModels.swift */; };
 		A59BF1A6298D8A2F0082B923 /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59BF1A5298D8A2F0082B923 /* UILabel+.swift */; };
 		A59BF1A8298DAC470082B923 /* WebViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59BF1A7298DAC470082B923 /* WebViewViewController.swift */; };
 		A59BF1AA298DBB610082B923 /* NYTAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59BF1A9298DBB610082B923 /* NYTAPIManager.swift */; };
@@ -67,7 +66,6 @@
 		A59BF197298D801A0082B923 /* BookCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookCollectionViewCell.swift; sourceTree = "<group>"; };
 		A59BF19A298D81F40082B923 /* CategoryListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListViewModel.swift; sourceTree = "<group>"; };
 		A59BF19C298D82010082B923 /* BookListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookListViewModel.swift; sourceTree = "<group>"; };
-		A59BF1A2298D83C30082B923 /* TempModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempModels.swift; sourceTree = "<group>"; };
 		A59BF1A5298D8A2F0082B923 /* UILabel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+.swift"; sourceTree = "<group>"; };
 		A59BF1A7298DAC470082B923 /* WebViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewViewController.swift; sourceTree = "<group>"; };
 		A59BF1A9298DBB610082B923 /* NYTAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYTAPIManager.swift; sourceTree = "<group>"; };
@@ -266,7 +264,6 @@
 			children = (
 				A59BF1AB298E51C90082B923 /* ListsAPI */,
 				A59BF1AC298E51DC0082B923 /* BooksAPI */,
-				A59BF1A2298D83C30082B923 /* TempModels.swift */,
 			);
 			path = "Codable models";
 			sourceTree = "<group>";
@@ -385,7 +382,6 @@
 				A59BF174298D56CE0082B923 /* AppDelegate.swift in Sources */,
 				A59BF191298D7F5E0082B923 /* CategoriesViewController.swift in Sources */,
 				A59BF1D3298FBEC30082B923 /* BuyLinkEntity+CoreDataProperties.swift in Sources */,
-				A59BF1A3298D83C30082B923 /* TempModels.swift in Sources */,
 				A5F0A83B2995175000755F43 /* BookCategoriesEntity+CoreDataProperties.swift in Sources */,
 				A59BF19D298D82010082B923 /* BookListViewModel.swift in Sources */,
 				A59BF1E0298FCE180082B923 /* DataProvider.swift in Sources */,

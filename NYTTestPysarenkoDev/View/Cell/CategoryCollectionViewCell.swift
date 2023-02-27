@@ -55,7 +55,7 @@ final class CategoryCollectionViewCell: UICollectionViewCell {
         layer.cornerRadius = 12
         backgroundColor = .tertiarySystemBackground
     
-        addSubview(mainVerticalStackView)
+        contentView.addSubview(mainVerticalStackView)
         mainVerticalStackView.addArrangedSubview(nameLabel)
         mainVerticalStackView.addArrangedSubview(publishedDateLabel)
     }
@@ -63,10 +63,10 @@ final class CategoryCollectionViewCell: UICollectionViewCell {
     private func setConstraints() {
         
         NSLayoutConstraint.activate([
-            mainVerticalStackView.topAnchor.constraint(equalTo: topAnchor),
-            mainVerticalStackView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            mainVerticalStackView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            mainVerticalStackView.bottomAnchor.constraint(equalTo: bottomAnchor)
+            mainVerticalStackView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            mainVerticalStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            mainVerticalStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            mainVerticalStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
     }
 }
