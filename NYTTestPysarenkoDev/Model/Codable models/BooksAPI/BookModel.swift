@@ -55,6 +55,7 @@ struct BuyLinks: Hashable {
 
 extension BuyLinks: Decodable {
     init(from decoder: Decoder) throws {
+        
         let buyLinksContainer = try decoder.container(keyedBy: CodingKeys.self)
         marketName = try buyLinksContainer.decode(String.self, forKey: .marketName)
         buyLinkUrl = try buyLinksContainer.decode(String.self, forKey: .buyLinkUrl)
