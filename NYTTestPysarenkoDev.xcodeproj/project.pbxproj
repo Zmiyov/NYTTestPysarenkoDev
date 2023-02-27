@@ -13,8 +13,6 @@
 		A59BF176298D56CE0082B923 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59BF175298D56CE0082B923 /* SceneDelegate.swift */; };
 		A59BF17D298D56D00082B923 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A59BF17C298D56D00082B923 /* Assets.xcassets */; };
 		A59BF180298D56D00082B923 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A59BF17E298D56D00082B923 /* LaunchScreen.storyboard */; };
-		A59BF18B298D57480082B923 /* CategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59BF18A298D57480082B923 /* CategoryModel.swift */; };
-		A59BF18D298D57E10082B923 /* BookModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59BF18C298D57E10082B923 /* BookModel.swift */; };
 		A59BF191298D7F5E0082B923 /* CategoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59BF190298D7F5E0082B923 /* CategoriesViewController.swift */; };
 		A59BF193298D7F7B0082B923 /* BooksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59BF192298D7F7B0082B923 /* BooksViewController.swift */; };
 		A59BF196298D800E0082B923 /* CategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59BF195298D800E0082B923 /* CategoryCollectionViewCell.swift */; };
@@ -24,8 +22,6 @@
 		A59BF1A6298D8A2F0082B923 /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59BF1A5298D8A2F0082B923 /* UILabel+.swift */; };
 		A59BF1A8298DAC470082B923 /* WebViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59BF1A7298DAC470082B923 /* WebViewViewController.swift */; };
 		A59BF1AA298DBB610082B923 /* NYTAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59BF1A9298DBB610082B923 /* NYTAPIManager.swift */; };
-		A59BF1AE298E532E0082B923 /* ResponseCategories.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59BF1AD298E532E0082B923 /* ResponseCategories.swift */; };
-		A59BF1B0298E57490082B923 /* ResponseBooks.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59BF1AF298E57490082B923 /* ResponseBooks.swift */; };
 		A59BF1B4298E709C0082B923 /* NYTAPIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59BF1B3298E709C0082B923 /* NYTAPIKey.swift */; };
 		A59BF1B7298E72590082B923 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = A59BF1B6298E72590082B923 /* Alamofire */; };
 		A59BF1B9298ED1940082B923 /* NotificationsName+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59BF1B8298ED1940082B923 /* NotificationsName+.swift */; };
@@ -58,8 +54,6 @@
 		A59BF17C298D56D00082B923 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A59BF17F298D56D00082B923 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A59BF181298D56D00082B923 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A59BF18A298D57480082B923 /* CategoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryModel.swift; sourceTree = "<group>"; };
-		A59BF18C298D57E10082B923 /* BookModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookModel.swift; sourceTree = "<group>"; };
 		A59BF190298D7F5E0082B923 /* CategoriesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesViewController.swift; sourceTree = "<group>"; };
 		A59BF192298D7F7B0082B923 /* BooksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BooksViewController.swift; sourceTree = "<group>"; };
 		A59BF195298D800E0082B923 /* CategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -69,8 +63,6 @@
 		A59BF1A5298D8A2F0082B923 /* UILabel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+.swift"; sourceTree = "<group>"; };
 		A59BF1A7298DAC470082B923 /* WebViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewViewController.swift; sourceTree = "<group>"; };
 		A59BF1A9298DBB610082B923 /* NYTAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYTAPIManager.swift; sourceTree = "<group>"; };
-		A59BF1AD298E532E0082B923 /* ResponseCategories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseCategories.swift; sourceTree = "<group>"; };
-		A59BF1AF298E57490082B923 /* ResponseBooks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseBooks.swift; sourceTree = "<group>"; };
 		A59BF1B3298E709C0082B923 /* NYTAPIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYTAPIKey.swift; sourceTree = "<group>"; };
 		A59BF1B8298ED1940082B923 /* NotificationsName+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationsName+.swift"; sourceTree = "<group>"; };
 		A59BF1BE298FAE3F0082B923 /* NYTTestPysarenkoDev.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = NYTTestPysarenkoDev.xcdatamodel; sourceTree = "<group>"; };
@@ -144,7 +136,6 @@
 			isa = PBXGroup;
 			children = (
 				A59BF1CF298FB1570082B923 /* Managed Objects */,
-				A59BF1E329903FEE0082B923 /* Codable models */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -199,24 +190,6 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		A59BF1AB298E51C90082B923 /* ListsAPI */ = {
-			isa = PBXGroup;
-			children = (
-				A59BF1AD298E532E0082B923 /* ResponseCategories.swift */,
-				A59BF18A298D57480082B923 /* CategoryModel.swift */,
-			);
-			path = ListsAPI;
-			sourceTree = "<group>";
-		};
-		A59BF1AC298E51DC0082B923 /* BooksAPI */ = {
-			isa = PBXGroup;
-			children = (
-				A59BF1AF298E57490082B923 /* ResponseBooks.swift */,
-				A59BF18C298D57E10082B923 /* BookModel.swift */,
-			);
-			path = BooksAPI;
-			sourceTree = "<group>";
-		};
 		A59BF1B1298E6F8F0082B923 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
@@ -257,15 +230,6 @@
 				A59BF1D1298FBEC30082B923 /* BuyLinkEntity+CoreDataProperties.swift */,
 			);
 			path = "Managed Objects";
-			sourceTree = "<group>";
-		};
-		A59BF1E329903FEE0082B923 /* Codable models */ = {
-			isa = PBXGroup;
-			children = (
-				A59BF1AB298E51C90082B923 /* ListsAPI */,
-				A59BF1AC298E51DC0082B923 /* BooksAPI */,
-			);
-			path = "Codable models";
 			sourceTree = "<group>";
 		};
 		A5DDC42D2993D75300CF1485 /* Bindings */ = {
@@ -366,17 +330,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A59BF18D298D57E10082B923 /* BookModel.swift in Sources */,
-				A59BF1B0298E57490082B923 /* ResponseBooks.swift in Sources */,
 				A5F0A8322994096500755F43 /* BookEntity+CoreDataClass.swift in Sources */,
 				A59BF198298D801A0082B923 /* BookCollectionViewCell.swift in Sources */,
-				A59BF18B298D57480082B923 /* CategoryModel.swift in Sources */,
 				A59BF1B9298ED1940082B923 /* NotificationsName+.swift in Sources */,
 				A59BF1B4298E709C0082B923 /* NYTAPIKey.swift in Sources */,
 				A59BF1BF298FAE3F0082B923 /* NYTTestPysarenkoDev.xcdatamodeld in Sources */,
 				A5E38E6B2992EAC50088B860 /* BuyLinksAlertController.swift in Sources */,
 				A5DDC42F2993D76900CF1485 /* Dynamic.swift in Sources */,
-				A59BF1AE298E532E0082B923 /* ResponseCategories.swift in Sources */,
 				A59BF1A6298D8A2F0082B923 /* UILabel+.swift in Sources */,
 				A59BF1D2298FBEC30082B923 /* BuyLinkEntity+CoreDataClass.swift in Sources */,
 				A59BF174298D56CE0082B923 /* AppDelegate.swift in Sources */,
