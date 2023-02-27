@@ -17,7 +17,7 @@ extension UILabel {
         self.adjustsFontSizeToFitWidth = false
         self.translatesAutoresizingMaskIntoConstraints = false
     }
-    
+
     convenience init(text: String, font: UIFont?, alighment: NSTextAlignment) {
         self.init()
         self.text = text

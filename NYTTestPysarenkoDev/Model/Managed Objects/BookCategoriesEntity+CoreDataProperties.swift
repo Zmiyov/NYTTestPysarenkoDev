@@ -9,7 +9,6 @@
 import Foundation
 import CoreData
 
-
 extension BookCategoriesEntity {
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<BookCategoriesEntity> {
@@ -19,15 +18,12 @@ extension BookCategoriesEntity {
     @NSManaged public var bookCategoryName: String?
     @NSManaged public var bookIDs: NSOrderedSet?
 
-    
-    
     func update(name: String, bookID: String, with jsonDictionary: [String: Any]) throws {
-        
-        
+
         self.bookCategoryName = name
-        
+
         if let bookIDs = self.bookIDs {
-            let array = bookIDs.map{ ($0 as? BookIDEntity)?.bookID as? String }
+            let array = bookIDs.map { ($0 as? BookIDEntity)?.bookID as? String }
             if !array.contains(bookID) {
                 guard let context = self.managedObjectContext else { return }
                 let bookIDEntity = BookIDEntity(context: context)
@@ -73,6 +69,6 @@ extension BookCategoriesEntity {
 
 }
 
-extension BookCategoriesEntity : Identifiable {
+extension BookCategoriesEntity: Identifiable {
 
 }

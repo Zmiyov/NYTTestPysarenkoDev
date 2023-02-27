@@ -11,16 +11,16 @@ import AlamofireImage
 import SwiftyJSON
 
 final class NYTAPIManager {
-    
+
     static let shared = NYTAPIManager()
-    
-    //MARK: - For data provider(are using)
-    
-    func fetchCategoriesJSON(completion: @escaping(_ categoriesDict: [[String: Any]]?, _ error: Error?) -> ()) {
+
+    // MARK: - For data provider(are using)
+
+    func fetchCategoriesJSON(completion: @escaping(_ categoriesDict: [[String: Any]]?, _ error: Error?) -> Void) {
         let url = "https://api.nytimes.com/svc/books/v3/lists/names.json?api-key=\(NYTAPIKey.key.rawValue)"
         AF.request(url).responseData { data in
             switch data.result {
-                
+
             case .success(let data):
                 let jsonObject = try? JSONSerialization.jsonObject(with: data, options: [])
                 let jsonDictionary = jsonObject as? [String: Any]
@@ -33,12 +33,12 @@ final class NYTAPIManager {
             }
         }
     }
-    
-    func fetchBooksJSON(name: String, date: String, completion: @escaping(_ booksDict: [[String: Any]]?, _ error: Error?) -> ()) {
+
+    func fetchBooksJSON(name: String, date: String, completion: @escaping(_ booksDict: [[String: Any]]?, _ error: Error?) -> Void) {
         let url = "https://api.nytimes.com/svc/books/v3/lists/\(date)/\(name).json?api-key=\(NYTAPIKey.key.rawValue)"
         AF.request(url).responseData { data in
             switch data.result {
-                
+
             case .success(let data):
                 let jsonObject = try? JSONSerialization.jsonObject(with: data, options: [])
                 let jsonDictionary = jsonObject as? [String: Any]

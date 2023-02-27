@@ -10,17 +10,18 @@ import CoreData
 
 final class BookListViewModel {
 
-    var dataProvider = DataProvider(persistentContainer: CoreDataStack.shared.storeContainer, repository: NYTAPIManager.shared)
+    var dataProvider = DataProvider(persistentContainer: CoreDataStack.shared.storeContainer,
+                                    repository: NYTAPIManager.shared)
     var books = Dynamic([BookEntity]())
-    
+
     var encodedName: String
     var titleName: String
     var date: String
     var bookIDs: [String]?
-    
+
     lazy var fetchedResultsController: NSFetchedResultsController<BookEntity> = {
         let fetchRequest = NSFetchRequest<BookEntity>(entityName: "BookEntity")
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "rank", ascending:true)]
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "rank", ascending: true)]
         fetchRequest.predicate = NSPredicate(format: "bookID in %@", argumentArray: [bookIDs ?? []])
         let controller = NSFetchedResultsController(fetchRequest: fetchRequest,
                                                     managedObjectContext: dataProvider.viewContext,
@@ -31,33 +32,33 @@ final class BookListViewModel {
             let nserror = error as NSError
             fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
         }
-        
+
         return controller
     }()
-    
+
     init(encodedName: String, titleName: String, date: String) {
         self.encodedName = encodedName
         self.titleName = titleName
         self.date = date
 
-        dataProvider.getBooks(name: encodedName, date: date) { [weak self] (error) in
+        dataProvider.getBooks(name: encodedName, date: date) { [weak self] _ in
             self?.fetchCategories(categoryName: encodedName)
             self?.fetchBooks()
         }
     }
-    
+
     func fetchBooks() {
         self.books.value = []
         if let books = fetchedResultsController.fetchedObjects {
             self.books.value = books
         }
     }
-    
+
     func fetchCategories(categoryName: String) {
         let managedContext = dataProvider.viewContext
         let fetchRequest = NSFetchRequest<BookCategoriesEntity>(entityName: "BookCategoriesEntity")
         fetchRequest.predicate = NSPredicate(format: "bookCategoryName = %@", categoryName)
-        
+
         self.bookIDs = []
         let category = try? managedContext.fetch(fetchRequest)
         guard let category, category != []

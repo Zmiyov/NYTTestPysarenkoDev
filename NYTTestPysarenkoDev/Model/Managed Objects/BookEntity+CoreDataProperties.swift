@@ -9,7 +9,6 @@
 import Foundation
 import CoreData
 
-
 extension BookEntity {
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<BookEntity> {
@@ -25,7 +24,7 @@ extension BookEntity {
     @NSManaged public var rank: Int16
     @NSManaged public var title: String?
     @NSManaged public var buyLinks: NSOrderedSet?
-    
+
     func update(with jsonDictionary: [String: Any]) throws {
         guard let rank = jsonDictionary["rank"] as? Int16,
               let publisher = jsonDictionary["publisher"] as? String,
@@ -54,7 +53,7 @@ extension BookEntity {
             try buyLink.update(with: value)
             self.addToBuyLinks(buyLink)
         }
-        
+
         self.bookID = bookID
     }
 
@@ -130,6 +129,6 @@ extension BookEntity {
 
 }
 
-extension BookEntity : Identifiable {
+extension BookEntity: Identifiable {
 
 }

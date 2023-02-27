@@ -24,6 +24,7 @@ final class BooksViewController: UIViewController {
         case publisher = "Publisher: "
         case rank = "Rank: "
     }
+
     var dataSource: UICollectionViewDiffableDataSource<Section, BookEntity>!
     var filteredItemsSnapshot: NSDiffableDataSourceSnapshot<Section, BookEntity> {
         var snapshot = NSDiffableDataSourceSnapshot<Section, BookEntity>()
@@ -31,6 +32,7 @@ final class BooksViewController: UIViewController {
         snapshot.appendItems(bookListViewModel?.books.value ?? [])
         return snapshot
     }
+
     let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -74,7 +76,8 @@ final class BooksViewController: UIViewController {
 
     func createDataSource() {
         dataSource = UICollectionViewDiffableDataSource<Section, BookEntity>(collectionView: collectionView, cellProvider: { (collectionView, indexPath, book) -> UICollectionViewCell? in
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifiers.bookCell.rawValue, for: indexPath) as? BookCollectionViewCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifiers.bookCell.rawValue,
+                                                          for: indexPath) as? BookCollectionViewCell
             cell?.configure(with: book,
                             publisherLabel: BookVCTextLabels.publisher.rawValue.localized(),
                             rankLabel: BookVCTextLabels.rank.rawValue.localized())
@@ -89,7 +92,9 @@ final class BooksViewController: UIViewController {
 
 extension BooksViewController: UICollectionViewDelegateFlowLayout {
 
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: collectionView.frame.width, height: collectionView.frame.width/2.5)
     }
 }

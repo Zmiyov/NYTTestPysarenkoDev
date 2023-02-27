@@ -9,7 +9,6 @@
 import Foundation
 import CoreData
 
-
 extension BuyLinkEntity {
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<BuyLinkEntity> {
@@ -20,7 +19,6 @@ extension BuyLinkEntity {
     @NSManaged public var buyLinkUrl: String?
     @NSManaged public var book: BookEntity?
 
-    
     func update(with jsonDictionary: [String: Any]) throws {
         guard let marketName = jsonDictionary["name"] as? String,
               let buyLinkUrl = jsonDictionary["url"] as? String
@@ -32,6 +30,6 @@ extension BuyLinkEntity {
     }
 }
 
-extension BuyLinkEntity : Identifiable {
+extension BuyLinkEntity: Identifiable {
 
 }

@@ -8,7 +8,7 @@
 import UIKit
 
 final class CategoryCollectionViewCell: UICollectionViewCell {
-    
+
     let nameLabel = UILabel(font: UIFont.systemFont(ofSize: 17, weight: .bold), alighment: .center)
     let publishedDateLabel = UILabel(font: UIFont.systemFont(ofSize: 15, weight: .regular), alighment: .center)
 
@@ -22,20 +22,20 @@ final class CategoryCollectionViewCell: UICollectionViewCell {
         stackView.contentMode = .center
         return stackView
     }()
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
         setConstraints()
     }
-    
+
     @available(*, unavailable)
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         setupView()
         setConstraints()
     }
-    
+
     override func layoutSubviews() {
         if UIDevice.current.orientation.isLandscape {
             nameLabel.font = UIFont.systemFont(ofSize: 25, weight: .bold)
@@ -45,23 +45,23 @@ final class CategoryCollectionViewCell: UICollectionViewCell {
             publishedDateLabel.font = UIFont.systemFont(ofSize: 15, weight: .regular)
         }
     }
-    
+
     func configure(category: CategoryEntity) {
         self.nameLabel.text = category.categoryName
         self.publishedDateLabel.text = category.newestPublishedDate
     }
-    
+
     private func setupView() {
         layer.cornerRadius = 12
         backgroundColor = .tertiarySystemBackground
-    
+
         contentView.addSubview(mainVerticalStackView)
         mainVerticalStackView.addArrangedSubview(nameLabel)
         mainVerticalStackView.addArrangedSubview(publishedDateLabel)
     }
-    
+
     private func setConstraints() {
-        
+
         NSLayoutConstraint.activate([
             mainVerticalStackView.topAnchor.constraint(equalTo: contentView.topAnchor),
             mainVerticalStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
