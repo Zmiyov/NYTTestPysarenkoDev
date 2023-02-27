@@ -10,10 +10,9 @@ import AlamofireImage
 import CoreData
 
 final class BooksViewController: UIViewController {
-    
+
     var bookListViewModel: BookListViewModel?
     private let refreshControl = UIRefreshControl()
-    
     private enum CellIdentifiers: String {
         case bookCell
     }
@@ -21,12 +20,10 @@ final class BooksViewController: UIViewController {
     enum Section: CaseIterable {
         case main
     }
-    
     private enum BookVCTextLabels: String {
         case publisher = "Publisher: "
         case rank = "Rank: "
     }
-    
     var dataSource: UICollectionViewDiffableDataSource<Section, BookEntity>!
     var filteredItemsSnapshot: NSDiffableDataSourceSnapshot<Section, BookEntity> {
         var snapshot = NSDiffableDataSourceSnapshot<Section, BookEntity>()
@@ -34,30 +31,29 @@ final class BooksViewController: UIViewController {
         snapshot.appendItems(bookListViewModel?.books.value ?? [])
         return snapshot
     }
-    
     let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.register(BookCollectionViewCell.self, forCellWithReuseIdentifier: CellIdentifiers.bookCell.rawValue)
+        collectionView.register(BookCollectionViewCell.self,
+                                forCellWithReuseIdentifier: CellIdentifiers.bookCell.rawValue)
         return collectionView
     }()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         title = bookListViewModel?.titleName
         view.backgroundColor = .secondarySystemBackground
-        
         setConstraints()
-      
+
         collectionView.delegate = self
         collectionView.refreshControl = refreshControl
         refreshControl.addTarget(self, action: #selector(didPullToRefresh(_:)), for: .valueChanged)
-        
+
         createDataSource()
         bindViewModel()
     }
-    
+
     @objc
     private func didPullToRefresh(_ sender: Any) {
         DispatchQueue.main.async {
@@ -65,24 +61,23 @@ final class BooksViewController: UIViewController {
         }
         refreshControl.endRefreshing()
     }
-    
+
     private func bindViewModel() {
-        bookListViewModel?.books.bind { [weak self] books in
+        bookListViewModel?.books.bind { [weak self] _ in
             DispatchQueue.main.async {
                 self?.createDataSource()
             }
         }
     }
-    
+
 // MARK: - UICollectionViewDataSource
-    
+
     func createDataSource() {
         dataSource = UICollectionViewDiffableDataSource<Section, BookEntity>(collectionView: collectionView, cellProvider: { (collectionView, indexPath, book) -> UICollectionViewCell? in
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifiers.bookCell.rawValue, for: indexPath) as! BookCollectionViewCell
-            
-            cell.configure(with: book,
-                           publisherLabel: BookVCTextLabels.publisher.rawValue.localized(),
-                           rankLabel: BookVCTextLabels.rank.rawValue.localized())
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifiers.bookCell.rawValue, for: indexPath) as? BookCollectionViewCell
+            cell?.configure(with: book,
+                            publisherLabel: BookVCTextLabels.publisher.rawValue.localized(),
+                            rankLabel: BookVCTextLabels.rank.rawValue.localized())
 
             return cell
         })
@@ -99,10 +94,10 @@ extension BooksViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
-//MARK: - Set Constraints
+// MARK: - Set Constraints
 
 extension BooksViewController {
-    
+
     private func setConstraints() {
         view.addSubview(collectionView)
         collectionView.backgroundColor = .secondarySystemBackground
@@ -114,4 +109,3 @@ extension BooksViewController {
         ])
     }
 }
-
