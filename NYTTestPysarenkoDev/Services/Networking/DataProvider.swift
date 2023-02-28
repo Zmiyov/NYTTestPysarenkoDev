@@ -24,28 +24,7 @@ final class DataProvider {
 
     // MARK: - All categories data provider
 
-//    func getCategories(completion: @escaping(Error?) -> Void) {
-//        repository.fetchCategoriesJSON { jsonDictionary, error in
-//            if let error = error {
-//                completion(error)
-//                return
-//            }
-//
-//            guard let jsonDictionary = jsonDictionary else {
-//                completion(error)
-//                return
-//            }
-//
-//            let taskContext = self.persistentContainer.newBackgroundContext()
-//            taskContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
-//
-//            _ = self.syncCategories(jsonDictionary: jsonDictionary, taskContext: taskContext)
-//
-//            completion(nil)
-//        }
-//    }
-
-    func getCategories1(completion: @escaping(Error?) -> Void) {
+    func getCategories(completion: @escaping(Error?) -> Void) {
         repository.fetchCategories { categoriesArray, error in
             if let error = error {
                 completion(error)
@@ -60,13 +39,13 @@ final class DataProvider {
             let taskContext = self.persistentContainer.newBackgroundContext()
             taskContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
 
-            _ = self.syncCategories1(categoriesArray: categoriesArray, taskContext: taskContext)
+            _ = self.syncCategories(categoriesArray: categoriesArray, taskContext: taskContext)
 
             completion(nil)
         }
     }
 
-    private func syncCategories1(categoriesArray: [CategoryModel], taskContext: NSManagedObjectContext) -> Bool {
+    private func syncCategories(categoriesArray: [CategoryModel], taskContext: NSManagedObjectContext) -> Bool {
 
         var successfull = false
 
@@ -115,56 +94,6 @@ final class DataProvider {
         }
         return successfull
     }
-
-//    private func syncCategories(jsonDictionary: [[String: Any]], taskContext: NSManagedObjectContext) -> Bool {
-//
-//        var successfull = false
-//
-//        taskContext.performAndWait {
-//            let matchingBooksRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "CategoryEntity")
-//
-//            let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: matchingBooksRequest)
-//            batchDeleteRequest.resultType = .resultTypeObjectIDs
-//
-//            do {
-//                let batchDeleteResult = try taskContext.execute(batchDeleteRequest) as? NSBatchDeleteResult
-//
-//                if let deletedBookIDs = batchDeleteResult?.result as? [NSManagedObjectID] {
-//                    NSManagedObjectContext.mergeChanges(fromRemoteContextSave: [NSDeletedObjectsKey: deletedBookIDs],
-//                                                        into: [self.persistentContainer.viewContext])
-//                }
-//            } catch {
-//                print("Error: \(error)\nCould not batch delete existing records.")
-//                return
-//            }
-//
-//            for categoryDictionary in jsonDictionary {
-//                guard let category = NSEntityDescription.insertNewObject(forEntityName: "CategoryEntity",
-//                                                                         into: taskContext) as? CategoryEntity else {
-//                    print("Error: Failed to create a new Film object!")
-//                    return
-//                }
-//
-//                do {
-//                    try category.update(with: categoryDictionary)
-//                } catch {
-//                    print("Error: \(error)\nThe Category object will be deleted.")
-//                    taskContext.delete(category)
-//                }
-//
-//                if taskContext.hasChanges {
-//                    do {
-//                        try taskContext.save()
-//                    } catch {
-//                        print("Error: \(error)\nCould not save Core Data context.")
-//                    }
-//                    taskContext.reset()
-//                }
-//                successfull = true
-//            }
-//        }
-//        return successfull
-//    }
 
     // MARK: - All books data provider
 

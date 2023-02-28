@@ -20,21 +20,6 @@ extension CategoryEntity {
     @NSManaged public var newestPublishedDate: String?
     @NSManaged public var listNameEncoded: String?
 
-    func update(with jsonDictionary: [String: Any]) throws {
-        guard let categoryName = jsonDictionary["list_name"] as? String,
-              let oldestPublishedDate = jsonDictionary["oldest_published_date"] as? String,
-              let newestPublishedDate = jsonDictionary["newest_published_date"] as? String,
-              let listNameEncoded = jsonDictionary["list_name_encoded"] as? String
-        else {
-            throw NSError(domain: "", code: 100)
-        }
-
-        self.categoryName = categoryName
-        self.oldestPublishedDate = oldestPublishedDate
-        self.newestPublishedDate = newestPublishedDate
-        self.listNameEncoded = listNameEncoded
-    }
-
     func update(with categoryModel: CategoryModel) throws {
         self.categoryName = categoryModel.categoryName
         self.oldestPublishedDate = categoryModel.oldestPublishedDate
