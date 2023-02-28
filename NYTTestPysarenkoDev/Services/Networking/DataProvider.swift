@@ -25,13 +25,13 @@ final class DataProvider {
     // MARK: - All categories data provider
 
     func getCategories(completion: @escaping(Error?) -> Void) {
-        repository.load(url: ConstructURLs.categoriesURL()) { (category: ResponseCategories?, error) in
+        repository.load(url: ConstructURLs.categoriesURL()) { (categoryResponse: ResponseCategories?, error) in
             if let error = error {
                 completion(error)
                 return
             }
 
-            guard let categoriesArray = category?.categories else {
+            guard let categoriesArray = categoryResponse?.categories else {
                 completion(error)
                 return
             }
@@ -98,13 +98,13 @@ final class DataProvider {
     // MARK: - All books data provider
 
     func getBooks(name: String, date: String, completion: @escaping(Error?) -> Void) {
-        repository.load(url: ConstructURLs.booksURL(for: name, date: date)) { (books: ResponseBooks?, error) in
+        repository.load(url: ConstructURLs.booksURL(for: name, date: date)) { (booksResponse: ResponseBooks?, error) in
             if let error = error {
                 completion(error)
                 return
             }
 
-            guard let booksArray = books?.books else {
+            guard let booksArray = booksResponse?.books else {
                 completion(error)
                 return
             }
