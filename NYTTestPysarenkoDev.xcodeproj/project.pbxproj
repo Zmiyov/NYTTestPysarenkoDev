@@ -272,8 +272,8 @@
 		A5D67B9729AE07E900E7DACA /* Books API */ = {
 			isa = PBXGroup;
 			children = (
-				A5D67B9D29AE089800E7DACA /* BookModel.swift */,
 				A5D67B9F29AE08BB00E7DACA /* ResponseBooks.swift */,
+				A5D67B9D29AE089800E7DACA /* BookModel.swift */,
 			);
 			path = "Books API";
 			sourceTree = "<group>";
