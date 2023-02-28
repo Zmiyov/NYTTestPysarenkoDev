@@ -31,7 +31,7 @@ final class CategoryListViewModel {
     }()
 
     init() {
-        dataProvider.getCategories { [weak self] _ in
+        dataProvider.getCategories1 { [weak self] _ in
             self?.fetchCategories()
         }
     }

@@ -56,7 +56,7 @@ extension BookEntity {
 
         self.bookID = bookID
     }
-    
+
     func update(with book: BookModel) {
         self.rank = Int16(book.rank)
         self.publisher = book.publisher

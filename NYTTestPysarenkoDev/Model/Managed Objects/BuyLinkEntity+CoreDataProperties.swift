@@ -28,7 +28,7 @@ extension BuyLinkEntity {
         self.marketName = marketName
         self.buyLinkUrl = buyLinkUrl
     }
-    
+
     func update(with buyLink: BuyLink) {
         self.marketName = buyLink.marketName
         self.buyLinkUrl = buyLink.buyLinkUrl

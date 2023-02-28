@@ -34,6 +34,13 @@ extension CategoryEntity {
         self.newestPublishedDate = newestPublishedDate
         self.listNameEncoded = listNameEncoded
     }
+
+    func update(with categoryModel: CategoryModel) throws {
+        self.categoryName = categoryModel.categoryName
+        self.oldestPublishedDate = categoryModel.oldestPublishedDate
+        self.newestPublishedDate = categoryModel.newestPublishedDate
+        self.listNameEncoded = categoryModel.listNameEncoded
+    }
 }
 
 extension CategoryEntity: Identifiable {

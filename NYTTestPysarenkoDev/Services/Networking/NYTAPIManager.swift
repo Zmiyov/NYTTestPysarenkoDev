@@ -16,12 +16,17 @@ final class NYTAPIManager {
 
     // MARK: - For codable models
 
-    func fetchCategories(completion: @escaping ([CategoryModel]) -> Void) {
+    func fetchCategories(completion: @escaping ([CategoryModel]?, _ error: Error?) -> Void) {
         let url = "https://api.nytimes.com/svc/books/v3/lists/names.json?api-key=\(NYTAPIKey.key.rawValue)"
         AF.request(url).responseDecodable(of: ResponseCategories.self) { response in
-            guard let fetchedCategories = response.value?.categories else { return }
-
-            completion(fetchedCategories)
+            switch response.result {
+            case .success(let data):
+                let categories = data.categories
+                completion(categories, nil)
+            case .failure(let error):
+                completion(nil, error)
+                print(error)
+            }
         }
     }
 
