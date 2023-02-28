@@ -75,7 +75,9 @@ final class BooksViewController: UIViewController {
 // MARK: - UICollectionViewDataSource
 
     func createDataSource() {
+        // swiftlint:disable line_length
         dataSource = UICollectionViewDiffableDataSource<Section, BookEntity>(collectionView: collectionView, cellProvider: { (collectionView, indexPath, book) -> UICollectionViewCell? in
+            // swiftlint:enable line_length
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifiers.bookCell.rawValue,
                                                           for: indexPath) as? BookCollectionViewCell
             cell?.configure(with: book,

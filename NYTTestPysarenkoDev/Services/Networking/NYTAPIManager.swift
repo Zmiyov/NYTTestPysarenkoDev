@@ -34,7 +34,9 @@ final class NYTAPIManager {
         }
     }
 
-    func fetchBooksJSON(name: String, date: String, completion: @escaping(_ booksDict: [[String: Any]]?, _ error: Error?) -> Void) {
+    func fetchBooksJSON(name: String,
+                        date: String,
+                        completion: @escaping(_ booksDict: [[String: Any]]?, _ error: Error?) -> Void) {
         let url = "https://api.nytimes.com/svc/books/v3/lists/\(date)/\(name).json?api-key=\(NYTAPIKey.key.rawValue)"
         AF.request(url).responseData { data in
             switch data.result {

@@ -75,8 +75,9 @@ final class CategoriesViewController: UIViewController {
 // MARK: - UICollectionViewDataSource
 
     func createDataSource() {
+        // swiftlint:disable line_length
         dataSource = UICollectionViewDiffableDataSource<Section, CategoryEntity>(collectionView: collectionView, cellProvider: { (collectionView, indexPath, category) -> UICollectionViewCell? in
-
+            // swiftlint:enable line_length
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifiers.categoryCell.rawValue,
                                                           for: indexPath) as? CategoryCollectionViewCell
 
