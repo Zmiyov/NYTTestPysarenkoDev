@@ -24,14 +24,35 @@ final class DataProvider {
 
     // MARK: - All categories data provider
 
-    func getCategories(completion: @escaping(Error?) -> Void) {
-        repository.fetchCategories { categoriesArray, error in
+//    func getCategories(completion: @escaping(Error?) -> Void) {
+//        repository.fetchCategories { categoriesArray, error in
+//            if let error = error {
+//                completion(error)
+//                return
+//            }
+//
+//            guard let categoriesArray = categoriesArray else {
+//                completion(error)
+//                return
+//            }
+//
+//            let taskContext = self.persistentContainer.newBackgroundContext()
+//            taskContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+//
+//            _ = self.syncCategories(categoriesArray: categoriesArray, taskContext: taskContext)
+//
+//            completion(nil)
+//        }
+//    }
+    
+    func getCategories1(completion: @escaping(Error?) -> Void) {
+        repository.load(url: ConstructURLs.categoriesURL()) { (category: [CategoryModel]?, error) in
             if let error = error {
                 completion(error)
                 return
             }
 
-            guard let categoriesArray = categoriesArray else {
+            guard let categoriesArray = category else {
                 completion(error)
                 return
             }
@@ -97,14 +118,36 @@ final class DataProvider {
 
     // MARK: - All books data provider
 
-    func getBooks(name: String, date: String, completion: @escaping(Error?) -> Void) {
-        repository.fetchBooks(name: name, date: date) { booksArray, error in
+//    func getBooks(name: String, date: String, completion: @escaping(Error?) -> Void) {
+//        repository.fetchBooks(name: name, date: date) { booksArray, error in
+//            if let error = error {
+//                completion(error)
+//                return
+//            }
+//
+//            guard let booksArray = booksArray else {
+//                completion(error)
+//                return
+//            }
+//
+//            let taskContext = self.persistentContainer.newBackgroundContext()
+//            taskContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+//
+//            _ = self.syncBooks(name: name, booksArray: booksArray, taskContext: taskContext)
+//            _ = self.syncBookIDsInCategory(name: name, booksArray: booksArray, taskContext: taskContext)
+//
+//            completion(nil)
+//        }
+//    }
+    
+    func getBooks1(name: String, date: String, completion: @escaping(Error?) -> Void) {
+        repository.load(url: ConstructURLs.booksURL(for: name, date: date)) { (books: [BookModel]?, error) in
             if let error = error {
                 completion(error)
                 return
             }
 
-            guard let booksArray = booksArray else {
+            guard let booksArray = books else {
                 completion(error)
                 return
             }

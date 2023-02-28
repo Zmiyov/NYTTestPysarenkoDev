@@ -19,16 +19,6 @@ extension BuyLinkEntity {
     @NSManaged public var buyLinkUrl: String?
     @NSManaged public var book: BookEntity?
 
-    func update(with jsonDictionary: [String: Any]) throws {
-        guard let marketName = jsonDictionary["name"] as? String,
-              let buyLinkUrl = jsonDictionary["url"] as? String
-        else {
-            throw NSError(domain: "", code: 100)
-        }
-        self.marketName = marketName
-        self.buyLinkUrl = buyLinkUrl
-    }
-
     func update(with buyLink: BuyLink) {
         self.marketName = buyLink.marketName
         self.buyLinkUrl = buyLink.buyLinkUrl

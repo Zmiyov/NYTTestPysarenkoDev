@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A557D62629AE91F90048C72E /* ConstructURLs.swift in Sources */ = {isa = PBXBuildFile; fileRef = A557D62529AE91F90048C72E /* ConstructURLs.swift */; };
 		A58805C32991BCDC00305BE7 /* String+Localized.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58805C22991BCDC00305BE7 /* String+Localized.swift */; };
 		A58805C72991BEB700305BE7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A58805C92991BEB700305BE7 /* Localizable.strings */; };
 		A59BF174298D56CE0082B923 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59BF173298D56CE0082B923 /* AppDelegate.swift */; };
@@ -52,6 +53,7 @@
 /* Begin PBXFileReference section */
 		4017B47FC98C14C509D06FAA /* Pods_NYTTestPysarenkoDev.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NYTTestPysarenkoDev.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		94711481C84EDFA6CE82C1CB /* Pods-NYTTestPysarenkoDev.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NYTTestPysarenkoDev.release.xcconfig"; path = "Target Support Files/Pods-NYTTestPysarenkoDev/Pods-NYTTestPysarenkoDev.release.xcconfig"; sourceTree = "<group>"; };
+		A557D62529AE91F90048C72E /* ConstructURLs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstructURLs.swift; sourceTree = "<group>"; };
 		A58805C22991BCDC00305BE7 /* String+Localized.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Localized.swift"; sourceTree = "<group>"; };
 		A58805C82991BEB700305BE7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		A58805CA2991BECF00305BE7 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -220,6 +222,7 @@
 			children = (
 				A59BF1A9298DBB610082B923 /* NYTAPIManager.swift */,
 				A59BF1DF298FCE180082B923 /* DataProvider.swift */,
+				A557D62529AE91F90048C72E /* ConstructURLs.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -456,6 +459,7 @@
 				A59BF1E0298FCE180082B923 /* DataProvider.swift in Sources */,
 				A59BF1AA298DBB610082B923 /* NYTAPIManager.swift in Sources */,
 				A5F0A83C2995175000755F43 /* BookIDEntity+CoreDataClass.swift in Sources */,
+				A557D62629AE91F90048C72E /* ConstructURLs.swift in Sources */,
 				A59BF1CB298FB1160082B923 /* CategoryEntity+CoreDataClass.swift in Sources */,
 				A59BF1A8298DAC470082B923 /* WebViewViewController.swift in Sources */,
 				A58805C32991BCDC00305BE7 /* String+Localized.swift in Sources */,

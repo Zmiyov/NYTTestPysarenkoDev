@@ -25,38 +25,6 @@ extension BookEntity {
     @NSManaged public var title: String?
     @NSManaged public var buyLinks: NSOrderedSet?
 
-    func update(with jsonDictionary: [String: Any]) throws {
-        guard let rank = jsonDictionary["rank"] as? Int16,
-              let publisher = jsonDictionary["publisher"] as? String,
-              let bookDescription = jsonDictionary["description"] as? String,
-              let title = jsonDictionary["title"] as? String,
-              let author = jsonDictionary["author"] as? String,
-              let bookImage = jsonDictionary["book_image"] as? String,
-              let linkToBuyOnAmazon = jsonDictionary["amazon_product_url"] as? String,
-              let buyLinksArray = jsonDictionary["buy_links"] as? [[String: Any]],
-              let bookID = jsonDictionary["book_uri"] as? String
-        else {
-            throw NSError(domain: "", code: 100)
-        }
-
-        self.rank = rank
-        self.publisher = publisher
-        self.bookDescription = bookDescription
-        self.title = title
-        self.author = author
-        self.bookImageURL = bookImage
-        self.linkToBuyOnAmazon = linkToBuyOnAmazon
-
-        try buyLinksArray.forEach { value in
-            guard let context = self.managedObjectContext else { return }
-            let buyLink = BuyLinkEntity(context: context)
-            try buyLink.update(with: value)
-            self.addToBuyLinks(buyLink)
-        }
-
-        self.bookID = bookID
-    }
-
     func update(with book: BookModel) throws {
         self.rank = Int16(book.rank)
         self.publisher = book.publisher
@@ -75,7 +43,6 @@ extension BookEntity {
 
         self.bookID = book.bookID
     }
-
 }
 
 // MARK: Generated accessors for buyLinks

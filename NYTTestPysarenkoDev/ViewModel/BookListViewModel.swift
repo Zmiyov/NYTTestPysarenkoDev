@@ -41,7 +41,7 @@ final class BookListViewModel {
         self.titleName = titleName
         self.date = date
 
-        dataProvider.getBooks(name: encodedName, date: date) { [weak self] _ in
+        dataProvider.getBooks1(name: encodedName, date: date) { [weak self] _ in
             self?.fetchCategories(categoryName: encodedName)
             self?.fetchBooks()
         }
