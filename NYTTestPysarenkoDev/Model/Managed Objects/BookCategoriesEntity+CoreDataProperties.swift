@@ -18,8 +18,7 @@ extension BookCategoriesEntity {
     @NSManaged public var bookCategoryName: String?
     @NSManaged public var bookIDs: NSOrderedSet?
 
-    func update(name: String, bookID: String, with jsonDictionary: [String: Any]) throws {
-
+    func update(name: String, bookID: String, with book: BookModel) throws {
         self.bookCategoryName = name
 
         if let bookIDs = self.bookIDs {

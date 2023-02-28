@@ -98,13 +98,13 @@ final class DataProvider {
     // MARK: - All books data provider
 
     func getBooks(name: String, date: String, completion: @escaping(Error?) -> Void) {
-        repository.fetchBooksJSON(name: name, date: date) { jsonDictionary, error in
+        repository.fetchBooks(name: name, date: date) { booksArray, error in
             if let error = error {
                 completion(error)
                 return
             }
 
-            guard let jsonDictionary = jsonDictionary else {
+            guard let booksArray = booksArray else {
                 completion(error)
                 return
             }
@@ -112,22 +112,22 @@ final class DataProvider {
             let taskContext = self.persistentContainer.newBackgroundContext()
             taskContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
 
-            _ = self.syncBooks(name: name, jsonDictionary: jsonDictionary, taskContext: taskContext)
-            _ = self.syncBookIDsInCategory(name: name, jsonDictionary: jsonDictionary, taskContext: taskContext)
+            _ = self.syncBooks(name: name, booksArray: booksArray, taskContext: taskContext)
+            _ = self.syncBookIDsInCategory(name: name, booksArray: booksArray, taskContext: taskContext)
 
             completion(nil)
         }
     }
 
     private func syncBooks(name: String,
-                           jsonDictionary: [[String: Any]],
+                           booksArray: [BookModel],
                            taskContext: NSManagedObjectContext) -> Bool {
 
         var successfull = false
 
         taskContext.performAndWait {
             let matchingBooksRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "BookEntity")
-            let bookIDs = jsonDictionary.map { $0["book_uri"] as? String }.compactMap { $0 }
+            let bookIDs = booksArray.map { $0.bookID }.compactMap { $0 }
             let bookIDpredicate = NSPredicate(format: "bookID in %@", argumentArray: [bookIDs])
             matchingBooksRequest.predicate = bookIDpredicate
 
@@ -146,18 +146,18 @@ final class DataProvider {
                 return
             }
 
-            for bookDictionary in jsonDictionary {
-                guard let book = NSEntityDescription.insertNewObject(forEntityName: "BookEntity",
+            for book in booksArray {
+                guard let bookEntity = NSEntityDescription.insertNewObject(forEntityName: "BookEntity",
                                                                      into: taskContext) as? BookEntity else {
                     print("Error: Failed to create a new Film object!")
                     return
                 }
 
                 do {
-                    try book.update(with: bookDictionary)
+                    try bookEntity.update(with: book)
                 } catch {
                     print("Error: \(error)\nThe Book object will be deleted.")
-                    taskContext.delete(book)
+                    taskContext.delete(bookEntity)
                 }
 
                 if taskContext.hasChanges {
@@ -175,14 +175,14 @@ final class DataProvider {
     }
 
     private func syncBookIDsInCategory(name: String,
-                                       jsonDictionary: [[String: Any]],
+                                       booksArray: [BookModel],
                                        taskContext: NSManagedObjectContext) -> Bool {
 
         var successfull = false
 
         taskContext.performAndWait {
             let matchingCategoriesRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "BookCategoriesEntity")
-            let bookIDs = jsonDictionary.map { $0["book_uri"] as? String }.compactMap { $0 }
+            let bookIDs = booksArray.map { $0.bookID }.compactMap { $0 }
             let bookIDpredicate = NSPredicate(format: "bookCategoryName = %@", name)
             matchingCategoriesRequest.predicate = bookIDpredicate
 
@@ -201,7 +201,7 @@ final class DataProvider {
                 return
             }
 
-            for bookDictionary in jsonDictionary {
+            for book in booksArray {
                 // swiftlint:disable line_length
                 guard let category = NSEntityDescription.insertNewObject(forEntityName: "BookCategoriesEntity",
                                                                          into: taskContext) as? BookCategoriesEntity else {
@@ -212,7 +212,7 @@ final class DataProvider {
 
                 do {
                     for id in bookIDs {
-                        try category.update(name: name, bookID: id, with: bookDictionary)
+                        try category.update(name: name, bookID: id, with: book)
                     }
                 } catch {
                     print("Error: \(error)\nThe Book object will be deleted.")
