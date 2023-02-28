@@ -34,6 +34,10 @@
 		A59BF1D3298FBEC30082B923 /* BuyLinkEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59BF1D1298FBEC30082B923 /* BuyLinkEntity+CoreDataProperties.swift */; };
 		A59BF1DE298FC9B10082B923 /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = A59BF1DD298FC9B10082B923 /* SwiftyJSON */; };
 		A59BF1E0298FCE180082B923 /* DataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59BF1DF298FCE180082B923 /* DataProvider.swift */; };
+		A5D67B9A29AE082F00E7DACA /* ResponseCategories.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D67B9929AE082F00E7DACA /* ResponseCategories.swift */; };
+		A5D67B9C29AE085700E7DACA /* CategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D67B9B29AE085700E7DACA /* CategoryModel.swift */; };
+		A5D67B9E29AE089800E7DACA /* BookModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D67B9D29AE089800E7DACA /* BookModel.swift */; };
+		A5D67BA029AE08BB00E7DACA /* ResponseBooks.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D67B9F29AE08BB00E7DACA /* ResponseBooks.swift */; };
 		A5DDC42F2993D76900CF1485 /* Dynamic.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DDC42E2993D76900CF1485 /* Dynamic.swift */; };
 		A5E38E6B2992EAC50088B860 /* BuyLinksAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E38E6A2992EAC50088B860 /* BuyLinksAlertController.swift */; };
 		A5F0A8322994096500755F43 /* BookEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F0A82E2994096500755F43 /* BookEntity+CoreDataClass.swift */; };
@@ -75,6 +79,10 @@
 		A59BF1D0298FBEC30082B923 /* BuyLinkEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BuyLinkEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
 		A59BF1D1298FBEC30082B923 /* BuyLinkEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BuyLinkEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		A59BF1DF298FCE180082B923 /* DataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProvider.swift; sourceTree = "<group>"; };
+		A5D67B9929AE082F00E7DACA /* ResponseCategories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseCategories.swift; sourceTree = "<group>"; };
+		A5D67B9B29AE085700E7DACA /* CategoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryModel.swift; sourceTree = "<group>"; };
+		A5D67B9D29AE089800E7DACA /* BookModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookModel.swift; sourceTree = "<group>"; };
+		A5D67B9F29AE08BB00E7DACA /* ResponseBooks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseBooks.swift; sourceTree = "<group>"; };
 		A5DDC42E2993D76900CF1485 /* Dynamic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dynamic.swift; sourceTree = "<group>"; };
 		A5E38E6A2992EAC50088B860 /* BuyLinksAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyLinksAlertController.swift; sourceTree = "<group>"; };
 		A5F0A82E2994096500755F43 /* BookEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BookEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -151,6 +159,7 @@
 		A59BF187298D56E40082B923 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				A5D67B9629AE07C800E7DACA /* Codable Models */,
 				A59BF1CF298FB1570082B923 /* Managed Objects */,
 			);
 			path = Model;
@@ -246,6 +255,33 @@
 				A59BF1D1298FBEC30082B923 /* BuyLinkEntity+CoreDataProperties.swift */,
 			);
 			path = "Managed Objects";
+			sourceTree = "<group>";
+		};
+		A5D67B9629AE07C800E7DACA /* Codable Models */ = {
+			isa = PBXGroup;
+			children = (
+				A5D67B9829AE07FF00E7DACA /* Categories API */,
+				A5D67B9729AE07E900E7DACA /* Books API */,
+			);
+			path = "Codable Models";
+			sourceTree = "<group>";
+		};
+		A5D67B9729AE07E900E7DACA /* Books API */ = {
+			isa = PBXGroup;
+			children = (
+				A5D67B9D29AE089800E7DACA /* BookModel.swift */,
+				A5D67B9F29AE08BB00E7DACA /* ResponseBooks.swift */,
+			);
+			path = "Books API";
+			sourceTree = "<group>";
+		};
+		A5D67B9829AE07FF00E7DACA /* Categories API */ = {
+			isa = PBXGroup;
+			children = (
+				A5D67B9929AE082F00E7DACA /* ResponseCategories.swift */,
+				A5D67B9B29AE085700E7DACA /* CategoryModel.swift */,
+			);
+			path = "Categories API";
 			sourceTree = "<group>";
 		};
 		A5DDC42D2993D75300CF1485 /* Bindings */ = {
@@ -399,10 +435,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A5D67B9C29AE085700E7DACA /* CategoryModel.swift in Sources */,
 				A5F0A8322994096500755F43 /* BookEntity+CoreDataClass.swift in Sources */,
 				A59BF198298D801A0082B923 /* BookCollectionViewCell.swift in Sources */,
+				A5D67B9A29AE082F00E7DACA /* ResponseCategories.swift in Sources */,
 				A59BF1B9298ED1940082B923 /* NotificationsName+.swift in Sources */,
 				A59BF1B4298E709C0082B923 /* NYTAPIKey.swift in Sources */,
+				A5D67B9E29AE089800E7DACA /* BookModel.swift in Sources */,
 				A59BF1BF298FAE3F0082B923 /* NYTTestPysarenkoDev.xcdatamodeld in Sources */,
 				A5E38E6B2992EAC50088B860 /* BuyLinksAlertController.swift in Sources */,
 				A5DDC42F2993D76900CF1485 /* Dynamic.swift in Sources */,
@@ -412,6 +451,7 @@
 				A59BF191298D7F5E0082B923 /* CategoriesViewController.swift in Sources */,
 				A59BF1D3298FBEC30082B923 /* BuyLinkEntity+CoreDataProperties.swift in Sources */,
 				A5F0A83B2995175000755F43 /* BookCategoriesEntity+CoreDataProperties.swift in Sources */,
+				A5D67BA029AE08BB00E7DACA /* ResponseBooks.swift in Sources */,
 				A59BF19D298D82010082B923 /* BookListViewModel.swift in Sources */,
 				A59BF1E0298FCE180082B923 /* DataProvider.swift in Sources */,
 				A59BF1AA298DBB610082B923 /* NYTAPIManager.swift in Sources */,
