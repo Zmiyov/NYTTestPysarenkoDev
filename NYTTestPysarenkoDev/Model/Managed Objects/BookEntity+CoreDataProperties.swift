@@ -56,6 +56,25 @@ extension BookEntity {
 
         self.bookID = bookID
     }
+    
+    func update(with book: BookModel) {
+        self.rank = Int16(book.rank)
+        self.publisher = book.publisher
+        self.bookDescription = book.description
+        self.title = book.title
+        self.author = book.author
+        self.bookImageURL = book.bookImage
+        self.linkToBuyOnAmazon = book.linkToBuyOnAmazon
+
+        book.buyLinks.forEach { value in
+            guard let context = self.managedObjectContext else { return }
+            let buyLink = BuyLinkEntity(context: context)
+            buyLink.update(with: value)
+            self.addToBuyLinks(buyLink)
+        }
+
+        self.bookID = book.bookID
+    }
 
 }
 
