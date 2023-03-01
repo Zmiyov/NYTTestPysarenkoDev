@@ -9,7 +9,9 @@ import UIKit
 
 final class CategoriesViewController: UIViewController {
 
-    var categoryListViewModel = CategoryListViewModel()
+    var categoryListViewModel: CategoryListViewModel
+    weak var coordinator: AppCoordinator?
+
     private let refreshControl = UIRefreshControl()
 
     private enum CellIdentifiers: String {
@@ -41,6 +43,15 @@ final class CategoriesViewController: UIViewController {
                                 forCellWithReuseIdentifier: CellIdentifiers.categoryCell.rawValue)
         return collectionView
     }()
+
+    init(categoryListViewModel: CategoryListViewModel) {
+        self.categoryListViewModel = categoryListViewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -101,19 +112,7 @@ extension CategoriesViewController: UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 
-        let category = categoryListViewModel.categories.value[indexPath.item]
-        let booksVC = BooksViewController()
-        guard let categoryNameEncoded = category.listNameEncoded,
-              let categoryName = category.categoryName,
-              let categoryDate = category.newestPublishedDate
-        else {
-            return
-        }
-        booksVC.bookListViewModel = BookListViewModel(encodedName: categoryNameEncoded,
-                                                      titleName: categoryName,
-                                                      date: categoryDate)
-
-        navigationController?.pushViewController(booksVC, animated: true)
+        coordinator?.goToBooks(categoryListViewModel: categoryListViewModel, indexPath: indexPath)
     }
 }
 

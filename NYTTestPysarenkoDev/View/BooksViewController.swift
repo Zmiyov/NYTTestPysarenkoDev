@@ -12,6 +12,8 @@ import CoreData
 final class BooksViewController: UIViewController {
 
     var bookListViewModel: BookListViewModel?
+    weak var coordinator: AppCoordinator?
+
     private let refreshControl = UIRefreshControl()
     private enum CellIdentifiers: String {
         case bookCell

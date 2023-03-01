@@ -19,7 +19,8 @@ final class CategoryListViewModel {
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "listNameEncoded", ascending: true)]
         let controller = NSFetchedResultsController(fetchRequest: fetchRequest,
                                                     managedObjectContext: dataProvider.viewContext,
-                                                    sectionNameKeyPath: nil, cacheName: nil)
+                                                    sectionNameKeyPath: nil,
+                                                    cacheName: nil)
         do {
             try controller.performFetch()
         } catch {
