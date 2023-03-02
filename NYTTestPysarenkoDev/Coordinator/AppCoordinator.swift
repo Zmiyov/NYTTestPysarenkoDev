@@ -10,8 +10,6 @@ import UIKit
 
 class AppCoordinator: Coordinator {
 
-    var parentCoordinator: Coordinator?
-    var children: [Coordinator] = []
     var navigationController: UINavigationController
 
     init(navCon: UINavigationController) {
@@ -29,10 +27,8 @@ class AppCoordinator: Coordinator {
         navigationController.pushViewController(viewController, animated: true)
     }
 
-    func goToBooks(categoryListViewModel: CategoryListViewModel, indexPath: IndexPath) {
+    func goToBooks(categoryListViewModel: CategoryListViewModelProtocol, indexPath: IndexPath) {
         let category = categoryListViewModel.categories.value[indexPath.item]
-        let booksVC = BooksViewController()
-        booksVC.coordinator = self
 
         guard let categoryNameEncoded = category.listNameEncoded,
               let categoryName = category.categoryName,
@@ -40,9 +36,12 @@ class AppCoordinator: Coordinator {
         else {
             return
         }
-        booksVC.bookListViewModel = BookListViewModel(encodedName: categoryNameEncoded,
+        let bookListViewModel = BookListViewModel(categoryNameEncoded: categoryNameEncoded,
                                                       titleName: categoryName,
                                                       date: categoryDate)
+
+        let booksVC = BooksViewController(bookListViewModel: bookListViewModel)
+        booksVC.coordinator = self
 
         navigationController.pushViewController(booksVC, animated: true)
     }

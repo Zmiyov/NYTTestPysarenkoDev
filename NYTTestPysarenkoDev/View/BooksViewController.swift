@@ -11,7 +11,7 @@ import CoreData
 
 final class BooksViewController: UIViewController {
 
-    var bookListViewModel: BookListViewModel?
+    var bookListViewModel: BookListViewModelProtocol
     weak var coordinator: AppCoordinator?
 
     private let refreshControl = UIRefreshControl()
@@ -31,7 +31,7 @@ final class BooksViewController: UIViewController {
     var filteredItemsSnapshot: NSDiffableDataSourceSnapshot<Section, BookEntity> {
         var snapshot = NSDiffableDataSourceSnapshot<Section, BookEntity>()
         snapshot.appendSections([.main])
-        snapshot.appendItems(bookListViewModel?.books.value ?? [])
+        snapshot.appendItems(bookListViewModel.books.value)
         return snapshot
     }
 
@@ -44,9 +44,18 @@ final class BooksViewController: UIViewController {
         return collectionView
     }()
 
+    init(bookListViewModel: BookListViewModelProtocol) {
+        self.bookListViewModel = bookListViewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = bookListViewModel?.titleName
+        title = bookListViewModel.titleName
         view.backgroundColor = .secondarySystemBackground
         setConstraints()
 
@@ -67,7 +76,7 @@ final class BooksViewController: UIViewController {
     }
 
     private func bindViewModel() {
-        bookListViewModel?.books.bind { [weak self] _ in
+        bookListViewModel.books.bind { [weak self] _ in
             DispatchQueue.main.async {
                 self?.createDataSource()
             }

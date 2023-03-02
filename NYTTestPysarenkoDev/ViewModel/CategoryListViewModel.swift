@@ -8,7 +8,7 @@
 import Foundation
 import CoreData
 
-final class CategoryListViewModel {
+final class CategoryListViewModel: CategoryListViewModelProtocol {
 
     var dataProvider = DataProvider(persistentContainer: CoreDataStack.shared.storeContainer,
                                     repository: NYTAPIManager.shared)

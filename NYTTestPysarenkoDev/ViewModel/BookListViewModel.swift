@@ -8,13 +8,13 @@
 import Foundation
 import CoreData
 
-final class BookListViewModel {
+final class BookListViewModel: BookListViewModelProtocol {
 
     var dataProvider = DataProvider(persistentContainer: CoreDataStack.shared.storeContainer,
                                     repository: NYTAPIManager.shared)
     var books = Dynamic([BookEntity]())
 
-    var encodedName: String
+    var categoryNameEncoded: String
     var titleName: String
     var date: String
     var bookIDs: [String]?
@@ -36,13 +36,13 @@ final class BookListViewModel {
         return controller
     }()
 
-    init(encodedName: String, titleName: String, date: String) {
-        self.encodedName = encodedName
+    init(categoryNameEncoded: String, titleName: String, date: String) {
+        self.categoryNameEncoded = categoryNameEncoded
         self.titleName = titleName
         self.date = date
 
-        dataProvider.getBooks(name: encodedName, date: date) { [weak self] _ in
-            self?.fetchCategories(categoryName: encodedName)
+        dataProvider.getBooks(name: categoryNameEncoded, date: date) { [weak self] _ in
+            self?.fetchCategories(categoryNameEncoded: categoryNameEncoded)
             self?.fetchBooks()
         }
     }
@@ -54,17 +54,15 @@ final class BookListViewModel {
         }
     }
 
-    func fetchCategories(categoryName: String) {
+    func fetchCategories(categoryNameEncoded: String) {
         let managedContext = dataProvider.viewContext
         let fetchRequest = NSFetchRequest<BookCategoriesEntity>(entityName: "BookCategoriesEntity")
-        fetchRequest.predicate = NSPredicate(format: "bookCategoryName = %@", categoryName)
+        fetchRequest.predicate = NSPredicate(format: "bookCategoryName = %@", categoryNameEncoded)
 
         self.bookIDs = []
         let category = try? managedContext.fetch(fetchRequest)
-        guard let category, category != []
-        else {
-            return
-        }
+        guard let category, category != [] else { return }
+
         if let bookIdEntityArray = category[0].bookIDs?.array as? [BookIDEntity] {
             let idStringArray = bookIdEntityArray.compactMap { $0.bookID }
             self.bookIDs = idStringArray

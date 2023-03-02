@@ -9,7 +9,7 @@ import UIKit
 
 final class CategoriesViewController: UIViewController {
 
-    var categoryListViewModel: CategoryListViewModel
+    var categoryListViewModel: CategoryListViewModelProtocol
     weak var coordinator: AppCoordinator?
 
     private let refreshControl = UIRefreshControl()
