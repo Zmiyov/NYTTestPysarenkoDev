@@ -9,5 +9,4 @@ import Foundation
 
 protocol CategoryListViewModelProtocol {
     var categories: Dynamic<[CategoryEntity]> { get }
-    func fetchCategories()
 }
